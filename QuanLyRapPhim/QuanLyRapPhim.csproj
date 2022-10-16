@@ -52,6 +52,7 @@
     <Compile Include="DAO\PermissionDAO.cs" />
     <Compile Include="DAO\RoleDAO.cs" />
     <Compile Include="DAO\RoomDAO.cs" />
+    <Compile Include="DAO\SeatDAO.cs" />
     <Compile Include="DAO\ShowTimeDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
     <Compile Include="DTO\Actor.cs" />
