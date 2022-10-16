@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyRapPhim.DTO
 {
-    public class Seat
+    public class Chair
     {
         public int Id { get; set; }
         public decimal Price { get; set; }

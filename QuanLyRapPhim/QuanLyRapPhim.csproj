@@ -53,7 +53,7 @@
     <Compile Include="DAO\ProjectorDAO.cs" />
     <Compile Include="DAO\RoleDAO.cs" />
     <Compile Include="DAO\RoomDAO.cs" />
-    <Compile Include="DAO\SeatDAO.cs" />
+    <Compile Include="DAO\ChairDAO.cs" />
     <Compile Include="DAO\ShowTimeDAO.cs" />
     <Compile Include="DAO\TicketDAO.cs" />
     <Compile Include="DAO\UserDAO.cs" />
@@ -64,7 +64,7 @@
     <Compile Include="DTO\Projector.cs" />
     <Compile Include="DTO\Role.cs" />
     <Compile Include="DTO\Room.cs" />
-    <Compile Include="DTO\Seat.cs" />
+    <Compile Include="DTO\Chair.cs" />
     <Compile Include="DTO\ShowTime.cs" />
     <Compile Include="DTO\Ticket.cs" />
     <Compile Include="DTO\User.cs" />
