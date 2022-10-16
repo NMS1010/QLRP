@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace QuanLyRapPhim.DAO
 {
-    internal class ProjectorDAO
+    public class ProjectorDAO
     {
     }
 }
