@@ -55,6 +55,7 @@
     <Compile Include="DAO\PromotoinDAO.cs" />
     <Compile Include="DAO\RoleDAO.cs" />
     <Compile Include="DAO\RoomDAO.cs" />
+    <Compile Include="DAO\ChairDAO.cs" />
     <Compile Include="DAO\ServiceDAO.cs" />
     <Compile Include="DAO\ShowTimeDAO.cs" />
     <Compile Include="DAO\TicketDAO.cs" />
@@ -70,6 +71,7 @@
     <Compile Include="DTO\Promotion.cs" />
     <Compile Include="DTO\Role.cs" />
     <Compile Include="DTO\Room.cs" />
+    <Compile Include="DTO\Chair.cs" />
     <Compile Include="DTO\Service.cs" />
     <Compile Include="DTO\ShowTime.cs" />
     <Compile Include="DTO\Ticket.cs" />
