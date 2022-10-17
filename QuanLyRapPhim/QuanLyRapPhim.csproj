@@ -101,6 +101,12 @@
     <Compile Include="GUI\Admin\DataUC\CinemaRoomUC.Designer.cs">
       <DependentUpon>CinemaRoomUC.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\Admin\DataUC\CustumerUC.cs">
+      <SubType>UserControl</SubType>
+    </Compile>
+    <Compile Include="GUI\Admin\DataUC\CustumerUC.Designer.cs">
+      <DependentUpon>CustumerUC.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\Admin\DataUC\DiscountUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
@@ -138,11 +144,11 @@
       <DependentUpon>ShowTimeUC.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO\DataProvider.cs" />
-    <Compile Include="GUI\Form1.cs">
+    <Compile Include="GUI\frm_admin.cs">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="GUI\Form1.Designer.cs">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <Compile Include="GUI\frm_admin.Designer.cs">
+      <DependentUpon>frm_admin.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\frmSeller.cs">
       <SubType>Form</SubType>
@@ -188,6 +194,9 @@
     <EmbeddedResource Include="GUI\Admin\DataUC\CinemaRoomUC.resx">
       <DependentUpon>CinemaRoomUC.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\Admin\DataUC\CustumerUC.resx">
+      <DependentUpon>CustumerUC.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\Admin\DataUC\DiscountUC.resx">
       <DependentUpon>DiscountUC.cs</DependentUpon>
     </EmbeddedResource>
@@ -206,8 +215,8 @@
     <EmbeddedResource Include="GUI\Admin\DataUC\ShowTimeUC.resx">
       <DependentUpon>ShowTimeUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Form1.resx">
-      <DependentUpon>Form1.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\frm_admin.resx">
+      <DependentUpon>frm_admin.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frm_account.resx">
       <DependentUpon>frm_account.cs</DependentUpon>

@@ -33,7 +33,7 @@ namespace QuanLyRapPhim.DAO
 
         public static DataTable GetAllPromotion(ref string error)
         {
-            string query = "select * from dbo.func_getAllDiscount();
+            string query = "select * from dbo.func_getAllDiscount()";
             return DataProvider.ExecuteQuery(query, ref error);
         }
 

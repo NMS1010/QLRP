@@ -33,7 +33,7 @@ namespace QuanLyRapPhim.DAO
 
         public static DataTable GetAllService(ref string error)
         {
-            string query = "select * from dbo.func_getAllService();
+            string query = "select * from dbo.func_getAllService()";
             return DataProvider.ExecuteQuery(query, ref error);
         }
 
