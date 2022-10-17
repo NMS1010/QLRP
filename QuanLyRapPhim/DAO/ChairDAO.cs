@@ -15,6 +15,7 @@ namespace QuanLyRapPhim.DAO
             string query = "select * from dbo.func_getChair";
             return DataProvider.ExecuteQuery(query, ref error);
         }
+
         public static int Insert(Chair chair, ref string error)
         {
             string query = "exec proc_addChair @GiaGhe, @LoaiGhe";
@@ -22,17 +23,19 @@ namespace QuanLyRapPhim.DAO
                 chair.Price, chair.Type
             });
         }
+
         public static int Update(Chair chair, ref string error)
         {
             string query = "exec proc_updateChair @MaGhe, @GiaGhe, @LoaiGhe";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
-                chair.Id, chair.Price, chair.Type
+                chair.ChairId, chair.Price, chair.Type
             });
         }
+
         public static int Delete(Chair chair, ref string error)
         {
             string query = "exec proc_deleteChair @MaGhe";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { chair.Id });
+            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { chair.ChairId });
         }
     }
 }
