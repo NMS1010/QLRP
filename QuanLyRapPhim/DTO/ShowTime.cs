@@ -9,8 +9,8 @@ namespace QuanLyRapPhim.DTO
     public class ShowTime
     {
         public int Id { get; set; }
-        public TimeSpan Time { get; set; }
-        public DateTime Day { get; set; }
+        public string Time { get; set; }
+        public string Day { get; set; }
         public int Status { get; set; }
         public int IdFilm { get; set; }
         public int IdRoom { get; set; }

@@ -33,5 +33,11 @@ namespace QuanLyRapPhim
             custumerUC.Dock = DockStyle.Fill;
             pnl_main.Controls.Add(custumerUC);
         }
+
+        private void btn_employee_Click(object sender, EventArgs e)
+        {
+            frm_account employeeForm = new frm_account();
+            employeeForm.ShowDialog();
+        }
     }
 }

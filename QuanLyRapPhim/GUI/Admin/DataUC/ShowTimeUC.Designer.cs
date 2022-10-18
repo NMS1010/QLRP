@@ -35,9 +35,6 @@
             this.TrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenPhim = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.btn_save = new System.Windows.Forms.Button();
-            this.btn_delete = new System.Windows.Forms.Button();
-            this.btn_add = new System.Windows.Forms.Button();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -47,10 +44,17 @@
             this.cbx_CinemaRoom = new System.Windows.Forms.ComboBox();
             this.cbx_movieName = new System.Windows.Forms.ComboBox();
             this.dtpicker_date = new System.Windows.Forms.DateTimePicker();
-            this.dtpicket_time = new System.Windows.Forms.DateTimePicker();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.dtpicker_time = new System.Windows.Forms.DateTimePicker();
+            this.grp_showTime = new System.Windows.Forms.GroupBox();
+            this.label6 = new System.Windows.Forms.Label();
+            this.txb_showTimeId = new System.Windows.Forms.TextBox();
+            this.btn_add = new System.Windows.Forms.Button();
+            this.btn_save = new System.Windows.Forms.Button();
+            this.btn_delete = new System.Windows.Forms.Button();
+            this.btn_search = new System.Windows.Forms.Button();
+            this.txb_search = new System.Windows.Forms.TextBox();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_showTime)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.grp_showTime.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_showTime
@@ -69,6 +73,7 @@
             this.dgv_showTime.ReadOnly = true;
             this.dgv_showTime.Size = new System.Drawing.Size(942, 417);
             this.dgv_showTime.TabIndex = 0;
+            this.dgv_showTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_showTime_CellClick);
             // 
             // MaSuatChieu
             // 
@@ -118,36 +123,6 @@
             this.TenPhong.ReadOnly = true;
             this.TenPhong.Width = 150;
             // 
-            // btn_save
-            // 
-            this.btn_save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_save.Location = new System.Drawing.Point(833, 106);
-            this.btn_save.Name = "btn_save";
-            this.btn_save.Size = new System.Drawing.Size(86, 38);
-            this.btn_save.TabIndex = 12;
-            this.btn_save.Text = "Lưu";
-            this.btn_save.UseVisualStyleBackColor = true;
-            // 
-            // btn_delete
-            // 
-            this.btn_delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_delete.Location = new System.Drawing.Point(833, 62);
-            this.btn_delete.Name = "btn_delete";
-            this.btn_delete.Size = new System.Drawing.Size(86, 38);
-            this.btn_delete.TabIndex = 11;
-            this.btn_delete.Text = "Xoá";
-            this.btn_delete.UseVisualStyleBackColor = true;
-            // 
-            // btn_add
-            // 
-            this.btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_add.Location = new System.Drawing.Point(833, 19);
-            this.btn_add.Name = "btn_add";
-            this.btn_add.Size = new System.Drawing.Size(86, 38);
-            this.btn_add.TabIndex = 10;
-            this.btn_add.Text = "Thêm";
-            this.btn_add.UseVisualStyleBackColor = true;
-            // 
             // label5
             // 
             this.label5.AutoSize = true;
@@ -182,7 +157,7 @@
             // 
             this.label2.AutoSize = true;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(24, 105);
+            this.label2.Location = new System.Drawing.Point(24, 121);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(45, 20);
             this.label2.TabIndex = 6;
@@ -192,7 +167,7 @@
             // 
             this.label1.AutoSize = true;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label1.Location = new System.Drawing.Point(24, 49);
+            this.label1.Location = new System.Drawing.Point(24, 76);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(34, 20);
             this.label1.TabIndex = 5;
@@ -202,6 +177,7 @@
             // 
             this.cbx_showTimeStatus.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbx_showTimeStatus.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_showTimeStatus.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_showTimeStatus.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_showTimeStatus.FormattingEnabled = true;
             this.cbx_showTimeStatus.Location = new System.Drawing.Point(371, 113);
@@ -213,6 +189,7 @@
             // 
             this.cbx_CinemaRoom.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbx_CinemaRoom.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_CinemaRoom.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_CinemaRoom.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_CinemaRoom.FormattingEnabled = true;
             this.cbx_CinemaRoom.Location = new System.Drawing.Point(371, 69);
@@ -224,6 +201,7 @@
             // 
             this.cbx_movieName.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbx_movieName.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_movieName.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_movieName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_movieName.FormattingEnabled = true;
             this.cbx_movieName.Location = new System.Drawing.Point(371, 25);
@@ -235,55 +213,129 @@
             // 
             this.dtpicker_date.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.dtpicker_date.Format = System.Windows.Forms.DateTimePickerFormat.Short;
-            this.dtpicker_date.Location = new System.Drawing.Point(84, 104);
+            this.dtpicker_date.Location = new System.Drawing.Point(84, 115);
             this.dtpicker_date.Name = "dtpicker_date";
             this.dtpicker_date.Size = new System.Drawing.Size(123, 26);
             this.dtpicker_date.TabIndex = 1;
             // 
-            // dtpicket_time
+            // dtpicker_time
             // 
-            this.dtpicket_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.dtpicket_time.Format = System.Windows.Forms.DateTimePickerFormat.Time;
-            this.dtpicket_time.Location = new System.Drawing.Point(84, 48);
-            this.dtpicket_time.Name = "dtpicket_time";
-            this.dtpicket_time.Size = new System.Drawing.Size(123, 26);
-            this.dtpicket_time.TabIndex = 0;
+            this.dtpicker_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.dtpicker_time.Format = System.Windows.Forms.DateTimePickerFormat.Time;
+            this.dtpicker_time.Location = new System.Drawing.Point(84, 71);
+            this.dtpicker_time.Name = "dtpicker_time";
+            this.dtpicker_time.Size = new System.Drawing.Size(123, 26);
+            this.dtpicker_time.TabIndex = 0;
             // 
-            // groupBox1
+            // grp_showTime
             // 
-            this.groupBox1.Controls.Add(this.btn_add);
-            this.groupBox1.Controls.Add(this.btn_save);
-            this.groupBox1.Controls.Add(this.cbx_showTimeStatus);
-            this.groupBox1.Controls.Add(this.btn_delete);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.cbx_CinemaRoom);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.cbx_movieName);
-            this.groupBox1.Controls.Add(this.dtpicket_time);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.dtpicker_date);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(942, 155);
-            this.groupBox1.TabIndex = 13;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin suất chiếu";
+            this.grp_showTime.Controls.Add(this.label6);
+            this.grp_showTime.Controls.Add(this.txb_showTimeId);
+            this.grp_showTime.Controls.Add(this.cbx_showTimeStatus);
+            this.grp_showTime.Controls.Add(this.label1);
+            this.grp_showTime.Controls.Add(this.cbx_CinemaRoom);
+            this.grp_showTime.Controls.Add(this.label2);
+            this.grp_showTime.Controls.Add(this.label5);
+            this.grp_showTime.Controls.Add(this.cbx_movieName);
+            this.grp_showTime.Controls.Add(this.dtpicker_time);
+            this.grp_showTime.Controls.Add(this.label3);
+            this.grp_showTime.Controls.Add(this.label4);
+            this.grp_showTime.Controls.Add(this.dtpicker_date);
+            this.grp_showTime.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.grp_showTime.Location = new System.Drawing.Point(3, 3);
+            this.grp_showTime.Name = "grp_showTime";
+            this.grp_showTime.Size = new System.Drawing.Size(620, 155);
+            this.grp_showTime.TabIndex = 13;
+            this.grp_showTime.TabStop = false;
+            this.grp_showTime.Text = "Thông tin suất chiếu";
+            // 
+            // label6
+            // 
+            this.label6.AutoSize = true;
+            this.label6.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label6.Location = new System.Drawing.Point(24, 34);
+            this.label6.Name = "label6";
+            this.label6.Size = new System.Drawing.Size(108, 20);
+            this.label6.TabIndex = 14;
+            this.label6.Text = "Mã suất chiếu";
+            // 
+            // txb_showTimeId
+            // 
+            this.txb_showTimeId.Enabled = false;
+            this.txb_showTimeId.Location = new System.Drawing.Point(138, 31);
+            this.txb_showTimeId.Name = "txb_showTimeId";
+            this.txb_showTimeId.Size = new System.Drawing.Size(100, 26);
+            this.txb_showTimeId.TabIndex = 13;
+            // 
+            // btn_add
+            // 
+            this.btn_add.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_add.Location = new System.Drawing.Point(844, 18);
+            this.btn_add.Name = "btn_add";
+            this.btn_add.Size = new System.Drawing.Size(86, 38);
+            this.btn_add.TabIndex = 14;
+            this.btn_add.Text = "Thêm";
+            this.btn_add.UseVisualStyleBackColor = true;
+            this.btn_add.Click += new System.EventHandler(this.btn_add_Click);
+            // 
+            // btn_save
+            // 
+            this.btn_save.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_save.Location = new System.Drawing.Point(844, 105);
+            this.btn_save.Name = "btn_save";
+            this.btn_save.Size = new System.Drawing.Size(86, 38);
+            this.btn_save.TabIndex = 16;
+            this.btn_save.Text = "Lưu";
+            this.btn_save.UseVisualStyleBackColor = true;
+            this.btn_save.Click += new System.EventHandler(this.btn_save_Click);
+            // 
+            // btn_delete
+            // 
+            this.btn_delete.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_delete.Location = new System.Drawing.Point(844, 61);
+            this.btn_delete.Name = "btn_delete";
+            this.btn_delete.Size = new System.Drawing.Size(86, 38);
+            this.btn_delete.TabIndex = 15;
+            this.btn_delete.Text = "Xoá";
+            this.btn_delete.UseVisualStyleBackColor = true;
+            this.btn_delete.Click += new System.EventHandler(this.btn_delete_Click);
+            // 
+            // btn_search
+            // 
+            this.btn_search.Location = new System.Drawing.Point(697, 91);
+            this.btn_search.Name = "btn_search";
+            this.btn_search.Size = new System.Drawing.Size(71, 36);
+            this.btn_search.TabIndex = 35;
+            this.btn_search.Text = "Tìm kiếm";
+            this.btn_search.UseVisualStyleBackColor = true;
+            this.btn_search.Click += new System.EventHandler(this.btn_search_Click);
+            // 
+            // txb_search
+            // 
+            this.txb_search.Location = new System.Drawing.Point(658, 39);
+            this.txb_search.Multiline = true;
+            this.txb_search.Name = "txb_search";
+            this.txb_search.Size = new System.Drawing.Size(147, 34);
+            this.txb_search.TabIndex = 34;
             // 
             // ShowTimeUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.btn_search);
+            this.Controls.Add(this.txb_search);
+            this.Controls.Add(this.btn_add);
+            this.Controls.Add(this.btn_save);
+            this.Controls.Add(this.btn_delete);
+            this.Controls.Add(this.grp_showTime);
             this.Controls.Add(this.dgv_showTime);
             this.Name = "ShowTimeUC";
             this.Size = new System.Drawing.Size(948, 584);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_showTime)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grp_showTime.ResumeLayout(false);
+            this.grp_showTime.PerformLayout();
             this.ResumeLayout(false);
+            this.PerformLayout();
 
         }
 
@@ -299,16 +351,20 @@
         private System.Windows.Forms.ComboBox cbx_CinemaRoom;
         private System.Windows.Forms.ComboBox cbx_movieName;
         private System.Windows.Forms.DateTimePicker dtpicker_date;
-        private System.Windows.Forms.DateTimePicker dtpicket_time;
-        private System.Windows.Forms.Button btn_save;
-        private System.Windows.Forms.Button btn_delete;
-        private System.Windows.Forms.Button btn_add;
+        private System.Windows.Forms.DateTimePicker dtpicker_time;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaSuatChieu;
         private System.Windows.Forms.DataGridViewTextBoxColumn Ngay;
         private System.Windows.Forms.DataGridViewTextBoxColumn Gio;
         private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenPhim;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenPhong;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grp_showTime;
+        private System.Windows.Forms.Label label6;
+        private System.Windows.Forms.TextBox txb_showTimeId;
+        private System.Windows.Forms.Button btn_add;
+        private System.Windows.Forms.Button btn_save;
+        private System.Windows.Forms.Button btn_delete;
+        private System.Windows.Forms.Button btn_search;
+        private System.Windows.Forms.TextBox txb_search;
     }
 }

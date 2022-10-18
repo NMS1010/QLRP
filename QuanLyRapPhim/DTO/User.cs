@@ -11,7 +11,7 @@ namespace QuanLyRapPhim.DTO
         public int UserId { get; set; }
         public string FullName { get; set; }
         public string Gender { get; set; }
-        public DateTime Dob { get; set; }
+        public string Dob { get; set; }
         public string Phone { get; set; }
         public string CCCD { get; set; }
         public string Email { get; set; }
@@ -19,6 +19,6 @@ namespace QuanLyRapPhim.DTO
         public string Password { get; set; }
         public decimal Salary { get; set; }
 
-        public List<int> RoleIds { get; set; }
+        public List<int> RoleIds { get; set; } = new List<int>();
     }
 }

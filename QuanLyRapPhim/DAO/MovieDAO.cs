@@ -16,16 +16,20 @@ namespace QuanLyRapPhim.DAO
             int count = DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { movie.Time, movie.MovieName, movie.AgeRange, movie.StartDate, movie.EndDate, movie.MainDirector });
             if (count == 0) return 0;
+            DataTable dt = DataProvider.ExecuteQuery("select * from dbo.func_getFilmByName( @name )", ref error,
+                new object[] { movie.MovieName });
+            if (dt == null || dt.Rows.Count == 0) return 0;
+            int movieId = (int)dt.Rows[0]["MaPhim"];
             foreach (int categoryId in movie.CategoryIds)
             {
                 count = DataProvider.ExecuteNonQuery("exec proc_addFilmCategory @MaPhim @MaLoai", ref error,
-                new object[] { movie.MovieId, categoryId });
+                new object[] { movieId, categoryId });
                 if (count == 0) return 0;
             }
             foreach (int actorId in movie.ActorIds)
             {
                 count = DataProvider.ExecuteNonQuery("exec proc_addFilmActor @MaPhim @MaDienVien", ref error,
-                new object[] { movie.MovieId, actorId });
+                new object[] { movieId, actorId });
                 if (count == 0) return 0;
             }
             return count;

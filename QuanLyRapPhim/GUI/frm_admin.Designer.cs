@@ -33,6 +33,7 @@ namespace QuanLyRapPhim
             this.pnl_main = new System.Windows.Forms.Panel();
             this.btn_khachHang = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
+            this.btn_employee = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -66,12 +67,23 @@ namespace QuanLyRapPhim
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.btn_employee);
             this.panel1.Controls.Add(this.btn_khachHang);
             this.panel1.Controls.Add(this.btn_dataManager);
             this.panel1.Location = new System.Drawing.Point(12, 4);
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(1169, 65);
             this.panel1.TabIndex = 0;
+            // 
+            // btn_employee
+            // 
+            this.btn_employee.Location = new System.Drawing.Point(483, 8);
+            this.btn_employee.Name = "btn_employee";
+            this.btn_employee.Size = new System.Drawing.Size(121, 48);
+            this.btn_employee.TabIndex = 1;
+            this.btn_employee.Text = "Nhân viên";
+            this.btn_employee.UseVisualStyleBackColor = true;
+            this.btn_employee.Click += new System.EventHandler(this.btn_employee_Click);
             // 
             // frm_admin
             // 
@@ -94,6 +106,7 @@ namespace QuanLyRapPhim
         private System.Windows.Forms.Panel pnl_main;
         private System.Windows.Forms.Button btn_khachHang;
         private System.Windows.Forms.Panel panel1;
+        private System.Windows.Forms.Button btn_employee;
     }
 }
 

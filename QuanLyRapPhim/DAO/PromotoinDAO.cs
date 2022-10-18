@@ -12,14 +12,14 @@ namespace QuanLyRapPhim.DAO
     {
         public static int Insert(Promotion promotion, ref string error)
         {
-            string query = "exec  proc_addDiscount @TenKM, @GiaTriKM";
+            string query = "exec  proc_addDiscount @TenKM , @GiaTriKM";
             return DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { promotion.Name, promotion.ValueOfPromotion });
         }
 
         public static int Update(Promotion promotion, ref string error)
         {
-            string query = "exec proc_updateDiscount @MaKM, @TenKM, @GiaTriKM";
+            string query = "exec proc_updateDiscount @MaKM , @TenKM , @GiaTriKM";
             return DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { promotion.PromotionId, promotion.Name, promotion.ValueOfPromotion });
         }
