@@ -23,14 +23,14 @@ namespace QuanLyRapPhim.DAO
         }
         public static int Insert(ShowTime showTime, ref string error)
         {
-            string query = "exec proc_addShowtimes @Gio, @Ngay, @TrangThai, @MaPhim, @MaPhong";
+            string query = "exec proc_addShowtimes @Gio , @Ngay , @TrangThai , @MaPhim , @MaPhong";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { 
                 showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom 
             });
         }
         public static int Update(ShowTime showTime, ref string error)
         {
-            string query = "exec proc_updateShowtimes @MaSuatChieu, @Gio, @Ngay, @TrangThai, @MaPhim, @MaPhong";
+            string query = "exec proc_updateShowtimes @MaSuatChieu , @Gio , @Ngay , @TrangThai , @MaPhim , @MaPhong";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { 
                 showTime.Id, showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom 
             });

@@ -17,14 +17,14 @@ namespace QuanLyRapPhim.DAO
         }
         public static int Insert(Chair chair, ref string error)
         {
-            string query = "exec proc_addChair @GiaGhe, @LoaiGhe";
+            string query = "exec proc_addChair @GiaGhe , @LoaiGhe";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 chair.Price, chair.Type
             });
         }
         public static int Update(Chair chair, ref string error)
         {
-            string query = "exec proc_updateChair @MaGhe, @GiaGhe, @LoaiGhe";
+            string query = "exec proc_updateChair @MaGhe , @GiaGhe , @LoaiGhe";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 chair.Id, chair.Price, chair.Type
             });

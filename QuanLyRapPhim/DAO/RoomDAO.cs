@@ -22,7 +22,7 @@ namespace QuanLyRapPhim.DAO
         }
         public static int Insert(Room room, ref string error)
         {
-            string query = "exec proc_addCinemaRoom @TenPhong, @SoCot, @SoHang, @TrangThai, @MaMay";
+            string query = "exec proc_addCinemaRoom @TenPhong , @SoCot , @SoHang , @TrangThai , @MaMay";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 room.Name, room.Col, room.Row, room.Status, room.IdProjector
             });

@@ -17,14 +17,14 @@ namespace QuanLyRapPhim.DAO
         }
         public static int Insert(Projector projector, ref string error)
         {
-            string query = "exec proc_addProjector @LoaiMay, @Gia";
+            string query = "exec proc_addProjector @LoaiMay , @Gia";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 projector.Type, projector.Price
             });
         }
         public static int Update(Projector projector, ref string error)
         {
-            string query = "exec proc_updateProjector @MaMay, @LoaiMay, @Gia";
+            string query = "exec proc_updateProjector @MaMay , @LoaiMay , @Gia";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 projector.Id, projector.Type, projector.Price
             });
