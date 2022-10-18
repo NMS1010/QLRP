@@ -12,32 +12,66 @@ namespace QuanLyRapPhim.DAO
     {
         public static DataTable GetAllRoom(ref string error)
         {
-            string query = "select * from dbo.func_getCinemaRoom";
+            string query = "select * from dbo.func_getCinemaRoom()";
             return DataProvider.ExecuteQuery(query, ref error);
         }
-        public static DataTable SearchByName(ref string error)
+
+        public static DataTable Search(string keyword, ref string error)
         {
-            string query = "select * from dbo.func_searchRoomByName";
-            return DataProvider.ExecuteQuery(query, ref error);
+            string query = "select * from dbo.func_searchRoomByName( @key )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { keyword });
         }
+
         public static int Insert(Room room, ref string error)
         {
-            string query = "exec proc_addCinemaRoom @TenPhong , @SoCot , @SoHang , @TrangThai , @MaMay";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
-                room.Name, room.Col, room.Row, room.Status, room.IdProjector
+            string query = "exec proc_addCinemaRoom @TenPhong , @SoCot , @SoHang , @TongSoGhe , @TrangThai , @MaMay";
+            int count = DataProvider.ExecuteNonQuery(query, ref error, new object[] {
+                room.Name, room.Col, room.Row, room.Col * room.Row, room.Status, room.IdProjector
             });
+            if (count == 0) return 0;
+            DataTable dt = DataProvider.ExecuteQuery("select * from dbo.func_getRoomByName( @TenPhong )", ref error,
+                new object[] { room.Name });
+            if (dt == null || dt.Rows.Count == 0) return 0;
+            int roomId = (int)dt.Rows[0]["MaPhong"];
+            room.Id = roomId;
+            foreach (int chairId in room.SeatIds)
+            {
+                count = DataProvider.ExecuteNonQuery("exec proc_addCinemaRoomChair @MaPhong , @MaGhe , @SoLuong", ref error,
+                new object[] { roomId, chairId, room.TotalSeat });
+                if (count == 0) return 0;
+            }
+            return count;
         }
+
         public static int Update(Room room, ref string error)
         {
-            string query = "exec proc_updateCinemaRoom @MaPhong, @TenPhong, @SoCot, @SoHang, @TrangThai, @MaMay";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
-                room.Id, room.Name, room.Col, room.Row, room.Status, room.IdProjector
+            string query = "exec proc_updateCinemaRoom @MaPhong , @TenPhong , @SoCot , @SoHang , @TongSoGhe , @TrangThai , @MaMay";
+            int count = DataProvider.ExecuteNonQuery(query, ref error, new object[] {
+                room.Id, room.Name, room.Col, room.Row, room.Col * room.Row, room.Status, room.IdProjector
             });
+            if (count == 0) return 0;
+            count = DataProvider.ExecuteNonQuery("exec proc_deleteCinemaRoomChairByRoomId @MaPhong", ref error,
+                new object[] { room.Id });
+            if (!string.IsNullOrEmpty(error)) return 0;
+            foreach (int chairId in room.SeatIds)
+            {
+                count = DataProvider.ExecuteNonQuery("exec proc_addCinemaRoomChair @MaPhong , @MaGhe , @SoLuong", ref error,
+                new object[] { room.Id, chairId, room.TotalSeat });
+                if (count == 0) return 0;
+            }
+            return count;
         }
-        public static int Delete(Room room, ref string error)
+
+        public static int Delete(int roomId, ref string error)
         {
             string query = "exec proc_deleteCinemaRoom @MaPhong";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { room.Id });
+            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { roomId });
+        }
+
+        public static DataTable GetTypeChairIdByRoomId(int roomId, ref string error)
+        {
+            string query = "select * from dbo.func_getTypeChairIdByRoomId( @MaPhong )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { roomId });
         }
     }
 }

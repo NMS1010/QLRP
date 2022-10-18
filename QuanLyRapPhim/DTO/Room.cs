@@ -14,6 +14,8 @@ namespace QuanLyRapPhim.DTO
         public int Col { get; set; }
         public int Row { get; set; }
         public int Status { get; set; }
-        public int IdProjector{ get; set; }
+        public int IdProjector { get; set; }
+
+        public List<int> SeatIds { get; set; } = new List<int>();
     }
 }

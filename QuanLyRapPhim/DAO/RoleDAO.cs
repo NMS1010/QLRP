@@ -16,10 +16,14 @@ namespace QuanLyRapPhim.DAO
             int count = DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { role.RoleName });
             if (count == 0) return 0;
+            DataTable dt = DataProvider.ExecuteQuery("select * from dbo.func_getRoleByName( @name )", ref error,
+                new object[] { role.RoleName });
+            if (dt == null || dt.Rows.Count == 0) return 0;
+            int roleId = (int)dt.Rows[0]["MaVaiTro"];
             foreach (int permissionId in role.PermissionIds)
             {
                 count = DataProvider.ExecuteNonQuery("exec proc_addRolePermission @MaVaiTro @MaQuyen", ref error,
-                new object[] { role.RoleId, permissionId });
+                new object[] { roleId, permissionId });
                 if (count == 0) return 0;
             }
             return count;

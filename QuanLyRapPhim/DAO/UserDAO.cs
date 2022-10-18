@@ -16,10 +16,15 @@ namespace QuanLyRapPhim.DAO
             int count = DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { user.FullName, user.Gender, user.Dob, user.Phone, user.CCCD, user.Email, user.UserName, user.Password, user.Salary });
             if (count == 0) return 0;
+            DataTable dt = DataProvider.ExecuteQuery("select * from dbo.func_getUserByUserName( @username )", ref error,
+                new object[] { user.UserName });
+            if (dt == null || dt.Rows.Count == 0) return 0;
+            int userId = (int)dt.Rows[0]["MaND"];
+            user.UserId = userId;
             foreach (int roleId in user.RoleIds)
             {
-                count = DataProvider.ExecuteNonQuery("exec proc_addUserRole @MaND @MaVaiTro", ref error,
-                new object[] { user.UserId, roleId });
+                count = DataProvider.ExecuteNonQuery("exec proc_addUserRole @MaND , @MaVaiTro", ref error,
+                new object[] { userId, roleId });
                 if (count == 0) return 0;
             }
             return count;
@@ -33,10 +38,10 @@ namespace QuanLyRapPhim.DAO
             if (count == 0) return 0;
             count = DataProvider.ExecuteNonQuery("exec proc_deleteUserRolebyUserId @MaND", ref error,
                 new object[] { user.UserId });
-            if (count == 0) return 0;
+            if (!string.IsNullOrEmpty(error)) return 0;
             foreach (int roleId in user.RoleIds)
             {
-                count = DataProvider.ExecuteNonQuery("exec proc_addUserRole @MaND @MaVaiTro", ref error,
+                count = DataProvider.ExecuteNonQuery("exec proc_addUserRole @MaND , @MaVaiTro", ref error,
                 new object[] { user.UserId, roleId });
                 if (count == 0) return 0;
             }
@@ -66,6 +71,12 @@ namespace QuanLyRapPhim.DAO
         {
             string query = "select * from dbo.func_searchUser( @keyword )";
             return DataProvider.ExecuteQuery(query, ref error, new object[] { keyword });
+        }
+
+        public static DataTable GetRoleByUserId(int userId, ref string error)
+        {
+            string query = "select * from dbo.func_getRoleIdByUserId( @userId )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { userId });
         }
     }
 }

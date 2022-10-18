@@ -11,34 +11,38 @@ namespace QuanLyRapPhim.DAO
 {
     public class ShowTimeDAO
     {
-        public static DataTable GetAllShowTime (ref string error)
+        public static DataTable GetAllShowTime(ref string error)
         {
-            string query = "select * from dbo.func_getShowtimes";
+            string query = "select * from dbo.func_getShowtimes()";
             return DataProvider.ExecuteQuery(query, ref error);
         }
-        public static DataTable SearchByNameRoom(ref string error)
+
+        public static DataTable Search(string keyword, ref string error)
         {
-            string query = "select * from dbo.func_searchShowtimes";
-            return DataProvider.ExecuteQuery(query, ref error);
+            string query = "select * from dbo.func_searchShowtimes( @key )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { keyword });
         }
+
         public static int Insert(ShowTime showTime, ref string error)
         {
             string query = "exec proc_addShowtimes @Gio , @Ngay , @TrangThai , @MaPhim , @MaPhong";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { 
-                showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom 
+            return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
+                showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom
             });
         }
+
         public static int Update(ShowTime showTime, ref string error)
         {
             string query = "exec proc_updateShowtimes @MaSuatChieu , @Gio , @Ngay , @TrangThai , @MaPhim , @MaPhong";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { 
-                showTime.Id, showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom 
+            return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
+                showTime.Id, showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom
             });
         }
-        public static int Delete(ShowTime showTime, ref string error)
+
+        public static int Delete(int showTimeId, ref string error)
         {
             string query = "exec proc_deleteShowtimes @MaSuatChieu";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { showTime.Id });
+            return DataProvider.ExecuteNonQuery(query, ref error, new object[] { showTimeId });
         }
     }
 }

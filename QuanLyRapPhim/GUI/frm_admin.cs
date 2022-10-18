@@ -35,5 +35,11 @@ namespace QuanLyRapPhim
 
             custumerUC.LoadData();
         }
+
+        private void btn_employee_Click(object sender, EventArgs e)
+        {
+            frm_account employeeForm = new frm_account();
+            employeeForm.ShowDialog();
+        }
     }
 }
