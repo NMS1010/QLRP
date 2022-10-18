@@ -32,6 +32,8 @@ namespace QuanLyRapPhim
             pnl_main.Controls.Clear();
             custumerUC.Dock = DockStyle.Fill;
             pnl_main.Controls.Add(custumerUC);
+
+            custumerUC.LoadData();
         }
 
         private void btn_employee_Click(object sender, EventArgs e)

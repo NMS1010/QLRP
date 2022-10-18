@@ -1,4 +1,5 @@
 ﻿using QuanLyRapPhim.Admin.DataUC;
+using QuanLyRapPhim.DAO;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -41,9 +42,12 @@ namespace QuanLyRapPhim.Admin
 
         private void btn_category_Click(object sender, EventArgs e)
         {
-            CategoryUC showTimeUC = new CategoryUC();
+            CategoryUC categoryUC = new CategoryUC();
             pnl_data.Controls.Clear();
-            pnl_data.Controls.Add(showTimeUC);
+            pnl_data.Controls.Add(categoryUC);
+
+            // load data to datagridview
+            categoryUC.LoadData();
         }
 
         private void btn_movie_Click(object sender, EventArgs e)
@@ -76,9 +80,11 @@ namespace QuanLyRapPhim.Admin
 
         private void btn_discount_Click(object sender, EventArgs e)
         {
-            DiscountUC showTimeUC = new DiscountUC();
+            DiscountUC discountUC = new DiscountUC();
             pnl_data.Controls.Clear();
-            pnl_data.Controls.Add(showTimeUC);
+            pnl_data.Controls.Add(discountUC);
+
+            discountUC.LoadData();
         }
     }
 }
