@@ -73,5 +73,23 @@ namespace QuanLyRapPhim.DAO
             string query = "select * from dbo.func_getTypeChairIdByRoomId( @MaPhong )";
             return DataProvider.ExecuteQuery(query, ref error, new object[] { roomId });
         }
+
+        public static DataTable GetRoomByRoomId(int roomId, ref string error)
+        {
+            string query = "select * from dbo.func_getRoomByRoomId( @MaPhong )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { roomId });
+        }
+
+        public static DataTable GetSeatPriceByRoomId(int roomId, ref string error)
+        {
+            string query = "select * from dbo.func_getSeatPriceByRoomId( @MaPhong )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { roomId });
+        }
+
+        public static DataTable GetProjectorPriceByRoomId(int roomId, ref string error)
+        {
+            string query = "select * from dbo.func_getProjectorPriceByRoomId( @MaPhong )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { roomId });
+        }
     }
 }

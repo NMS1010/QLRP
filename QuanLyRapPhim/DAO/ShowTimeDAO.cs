@@ -26,17 +26,29 @@ namespace QuanLyRapPhim.DAO
         public static int Insert(ShowTime showTime, ref string error)
         {
             string query = "exec proc_addShowtimes @Gio , @Ngay , @TrangThai , @MaPhim , @MaPhong";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
+            int count = DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom
             });
+            if (count == 0)
+                return count;
+            bool isSuccess = TicketDAO.GenerateTicket(showTime.Id, showTime.IdRoom, ref error);
+
+            if (!isSuccess)
+                return 0;
+            return count;
         }
 
         public static int Update(ShowTime showTime, ref string error)
         {
             string query = "exec proc_updateShowtimes @MaSuatChieu , @Gio , @Ngay , @TrangThai , @MaPhim , @MaPhong";
-            return DataProvider.ExecuteNonQuery(query, ref error, new object[] {
+            int count = DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 showTime.Id, showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom
             });
+            if (count == 0)
+                return count;
+            count = TicketDAO.UpdateTicketPrice(showTime.Id, showTime.IdRoom, ref error);
+
+            return count;
         }
 
         public static int Delete(int showTimeId, ref string error)
