@@ -1,5 +1,7 @@
-﻿using QuanLyRapPhim.DAO;
+﻿using QuanLyRapPhim.Admin.DataUC;
+using QuanLyRapPhim.DAO;
 using QuanLyRapPhim.DTO;
+using QuanLyRapPhim.Utils.FormControls;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -15,48 +17,52 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
     public partial class CustumerUC : UserControl
     {
         private string error = "";
+        private List<Control> controls = new List<Control>();
         public CustumerUC()
         {
             InitializeComponent();
+            Init();
         }
-
-        public void LoadData()
+        private void Init()
         {
-            DataTable result = CustomerDAO.GetAllCustomer(ref error);
-            if (!string.IsNullOrEmpty(error))
+            foreach (var c in grb_customer.Controls)
             {
-                MessageBox.Show(error);
+                controls.Add(c as Control);
+            }
+        }
+        private void Fill(int selectedRowIndex)
+        {
+            txb_maKH.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["MaKH"].Value?.ToString();
+            txb_hoTen.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["Ten"].Value?.ToString();
+            txb_gioiTinh.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["GioiTinh"].Value?.ToString();
+            dtp_ngSinh.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["NgaySinh"].Value?.ToString();
+            txb_diaChi.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["DiaChi"].Value?.ToString();
+            txb_sdt.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["SoDienThoai"].Value?.ToString();
+            txb_loaiKH.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["MaLoaiKH"].Value?.ToString();
+            txb_email.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["Email"].Value?.ToString();
+        }
+        private void GetRowChecked()
+        {
+            int selectedRowIndex = -1;
+            try
+            {
+                selectedRowIndex = dgv_dsKH.SelectedCells[0].RowIndex;
+            }
+            catch
+            {
                 return;
             }
-            dgv_dsKH.DataSource = result;
-        }
-
-        private void dgv_dsKH_RowEnter(object sender, DataGridViewCellEventArgs e)
-        {
-            txb_maKH.Text = dgv_dsKH.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txb_hoTen.Text = dgv_dsKH.Rows[e.RowIndex].Cells[1].Value.ToString();
-            txb_gioiTinh.Text = dgv_dsKH.Rows[e.RowIndex].Cells[2].Value.ToString();
-            dtp_ngSinh.Text = dgv_dsKH.Rows[e.RowIndex].Cells[3].Value.ToString();
-            txb_diaChi.Text = dgv_dsKH.Rows[e.RowIndex].Cells[4].Value.ToString();
-            txb_sdt.Text = dgv_dsKH.Rows[e.RowIndex].Cells[5].Value.ToString();
-            txb_loaiKH.Text = dgv_dsKH.Rows[e.RowIndex].Cells[6].Value.ToString();
-            txb_email.Text = dgv_dsKH.Rows[e.RowIndex].Cells[7].Value.ToString();
-        }
-
-        private void btn_add_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txb_maKH.Text))
+            if (selectedRowIndex > dgv_dsKH.Rows.Count - 2)
             {
-                txb_maKH.ResetText();
-                txb_hoTen.ResetText();
-                txb_gioiTinh.ResetText();
-                txb_diaChi.ResetText();
-                txb_sdt.ResetText();
-                txb_email.ResetText();
-                txb_loaiKH.ResetText();
-
+                ClearControls.ClearContent(controls);
                 return;
             }
+            Fill(selectedRowIndex);
+        }
+        private Customer GetCustomer()
+        {
+            if (string.IsNullOrEmpty(txb_hoTen.Text) || string.IsNullOrEmpty(txb_gioiTinh.Text) || string.IsNullOrEmpty(txb_diaChi.Text) || string.IsNullOrEmpty(txb_sdt.Text))
+                return null;
             Customer customer = new Customer()
             {
                 Name = txb_hoTen.Text,
@@ -67,6 +73,35 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
                 TypeCustomerId = Int32.Parse(txb_loaiKH.Text),
                 Email = txb_email.Text
             };
+            return customer;
+        }
+        public void LoadData()
+        {
+            DataTable result = CustomerDAO.GetAllCustomer(ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+            dgv_dsKH.DataSource = result;
+            GetRowChecked();
+        }
+
+        private void btn_add_Click(object sender, EventArgs e)
+        {
+            if (!string.IsNullOrEmpty(txb_maKH.Text))
+            {
+                ClearControls.ClearContent(controls);
+                return;
+            }
+            
+            Customer customer = GetCustomer();
+
+            if (customer == null)
+            {
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                return;
+            }
             int result = CustomerDAO.Insert(customer, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
             {
@@ -75,6 +110,7 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
             }
             MessageBox.Show("Thêm khách hàng thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -90,6 +126,7 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
                 return;
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -99,25 +136,23 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
                 MessageBox.Show("Lưu không thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Customer customer = new Customer()
+            Customer customer = GetCustomer();
+
+            if (customer == null)
             {
-                CustomerId = Int32.Parse(txb_maKH.Text),
-                Name = txb_hoTen.Text,
-                Sex = txb_gioiTinh.Text,
-                Dob = Convert.ToDateTime(dtp_ngSinh.Text),
-                Address = txb_diaChi.Text,
-                PhoneNumber = txb_sdt.Text,
-                TypeCustomerId = Int32.Parse(txb_loaiKH.Text),
-                Email = txb_email.Text
-            };
+                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
+                return;
+            }
+            customer.CustomerId = Int32.Parse(txb_maKH.Text);
             int result = CustomerDAO.Update(customer, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
             }
-            MessageBox.Show("Cập nhật khuyến mãi thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Cập nhật khách hàng thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -129,6 +164,12 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
                 return;
             }
             dgv_dsKH.DataSource = result;
+            GetRowChecked();
+        }
+
+        private void dgv_dsKH_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GetRowChecked();
         }
     }
 }

@@ -28,7 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grb_customer = new System.Windows.Forms.GroupBox();
             this.dtp_ngSinh = new System.Windows.Forms.DateTimePicker();
             this.txb_email = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
@@ -62,38 +62,38 @@
             this.SoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaLoaiKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1.SuspendLayout();
+            this.grb_customer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnl_viewKH.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_dsKH)).BeginInit();
             this.SuspendLayout();
             // 
-            // groupBox1
+            // grb_customer
             // 
-            this.groupBox1.Controls.Add(this.dtp_ngSinh);
-            this.groupBox1.Controls.Add(this.txb_email);
-            this.groupBox1.Controls.Add(this.label10);
-            this.groupBox1.Controls.Add(this.label7);
-            this.groupBox1.Controls.Add(this.txb_loaiKH);
-            this.groupBox1.Controls.Add(this.label8);
-            this.groupBox1.Controls.Add(this.txb_gioiTinh);
-            this.groupBox1.Controls.Add(this.label9);
-            this.groupBox1.Controls.Add(this.txb_sdt);
-            this.groupBox1.Controls.Add(this.label5);
-            this.groupBox1.Controls.Add(this.txb_diaChi);
-            this.groupBox1.Controls.Add(this.label4);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txb_hoTen);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.txb_maKH);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.groupBox1.Location = new System.Drawing.Point(113, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(945, 169);
-            this.groupBox1.TabIndex = 0;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin khách hàng";
+            this.grb_customer.Controls.Add(this.dtp_ngSinh);
+            this.grb_customer.Controls.Add(this.txb_email);
+            this.grb_customer.Controls.Add(this.label10);
+            this.grb_customer.Controls.Add(this.label7);
+            this.grb_customer.Controls.Add(this.txb_loaiKH);
+            this.grb_customer.Controls.Add(this.label8);
+            this.grb_customer.Controls.Add(this.txb_gioiTinh);
+            this.grb_customer.Controls.Add(this.label9);
+            this.grb_customer.Controls.Add(this.txb_sdt);
+            this.grb_customer.Controls.Add(this.label5);
+            this.grb_customer.Controls.Add(this.txb_diaChi);
+            this.grb_customer.Controls.Add(this.label4);
+            this.grb_customer.Controls.Add(this.label3);
+            this.grb_customer.Controls.Add(this.txb_hoTen);
+            this.grb_customer.Controls.Add(this.label2);
+            this.grb_customer.Controls.Add(this.txb_maKH);
+            this.grb_customer.Controls.Add(this.label1);
+            this.grb_customer.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, ((System.Drawing.FontStyle)((System.Drawing.FontStyle.Bold | System.Drawing.FontStyle.Italic))), System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.grb_customer.Location = new System.Drawing.Point(113, 3);
+            this.grb_customer.Name = "grb_customer";
+            this.grb_customer.Size = new System.Drawing.Size(945, 169);
+            this.grb_customer.TabIndex = 0;
+            this.grb_customer.TabStop = false;
+            this.grb_customer.Text = "Thông tin khách hàng";
             // 
             // dtp_ngSinh
             // 
@@ -329,7 +329,7 @@
             this.dgv_dsKH.Name = "dgv_dsKH";
             this.dgv_dsKH.Size = new System.Drawing.Size(936, 355);
             this.dgv_dsKH.TabIndex = 0;
-            this.dgv_dsKH.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_dsKH_RowEnter);
+            this.dgv_dsKH.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_dsKH_CellClick);
             // 
             // MaKH
             // 
@@ -387,11 +387,11 @@
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.Controls.Add(this.pnl_viewKH);
             this.Controls.Add(this.panel1);
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grb_customer);
             this.Name = "CustumerUC";
             this.Size = new System.Drawing.Size(1168, 592);
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grb_customer.ResumeLayout(false);
+            this.grb_customer.PerformLayout();
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
             this.pnl_viewKH.ResumeLayout(false);
@@ -402,7 +402,7 @@
 
         #endregion
 
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grb_customer;
         private System.Windows.Forms.TextBox txb_sdt;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.TextBox txb_diaChi;
