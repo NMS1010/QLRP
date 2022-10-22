@@ -80,5 +80,11 @@ namespace QuanLyRapPhim.DAO
             string query = "select * from dbo.func_searchFilm( @keyword )";
             return DataProvider.ExecuteQuery(query, ref error, new object[] { keyword });
         }
+
+        public static DataTable GetMovieByDate(string date, ref string error)
+        {
+            string query = "select * from dbo.func_getFilmByDate( @date )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { date });
+        }
     }
 }

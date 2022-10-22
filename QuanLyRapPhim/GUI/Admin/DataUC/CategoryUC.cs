@@ -17,6 +17,7 @@ namespace QuanLyRapPhim.Admin.DataUC
     {
         private string error = "";
         private List<Control> controls = new List<Control>();
+
         public CategoryUC()
         {
             InitializeComponent();
@@ -31,13 +32,13 @@ namespace QuanLyRapPhim.Admin.DataUC
         }
 
         public void LoadData()
-        { 
+        {
             DataTable result = CategoryDAO.GetAllCategory(ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
-            } 
+            }
             dgv_category.DataSource = result;
             GetRowChecked();
         }
@@ -49,6 +50,7 @@ namespace QuanLyRapPhim.Admin.DataUC
         }
         private void GetRowChecked()
         {
+
             int selectedRowIndex = -1;
             try
             {
@@ -126,10 +128,10 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show("Lưu không thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Category category = new Category() 
-            { 
+            Category category = new Category()
+            {
                 CategoryId = Int32.Parse(txb_categoryId.Text),
-                CategoryName = txb_categoryName.Text 
+                CategoryName = txb_categoryName.Text
             };
             int result = CategoryDAO.Update(category, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
@@ -157,6 +159,10 @@ namespace QuanLyRapPhim.Admin.DataUC
         private void dgv_category_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             GetRowChecked();
+        }
+
+        private void dgv_category_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }

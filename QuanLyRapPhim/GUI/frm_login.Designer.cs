@@ -30,10 +30,11 @@ namespace QuanLyRapPhim
         private void InitializeComponent()
         {
             this.panel1 = new System.Windows.Forms.Panel();
+            this.label8 = new System.Windows.Forms.Label();
             this.btn_login = new System.Windows.Forms.Button();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label7 = new System.Windows.Forms.Label();
-            this.textBox1 = new System.Windows.Forms.TextBox();
+            this.txb_password = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             this.txb_username = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
@@ -41,7 +42,6 @@ namespace QuanLyRapPhim
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
-            this.label8 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -52,7 +52,7 @@ namespace QuanLyRapPhim
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.btn_login);
             this.panel1.Controls.Add(this.panel2);
-            this.panel1.Controls.Add(this.textBox1);
+            this.panel1.Controls.Add(this.txb_password);
             this.panel1.Controls.Add(this.label3);
             this.panel1.Controls.Add(this.txb_username);
             this.panel1.Controls.Add(this.label2);
@@ -61,6 +61,17 @@ namespace QuanLyRapPhim
             this.panel1.Name = "panel1";
             this.panel1.Size = new System.Drawing.Size(325, 411);
             this.panel1.TabIndex = 0;
+            // 
+            // label8
+            // 
+            this.label8.AutoSize = true;
+            this.label8.BackColor = System.Drawing.Color.Transparent;
+            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label8.Location = new System.Drawing.Point(191, 365);
+            this.label8.Name = "label8";
+            this.label8.Size = new System.Drawing.Size(55, 20);
+            this.label8.TabIndex = 13;
+            this.label8.Text = "Thoát";
             // 
             // btn_login
             // 
@@ -73,6 +84,7 @@ namespace QuanLyRapPhim
             this.btn_login.TabIndex = 11;
             this.btn_login.Text = "ĐĂNG NHẬP";
             this.btn_login.UseVisualStyleBackColor = false;
+            this.btn_login.Click += new System.EventHandler(this.btn_login_Click);
             // 
             // panel2
             // 
@@ -84,6 +96,7 @@ namespace QuanLyRapPhim
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(61, 44);
             this.panel2.TabIndex = 12;
+            this.panel2.Click += new System.EventHandler(this.panel2_Click);
             // 
             // label7
             // 
@@ -97,13 +110,13 @@ namespace QuanLyRapPhim
             this.label7.TabIndex = 13;
             this.label7.Text = "THOÁT";
             // 
-            // textBox1
+            // txb_password
             // 
-            this.textBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.textBox1.Location = new System.Drawing.Point(22, 190);
-            this.textBox1.Name = "textBox1";
-            this.textBox1.Size = new System.Drawing.Size(270, 32);
-            this.textBox1.TabIndex = 10;
+            this.txb_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_password.Location = new System.Drawing.Point(22, 190);
+            this.txb_password.Name = "txb_password";
+            this.txb_password.Size = new System.Drawing.Size(270, 32);
+            this.txb_password.TabIndex = 10;
             // 
             // label3
             // 
@@ -167,7 +180,7 @@ namespace QuanLyRapPhim
             this.label5.ForeColor = System.Drawing.Color.WhiteSmoke;
             this.label5.Location = new System.Drawing.Point(144, 130);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(176, 16);
+            this.label5.Size = new System.Drawing.Size(175, 16);
             this.label5.TabIndex = 2;
             this.label5.Text = "Special - Dream - Mood ";
             // 
@@ -179,20 +192,9 @@ namespace QuanLyRapPhim
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(56, 149);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(371, 16);
+            this.label6.Size = new System.Drawing.Size(370, 16);
             this.label6.TabIndex = 3;
             this.label6.Text = "Dịch vụ đặt biệt - Tuyệt vời như mơ - Nên thơ cảm xúc";
-            // 
-            // label8
-            // 
-            this.label8.AutoSize = true;
-            this.label8.BackColor = System.Drawing.Color.Transparent;
-            this.label8.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label8.Location = new System.Drawing.Point(191, 365);
-            this.label8.Name = "label8";
-            this.label8.Size = new System.Drawing.Size(55, 20);
-            this.label8.TabIndex = 13;
-            this.label8.Text = "Thoát";
             // 
             // frm_login
             // 
@@ -226,7 +228,7 @@ namespace QuanLyRapPhim
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.TextBox txb_username;
-        private System.Windows.Forms.TextBox textBox1;
+        private System.Windows.Forms.TextBox txb_password;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.Label label5;
