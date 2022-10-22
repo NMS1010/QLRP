@@ -161,8 +161,5 @@ namespace QuanLyRapPhim.Admin.DataUC
             GetRowChecked();
         }
 
-        private void dgv_category_CellClick(object sender, DataGridViewCellEventArgs e)
-        {
-        }
     }
 }
