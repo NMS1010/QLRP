@@ -39,13 +39,13 @@
             this.MaKM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.TenKM = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.GiaTriKM = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grb_discount = new System.Windows.Forms.GroupBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.txb_search = new System.Windows.Forms.TextBox();
             this.txb_discountId = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_discount)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.grb_discount.SuspendLayout();
             this.SuspendLayout();
             // 
             // txb_price
@@ -133,7 +133,7 @@
             this.dgv_discount.ReadOnly = true;
             this.dgv_discount.Size = new System.Drawing.Size(942, 428);
             this.dgv_discount.TabIndex = 12;
-            this.dgv_discount.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_discount_RowEnter);
+            this.dgv_discount.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_discount_CellClick);
             // 
             // MaKM
             // 
@@ -159,26 +159,26 @@
             this.GiaTriKM.ReadOnly = true;
             this.GiaTriKM.Width = 300;
             // 
-            // groupBox1
+            // grb_discount
             // 
-            this.groupBox1.Controls.Add(this.btn_search);
-            this.groupBox1.Controls.Add(this.txb_search);
-            this.groupBox1.Controls.Add(this.txb_discountId);
-            this.groupBox1.Controls.Add(this.label3);
-            this.groupBox1.Controls.Add(this.txb_price);
-            this.groupBox1.Controls.Add(this.btn_save);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.btn_delete);
-            this.groupBox1.Controls.Add(this.txb_codeName);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btn_add);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(3, 3);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(942, 140);
-            this.groupBox1.TabIndex = 19;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin khuyến mãi";
+            this.grb_discount.Controls.Add(this.btn_search);
+            this.grb_discount.Controls.Add(this.txb_search);
+            this.grb_discount.Controls.Add(this.txb_discountId);
+            this.grb_discount.Controls.Add(this.label3);
+            this.grb_discount.Controls.Add(this.txb_price);
+            this.grb_discount.Controls.Add(this.btn_save);
+            this.grb_discount.Controls.Add(this.label2);
+            this.grb_discount.Controls.Add(this.btn_delete);
+            this.grb_discount.Controls.Add(this.txb_codeName);
+            this.grb_discount.Controls.Add(this.label1);
+            this.grb_discount.Controls.Add(this.btn_add);
+            this.grb_discount.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.grb_discount.Location = new System.Drawing.Point(3, 3);
+            this.grb_discount.Name = "grb_discount";
+            this.grb_discount.Size = new System.Drawing.Size(942, 140);
+            this.grb_discount.TabIndex = 19;
+            this.grb_discount.TabStop = false;
+            this.grb_discount.Text = "Thông tin khuyến mãi";
             // 
             // btn_search
             // 
@@ -221,13 +221,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grb_discount);
             this.Controls.Add(this.dgv_discount);
             this.Name = "DiscountUC";
             this.Size = new System.Drawing.Size(948, 584);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_discount)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grb_discount.ResumeLayout(false);
+            this.grb_discount.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -241,7 +241,7 @@
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_add;
         private System.Windows.Forms.DataGridView dgv_discount;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grb_discount;
         private System.Windows.Forms.TextBox txb_discountId;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.Button btn_search;

@@ -36,13 +36,13 @@
             this.btn_save = new System.Windows.Forms.Button();
             this.label1 = new System.Windows.Forms.Label();
             this.txb_categoryName = new System.Windows.Forms.TextBox();
-            this.groupBox1 = new System.Windows.Forms.GroupBox();
+            this.grb_category = new System.Windows.Forms.GroupBox();
             this.btn_search = new System.Windows.Forms.Button();
             this.txb_search = new System.Windows.Forms.TextBox();
             this.txb_categoryId = new System.Windows.Forms.TextBox();
             this.label2 = new System.Windows.Forms.Label();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).BeginInit();
-            this.groupBox1.SuspendLayout();
+            this.grb_category.SuspendLayout();
             this.SuspendLayout();
             // 
             // dgv_category
@@ -57,7 +57,7 @@
             this.dgv_category.ReadOnly = true;
             this.dgv_category.Size = new System.Drawing.Size(942, 442);
             this.dgv_category.TabIndex = 6;
-            this.dgv_category.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_category_RowEnter);
+            this.dgv_category.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_category_CellClick);
             // 
             // MaLoai
             // 
@@ -129,24 +129,24 @@
             this.txb_categoryName.Size = new System.Drawing.Size(241, 26);
             this.txb_categoryName.TabIndex = 16;
             // 
-            // groupBox1
+            // grb_category
             // 
-            this.groupBox1.Controls.Add(this.btn_search);
-            this.groupBox1.Controls.Add(this.txb_search);
-            this.groupBox1.Controls.Add(this.txb_categoryId);
-            this.groupBox1.Controls.Add(this.label2);
-            this.groupBox1.Controls.Add(this.btn_add);
-            this.groupBox1.Controls.Add(this.txb_categoryName);
-            this.groupBox1.Controls.Add(this.btn_delete);
-            this.groupBox1.Controls.Add(this.label1);
-            this.groupBox1.Controls.Add(this.btn_save);
-            this.groupBox1.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.groupBox1.Location = new System.Drawing.Point(4, 4);
-            this.groupBox1.Name = "groupBox1";
-            this.groupBox1.Size = new System.Drawing.Size(941, 125);
-            this.groupBox1.TabIndex = 17;
-            this.groupBox1.TabStop = false;
-            this.groupBox1.Text = "Thông tin thể loại phim";
+            this.grb_category.Controls.Add(this.btn_search);
+            this.grb_category.Controls.Add(this.txb_search);
+            this.grb_category.Controls.Add(this.txb_categoryId);
+            this.grb_category.Controls.Add(this.label2);
+            this.grb_category.Controls.Add(this.btn_add);
+            this.grb_category.Controls.Add(this.txb_categoryName);
+            this.grb_category.Controls.Add(this.btn_delete);
+            this.grb_category.Controls.Add(this.label1);
+            this.grb_category.Controls.Add(this.btn_save);
+            this.grb_category.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.grb_category.Location = new System.Drawing.Point(4, 4);
+            this.grb_category.Name = "grb_category";
+            this.grb_category.Size = new System.Drawing.Size(941, 125);
+            this.grb_category.TabIndex = 17;
+            this.grb_category.TabStop = false;
+            this.grb_category.Text = "Thông tin thể loại phim";
             // 
             // btn_search
             // 
@@ -189,13 +189,13 @@
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.Controls.Add(this.groupBox1);
+            this.Controls.Add(this.grb_category);
             this.Controls.Add(this.dgv_category);
             this.Name = "CategoryUC";
             this.Size = new System.Drawing.Size(948, 584);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_category)).EndInit();
-            this.groupBox1.ResumeLayout(false);
-            this.groupBox1.PerformLayout();
+            this.grb_category.ResumeLayout(false);
+            this.grb_category.PerformLayout();
             this.ResumeLayout(false);
 
         }
@@ -207,7 +207,7 @@
         private System.Windows.Forms.Button btn_save;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.TextBox txb_categoryName;
-        private System.Windows.Forms.GroupBox groupBox1;
+        private System.Windows.Forms.GroupBox grb_category;
         private System.Windows.Forms.DataGridViewTextBoxColumn MaLoai;
         private System.Windows.Forms.DataGridViewTextBoxColumn TenLoai;
         private System.Windows.Forms.TextBox txb_categoryId;
