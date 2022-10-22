@@ -73,10 +73,16 @@ namespace QuanLyRapPhim.DAO
             return DataProvider.ExecuteQuery(query, ref error, new object[] { keyword });
         }
 
-        public static DataTable GetRoleByUserId(int userId, ref string error)
+        public static DataTable GetRoleIdByUserId(int userId, ref string error)
         {
             string query = "select * from dbo.func_getRoleIdByUserId( @userId )";
             return DataProvider.ExecuteQuery(query, ref error, new object[] { userId });
+        }
+
+        public static DataTable GetRoleNameByUsername(string username, ref string error)
+        {
+            string query = "select * from dbo.func_getRoleNameByUsername( @username )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { username });
         }
     }
 }

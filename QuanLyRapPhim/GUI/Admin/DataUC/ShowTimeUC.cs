@@ -28,6 +28,25 @@ namespace QuanLyRapPhim.Admin.DataUC
             Init();
         }
 
+        private void GetRowChecked()
+        {
+            int selectedRowIndex = -1;
+            try
+            {
+                selectedRowIndex = dgv_showTime.SelectedCells[0].RowIndex;
+            }
+            catch
+            {
+                return;
+            }
+            if (selectedRowIndex > dgv_showTime.Rows.Count - 2)
+            {
+                ClearControls.ClearContent(controls);
+                return;
+            }
+            Fill(selectedRowIndex);
+        }
+
         private void Init()
         {
             movies = new Hashtable();
@@ -97,6 +116,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 r["MaPhong"] = cinemaRooms[st.IdRoom].ToString();
                 showTimes.Add(st);
             }
+            GetRowChecked();
         }
 
         private ShowTime GetShowTime()
@@ -150,13 +170,7 @@ namespace QuanLyRapPhim.Admin.DataUC
 
         private void dgv_showTime_CellClick(object sender, DataGridViewCellEventArgs e)
         {
-            int selectedRowIndex = dgv_showTime.SelectedCells[0].RowIndex;
-            if (selectedRowIndex > dgv_showTime.Rows.Count - 2)
-            {
-                ClearControls.ClearContent(controls);
-                return;
-            }
-            Fill(selectedRowIndex);
+            GetRowChecked();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -184,6 +198,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 return;
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -206,6 +221,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
             ClearControls.ClearContent(controls);
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -234,6 +250,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show(error);
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_search_Click(object sender, EventArgs e)

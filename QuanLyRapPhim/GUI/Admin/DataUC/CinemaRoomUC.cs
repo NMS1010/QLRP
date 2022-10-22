@@ -147,15 +147,28 @@ namespace QuanLyRapPhim.Admin.DataUC
             cbx_projector.Text = projectors[room.IdProjector].ToString();
         }
 
-        private void dgv_cinemaRoom_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void GetRowChecked()
         {
-            int selectedRowIndex = dgv_cinemaRoom.SelectedCells[0].RowIndex;
+            int selectedRowIndex = -1;
+            try
+            {
+                selectedRowIndex = dgv_cinemaRoom.SelectedCells[0].RowIndex;
+            }
+            catch
+            {
+                return;
+            }
             if (selectedRowIndex > dgv_cinemaRoom.Rows.Count - 2)
             {
                 ClearControls.ClearContent(controls);
                 return;
             }
             Fill(selectedRowIndex);
+        }
+
+        private void dgv_cinemaRoom_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
+            GetRowChecked();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
@@ -189,6 +202,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 return;
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -211,6 +225,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
             ClearControls.ClearContent(controls);
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -239,6 +254,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show(error);
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void CinemaRoomUC_Load(object sender, EventArgs e)
@@ -246,10 +262,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             LoadData();
             if (dgv_cinemaRoom.SelectedCells.Count == 0)
                 return;
-            int selectedRowIndex = dgv_cinemaRoom.SelectedCells[0].RowIndex;
-            if (selectedRowIndex > dgv_cinemaRoom.Rows.Count - 2)
-                return;
-            Fill(selectedRowIndex);
+            GetRowChecked();
         }
     }
 }

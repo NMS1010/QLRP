@@ -15,26 +15,29 @@ namespace QuanLyRapPhim.Admin.DataUC
     public partial class CategoryUC : UserControl
     {
         private string error = "";
+
         public CategoryUC()
         {
             InitializeComponent();
         }
 
         public void LoadData()
-        { 
+        {
             DataTable result = CategoryDAO.GetAllCategory(ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
-            } 
+            }
             dgv_category.DataSource = result;
         }
 
         private void dgv_category_RowEnter(object sender, DataGridViewCellEventArgs e)
         {
-            txb_categoryId.Text = dgv_category.Rows[e.RowIndex].Cells[0].Value.ToString();
-            txb_categoryName.Text = dgv_category.Rows[e.RowIndex].Cells[1].Value.ToString();
+            if (e.RowIndex > dgv_category.Rows.Count - 2)
+                return;
+            txb_categoryId.Text = dgv_category.Rows[e.RowIndex].Cells[0]?.Value?.ToString();
+            txb_categoryName.Text = dgv_category.Rows[e.RowIndex].Cells[1]?.Value?.ToString();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
@@ -69,6 +72,8 @@ namespace QuanLyRapPhim.Admin.DataUC
                 return;
             }
             LoadData();
+            txb_categoryId.ResetText();
+            txb_categoryName.ResetText();
         }
 
         private void btn_save_Click(object sender, EventArgs e)
@@ -78,10 +83,10 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show("Lưu không thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Category category = new Category() 
-            { 
+            Category category = new Category()
+            {
                 CategoryId = Int32.Parse(txb_categoryId.Text),
-                CategoryName = txb_categoryName.Text 
+                CategoryName = txb_categoryName.Text
             };
             int result = CategoryDAO.Update(category, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
@@ -102,6 +107,10 @@ namespace QuanLyRapPhim.Admin.DataUC
                 return;
             }
             dgv_category.DataSource = result;
+        }
+
+        private void dgv_category_CellClick(object sender, DataGridViewCellEventArgs e)
+        {
         }
     }
 }

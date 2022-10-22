@@ -111,7 +111,15 @@ namespace QuanLyRapPhim.Admin.DataUC
 
         private void GetRowChecked()
         {
-            int selectedRowIndex = dgv_actor.SelectedCells[0].RowIndex;
+            int selectedRowIndex = -1;
+            try
+            {
+                selectedRowIndex = dgv_actor.SelectedCells[0].RowIndex;
+            }
+            catch
+            {
+                return;
+            }
             if (selectedRowIndex > dgv_actor.Rows.Count - 2)
             {
                 ClearControls.ClearContent(controls);

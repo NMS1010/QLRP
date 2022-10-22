@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyRapPhim.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -15,6 +16,53 @@ namespace QuanLyRapPhim
         public frm_login()
         {
             InitializeComponent();
+        }
+
+        private void btn_login_Click(object sender, EventArgs e)
+        {
+            string username = txb_username.Text;
+            string password = txb_password.Text;
+
+            string error = "";
+            bool res = UserDAO.Login(username, password, ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+            DataTable dt = UserDAO.GetRoleNameByUsername(username, ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+            bool isAdmin = false;
+            foreach (DataRow dr in dt.Rows)
+            {
+                if (dr["TenVaiTro"].ToString().ToLower() == "admin")
+                {
+                    isAdmin = true; break;
+                }
+            }
+            if (isAdmin)
+            {
+                frm_admin frm_Admin = new frm_admin();
+                this.Hide();
+                frm_Admin.ShowDialog();
+                this.Show();
+            }
+            else
+            {
+                frmSeller frmSeller = new frmSeller();
+                this.Hide();
+                frmSeller.ShowDialog();
+                this.Show();
+            }
+        }
+
+        private void panel2_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

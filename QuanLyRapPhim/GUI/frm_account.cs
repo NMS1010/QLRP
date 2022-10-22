@@ -104,6 +104,7 @@ namespace QuanLyRapPhim
                 return;
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void LoadData(string keyword = null)
@@ -140,7 +141,7 @@ namespace QuanLyRapPhim
                     Password = row["MatKhau"].ToString(),
                     Salary = (decimal)row["Luong"]
                 };
-                DataTable roles = UserDAO.GetRoleByUserId((int)row["MaND"], ref error);
+                DataTable roles = UserDAO.GetRoleIdByUserId((int)row["MaND"], ref error);
                 if (!string.IsNullOrEmpty(error))
                 {
                     MessageBox.Show(error);
@@ -159,10 +160,8 @@ namespace QuanLyRapPhim
             LoadData();
             if (dgv_account.SelectedCells.Count == 0)
                 return;
-            int selectedRowIndex = dgv_account.SelectedCells[0].RowIndex;
-            if (selectedRowIndex > dgv_account.Rows.Count - 2)
-                return;
-            Fill(selectedRowIndex);
+
+            GetRowChecked();
         }
 
         private void btn_edit_Click(object sender, EventArgs e)
@@ -206,6 +205,25 @@ namespace QuanLyRapPhim
             }
         }
 
+        private void GetRowChecked()
+        {
+            int selectedRowIndex = -1;
+            try
+            {
+                selectedRowIndex = dgv_account.SelectedCells[0].RowIndex;
+            }
+            catch
+            {
+                return;
+            }
+            if (selectedRowIndex > dgv_account.Rows.Count - 2)
+            {
+                ClearControls.ClearContent(controls);
+                return;
+            }
+            Fill(selectedRowIndex);
+        }
+
         private void dgv_account_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             int selectedRowIndex = dgv_account.SelectedCells[0].RowIndex;
@@ -243,6 +261,7 @@ namespace QuanLyRapPhim
                 MessageBox.Show(error);
             }
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -265,6 +284,7 @@ namespace QuanLyRapPhim
             }
             ClearControls.ClearContent(controls);
             LoadData();
+            GetRowChecked();
         }
 
         private void btn_search_Click(object sender, EventArgs e)

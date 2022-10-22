@@ -57,6 +57,7 @@
             this.dgv_category.ReadOnly = true;
             this.dgv_category.Size = new System.Drawing.Size(942, 442);
             this.dgv_category.TabIndex = 6;
+            this.dgv_category.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_category_CellClick);
             this.dgv_category.RowEnter += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_category_RowEnter);
             // 
             // MaLoai

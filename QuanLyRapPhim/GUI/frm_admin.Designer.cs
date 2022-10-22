@@ -34,6 +34,7 @@ namespace QuanLyRapPhim
             this.btn_khachHang = new System.Windows.Forms.Button();
             this.panel1 = new System.Windows.Forms.Panel();
             this.btn_employee = new System.Windows.Forms.Button();
+            this.btn_sellTicket = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.SuspendLayout();
             // 
@@ -67,6 +68,7 @@ namespace QuanLyRapPhim
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.SystemColors.ActiveCaption;
+            this.panel1.Controls.Add(this.btn_sellTicket);
             this.panel1.Controls.Add(this.btn_employee);
             this.panel1.Controls.Add(this.btn_khachHang);
             this.panel1.Controls.Add(this.btn_dataManager);
@@ -84,6 +86,16 @@ namespace QuanLyRapPhim
             this.btn_employee.Text = "Nhân viên";
             this.btn_employee.UseVisualStyleBackColor = true;
             this.btn_employee.Click += new System.EventHandler(this.btn_employee_Click);
+            // 
+            // btn_sellTicket
+            // 
+            this.btn_sellTicket.Location = new System.Drawing.Point(639, 8);
+            this.btn_sellTicket.Name = "btn_sellTicket";
+            this.btn_sellTicket.Size = new System.Drawing.Size(121, 48);
+            this.btn_sellTicket.TabIndex = 2;
+            this.btn_sellTicket.Text = "Bán vé";
+            this.btn_sellTicket.UseVisualStyleBackColor = true;
+            this.btn_sellTicket.Click += new System.EventHandler(this.btn_sellTicket_Click);
             // 
             // frm_admin
             // 
@@ -107,6 +119,7 @@ namespace QuanLyRapPhim
         private System.Windows.Forms.Button btn_khachHang;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_employee;
+        private System.Windows.Forms.Button btn_sellTicket;
     }
 }
 

@@ -39,7 +39,17 @@ namespace QuanLyRapPhim
         private void btn_employee_Click(object sender, EventArgs e)
         {
             frm_account employeeForm = new frm_account();
+            this.Hide();
             employeeForm.ShowDialog();
+            this.Show();
+        }
+
+        private void btn_sellTicket_Click(object sender, EventArgs e)
+        {
+            frmSeller frmSeller = new frmSeller();
+            this.Hide();
+            frmSeller.ShowDialog();
+            this.Show();
         }
     }
 }

@@ -29,7 +29,6 @@ namespace QuanLyRapPhim
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmSeller));
             this.gb_chitiet = new System.Windows.Forms.GroupBox();
             this.cbx_lichChieu_suatChieu = new System.Windows.Forms.ComboBox();
             this.label4 = new System.Windows.Forms.Label();
@@ -45,14 +44,11 @@ namespace QuanLyRapPhim
             this.tinhtrang = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.stt = ((System.Windows.Forms.ColumnHeader)(new System.Windows.Forms.ColumnHeader()));
             this.label1 = new System.Windows.Forms.Label();
-            this.pictureBox1 = new System.Windows.Forms.PictureBox();
             this.gb_chitiet.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).BeginInit();
             this.SuspendLayout();
             // 
             // gb_chitiet
             // 
-            this.gb_chitiet.Controls.Add(this.pictureBox1);
             this.gb_chitiet.Controls.Add(this.cbx_lichChieu_suatChieu);
             this.gb_chitiet.Controls.Add(this.label4);
             this.gb_chitiet.Controls.Add(this.cbx_lichChieu_phim);
@@ -176,16 +172,6 @@ namespace QuanLyRapPhim
             this.label1.TabIndex = 2;
             this.label1.Text = "Lịch chiếu phim";
             // 
-            // pictureBox1
-            // 
-            this.pictureBox1.Image = ((System.Drawing.Image)(resources.GetObject("pictureBox1.Image")));
-            this.pictureBox1.Location = new System.Drawing.Point(9, 211);
-            this.pictureBox1.Name = "pictureBox1";
-            this.pictureBox1.Size = new System.Drawing.Size(290, 192);
-            this.pictureBox1.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pictureBox1.TabIndex = 6;
-            this.pictureBox1.TabStop = false;
-            // 
             // frmSeller
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -197,9 +183,9 @@ namespace QuanLyRapPhim
             this.Name = "frmSeller";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Lịch Chiếu Phim";
+            this.Load += new System.EventHandler(this.frmSeller_Load);
             this.gb_chitiet.ResumeLayout(false);
             this.gb_chitiet.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pictureBox1)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -222,7 +208,6 @@ namespace QuanLyRapPhim
         private System.Windows.Forms.ColumnHeader tinhtrang;
         private System.Windows.Forms.ColumnHeader stt;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.PictureBox pictureBox1;
     }
 }
 

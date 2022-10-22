@@ -56,5 +56,11 @@ namespace QuanLyRapPhim.DAO
             string query = "exec proc_deleteShowtimes @MaSuatChieu";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { showTimeId });
         }
+
+        public static DataTable GetShowTimeByMovie(int movieId, ref string error)
+        {
+            string query = "select * from dbo.func_getShowtimesByFilm( @movieId )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { movieId });
+        }
     }
 }
