@@ -71,9 +71,9 @@ namespace QuanLyRapPhim
                     )
                 );
             }
-            if (!string.IsNullOrEmpty(user.FullName) || !string.IsNullOrEmpty(user.Gender) || !string.IsNullOrEmpty(user.Phone)
-                || !string.IsNullOrEmpty(user.Dob) || !string.IsNullOrEmpty(user.CCCD) || !string.IsNullOrEmpty(user.Email)
-                || !string.IsNullOrEmpty(user.UserName) || !string.IsNullOrEmpty(user.Password) || !string.IsNullOrEmpty(txb_Luong.Text)
+            if (string.IsNullOrEmpty(user.FullName) || string.IsNullOrEmpty(user.Gender) || string.IsNullOrEmpty(user.Phone)
+                || string.IsNullOrEmpty(user.Dob) || string.IsNullOrEmpty(user.CCCD) || string.IsNullOrEmpty(user.Email)
+                || string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password) || string.IsNullOrEmpty(txb_Luong.Text)
                 || user.RoleIds.Count == 0)
                 return null;
             return user;
