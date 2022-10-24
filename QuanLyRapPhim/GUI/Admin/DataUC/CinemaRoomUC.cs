@@ -18,9 +18,10 @@ namespace QuanLyRapPhim.Admin.DataUC
 {
     public partial class CinemaRoomUC : UserControl
     {
-        private Hashtable projectors = new Hashtable();
+        private List<Projector> projectors = new List<Projector>();
         private List<Room> rooms = new List<Room>();
         private List<Control> controls = new List<Control>();
+        private List<Chair> seats = new List<Chair>();
 
         public CinemaRoomUC()
         {
@@ -32,17 +33,31 @@ namespace QuanLyRapPhim.Admin.DataUC
         {
             string error = "";
             DataTable projectorDT = ProjectorDAO.GetAllProjector(ref error);
+            DataTable chairDT = ChairDAO.GetAllChair(ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
             }
             foreach (DataRow row in projectorDT.Rows)
             {
-                int projectorId = (int)row[0];
-                string typeProjector = (string)row[1];
-
-                projectors.Add(projectorId, typeProjector);
-                cbx_projector.Items.Add(typeProjector);
+                Projector projector = new Projector()
+                {
+                    Id = (int)row["MaMay"],
+                    Type = row["LoaiMay"].ToString(),
+                    Price = (decimal)row["Gia"]
+                };
+                projectors.Add(projector);
+                cbx_projector.Items.Add(row["LoaiMay"].ToString());
+            }
+            foreach (DataRow row in chairDT.Rows)
+            {
+                Chair c = new Chair()
+                {
+                    ChairId = (int)row["MaGhe"],
+                    Type = row["LoaiGhe"].ToString(),
+                    Price = (decimal)row["GiaGhe"]
+                };
+                seats.Add(c);
             }
             if (!string.IsNullOrEmpty(error))
             {
@@ -56,6 +71,10 @@ namespace QuanLyRapPhim.Admin.DataUC
             {
                 cbx_roomStatus.Items.Add(s.Value);
             }
+            if (cbx_projector.Items.Count > 0)
+                cbx_projector.SelectedIndex = 0;
+            if (cbx_roomStatus.Items.Count > 0)
+                cbx_roomStatus.SelectedIndex = 0;
         }
 
         private Room GetRoom()
@@ -64,7 +83,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             int col = int.TryParse(txb_col.Text, out int c) ? c : -1;
             Room room = new Room()
             {
-                Name = txb_roomId.Text,
+                Name = txb_cinemaName.Text,
                 Col = col,
                 Row = row,
                 TotalSeat = col * row,
@@ -74,14 +93,10 @@ namespace QuanLyRapPhim.Admin.DataUC
                                     STATUS.Status[s].ToString() == cbx_roomStatus.Text
                              )
                             .ToString(), out int status) ? status : -1,
-                IdProjector = int.TryParse(projectors.Keys
-                            .OfType<int>()
-                            .FirstOrDefault(s =>
-                                    projectors[s].ToString() == cbx_projector.Text
-                             )
-                            .ToString(), out int idFilm) ? idFilm : -1,
+                IdProjector = projectors.FirstOrDefault(x => x.Type == cbx_projector.Text).Id
             };
-            if (!string.IsNullOrEmpty(room.Name)
+            room.SeatIds.Add(seats.FirstOrDefault(x => x.Type == "1").ChairId);
+            if (string.IsNullOrEmpty(room.Name)
                 || room.Col == -1 || room.Row == -1 || room.IdProjector == -1
                 || room.SeatIds.Count == 0)
                 return null;
@@ -105,7 +120,6 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show(error);
                 return;
             }
-            dgv_cinemaRoom.DataSource = dt;
             rooms.Clear();
             foreach (DataRow row in dt.Rows)
             {
@@ -119,7 +133,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                     Status = (int)row["TrangThai"],
                     TotalSeat = (int)row["TongSoGhe"],
                 };
-
+                //row["MaMay"] = projectors.FirstOrDefault(x => x.Id == room.IdProjector).Type;
                 DataTable typeChair = RoomDAO.GetTypeChairIdByRoomId(room.Id, ref error);
                 foreach (DataRow r in typeChair.Rows)
                 {
@@ -128,6 +142,11 @@ namespace QuanLyRapPhim.Admin.DataUC
 
                 rooms.Add(room);
             }
+            dgv_cinemaRoom.DataSource = dt;
+            //foreach (DataGridViewRow r in dgv_cinemaRoom.Rows)
+            //{
+            //    r.Cells["MayChieu"].Value = projectors.FirstOrDefault(x => x.Id == (int)r.Cells["MayChieu"].Value).Type;
+            //}
         }
 
         private void Fill(int selectedRowIndex)
@@ -144,7 +163,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             txb_col.Text = room.Col.ToString();
             txb_row.Text = room.Row.ToString();
             cbx_roomStatus.Text = STATUS.Status[room.Status].ToString();
-            cbx_projector.Text = projectors[room.IdProjector].ToString();
+            cbx_projector.Text = projectors.FirstOrDefault(x => x.Id == room.IdProjector).Type;
         }
 
         private void GetRowChecked()

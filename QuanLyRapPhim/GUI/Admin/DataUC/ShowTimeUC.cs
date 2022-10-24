@@ -112,10 +112,11 @@ namespace QuanLyRapPhim.Admin.DataUC
                     IdFilm = (int)r["MaPhim"],
                     IdRoom = (int)r["MaPhong"]
                 };
-                r["MaPhim"] = movies[st.IdFilm].ToString();
-                r["MaPhong"] = cinemaRooms[st.IdRoom].ToString();
+                //r["MaPhim"] = movies[st.IdFilm].ToString();
+                //r["MaPhong"] = cinemaRooms[st.IdRoom].ToString();
                 showTimes.Add(st);
             }
+            dgv_showTime.DataSource = dt;
             GetRowChecked();
         }
 
@@ -145,7 +146,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                             .ToString(), out int idCinemaRoom) ? idCinemaRoom : -1,
             };
 
-            if (!string.IsNullOrEmpty(st.Time) || !string.IsNullOrEmpty(st.Day)
+            if (string.IsNullOrEmpty(st.Time) || string.IsNullOrEmpty(st.Day)
                 || st.Status == -1 || st.IdFilm == -1 || st.IdRoom == -1)
                 return null;
             return st;
@@ -199,11 +200,18 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
             LoadData();
             GetRowChecked();
+            showTime.Id = (int)dgv_showTime.Rows[dgv_showTime.Rows.Count - 2].Cells["MaSuatChieu"].Value;
+            TicketDAO.GenerateTicket(showTime.Id, showTime.IdRoom, ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-            if (MessageBox.Show("Bạn có muốn xoá tài khoản này ?", "Xoá", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
+            if (MessageBox.Show("Bạn có muốn xoá suất chiếu này ?", "Xoá", MessageBoxButtons.OKCancel) == DialogResult.Cancel)
             {
                 return;
             }
@@ -257,6 +265,11 @@ namespace QuanLyRapPhim.Admin.DataUC
         {
             string keyword = txb_search.Text;
             LoadData(keyword);
+        }
+
+        private void ShowTimeUC_Load(object sender, EventArgs e)
+        {
+            LoadData();
         }
     }
 }

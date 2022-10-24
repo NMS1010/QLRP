@@ -220,6 +220,9 @@
     <EmbeddedResource Include="GUI\frmSeller.resx">
       <DependentUpon>frmSeller.cs</DependentUpon>
     </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frmTheater.resx">
+      <DependentUpon>frmTheater.cs</DependentUpon>
+    </EmbeddedResource>
     <EmbeddedResource Include="GUI\frm_admin.resx">
       <DependentUpon>frm_admin.cs</DependentUpon>
     </EmbeddedResource>

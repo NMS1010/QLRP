@@ -31,6 +31,12 @@ namespace QuanLyRapPhim.DAO
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { ticket.IdCustomer, ticket.Id });
         }
 
+        public static DataTable GetBoughtTicket(int showTimeId, ref string error)
+        {
+            string query = "select * from dbo.func_getBoughtTicket( @MaSC )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { showTimeId });
+        }
+
         public static int UpdateTicketPrice(int showTimeId, int roomId, ref string error)
         {
             DataTable seatPriceDT = RoomDAO.GetSeatPriceByRoomId(roomId, ref error);
@@ -64,8 +70,8 @@ namespace QuanLyRapPhim.DAO
                 error = "Có lỗi xảy ra!!!";
                 return false;
             }
-            int numberRows = int.TryParse(roomDt.Rows[0]["Hang"].ToString(), out int row) ? row : -1;
-            int numberChairPerRow = int.TryParse(roomDt.Rows[0]["Cot"].ToString(), out int col) ? col : -1;
+            int numberRows = int.TryParse(roomDt.Rows[0]["SoHang"].ToString(), out int row) ? row : -1;
+            int numberChairPerRow = int.TryParse(roomDt.Rows[0]["SoCot"].ToString(), out int col) ? col : -1;
 
             decimal seatPrice = (decimal)seatPriceDT.Rows[0]["GiaGhe"];
             decimal projectorPrice = (decimal)projectorPriceDT.Rows[0]["Gia"];

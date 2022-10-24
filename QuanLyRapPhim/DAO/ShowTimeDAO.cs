@@ -29,12 +29,7 @@ namespace QuanLyRapPhim.DAO
             int count = DataProvider.ExecuteNonQuery(query, ref error, new object[] {
                 showTime.Time, showTime.Day, showTime.Status, showTime.IdFilm, showTime.IdRoom
             });
-            if (count == 0)
-                return count;
-            bool isSuccess = TicketDAO.GenerateTicket(showTime.Id, showTime.IdRoom, ref error);
 
-            if (!isSuccess)
-                return 0;
             return count;
         }
 
@@ -61,6 +56,12 @@ namespace QuanLyRapPhim.DAO
         {
             string query = "select * from dbo.func_getShowtimesByFilm( @movieId )";
             return DataProvider.ExecuteQuery(query, ref error, new object[] { movieId });
+        }
+
+        public static DataTable GetShowTimeById(int showTimeId, ref string error)
+        {
+            string query = "select * from dbo.func_getShowtimesById( @showTimeId )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { showTimeId });
         }
     }
 }
