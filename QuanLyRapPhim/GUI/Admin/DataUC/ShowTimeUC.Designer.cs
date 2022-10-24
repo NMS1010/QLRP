@@ -29,12 +29,6 @@
         private void InitializeComponent()
         {
             this.dgv_showTime = new System.Windows.Forms.DataGridView();
-            this.MaSuatChieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Ngay = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.Gio = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenPhim = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.label5 = new System.Windows.Forms.Label();
             this.label4 = new System.Windows.Forms.Label();
             this.label3 = new System.Windows.Forms.Label();
@@ -53,6 +47,12 @@
             this.btn_delete = new System.Windows.Forms.Button();
             this.btn_search = new System.Windows.Forms.Button();
             this.txb_search = new System.Windows.Forms.TextBox();
+            this.MaSuatChieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ngay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaPhim = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MaPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_showTime)).BeginInit();
             this.grp_showTime.SuspendLayout();
             this.SuspendLayout();
@@ -66,62 +66,14 @@
             this.Ngay,
             this.Gio,
             this.TrangThai,
-            this.TenPhim,
-            this.TenPhong});
+            this.MaPhim,
+            this.MaPhong});
             this.dgv_showTime.Location = new System.Drawing.Point(3, 164);
             this.dgv_showTime.Name = "dgv_showTime";
             this.dgv_showTime.ReadOnly = true;
             this.dgv_showTime.Size = new System.Drawing.Size(942, 417);
             this.dgv_showTime.TabIndex = 0;
             this.dgv_showTime.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_showTime_CellClick);
-            // 
-            // MaSuatChieu
-            // 
-            this.MaSuatChieu.DataPropertyName = "MaSuatChieu";
-            this.MaSuatChieu.HeaderText = "Mã suất chiếu";
-            this.MaSuatChieu.Name = "MaSuatChieu";
-            this.MaSuatChieu.ReadOnly = true;
-            this.MaSuatChieu.Width = 150;
-            // 
-            // Ngay
-            // 
-            this.Ngay.DataPropertyName = "Ngay";
-            this.Ngay.HeaderText = "Ngày";
-            this.Ngay.Name = "Ngay";
-            this.Ngay.ReadOnly = true;
-            this.Ngay.Width = 150;
-            // 
-            // Gio
-            // 
-            this.Gio.DataPropertyName = "Gio";
-            this.Gio.HeaderText = "Giờ";
-            this.Gio.Name = "Gio";
-            this.Gio.ReadOnly = true;
-            this.Gio.Width = 150;
-            // 
-            // TrangThai
-            // 
-            this.TrangThai.DataPropertyName = "TrangThai";
-            this.TrangThai.HeaderText = "Trạng thái";
-            this.TrangThai.Name = "TrangThai";
-            this.TrangThai.ReadOnly = true;
-            this.TrangThai.Width = 150;
-            // 
-            // TenPhim
-            // 
-            this.TenPhim.DataPropertyName = "TenPhim";
-            this.TenPhim.HeaderText = "Tên phim";
-            this.TenPhim.Name = "TenPhim";
-            this.TenPhim.ReadOnly = true;
-            this.TenPhim.Width = 150;
-            // 
-            // TenPhong
-            // 
-            this.TenPhong.DataPropertyName = "TenPhong";
-            this.TenPhong.HeaderText = "Tên phòng";
-            this.TenPhong.Name = "TenPhong";
-            this.TenPhong.ReadOnly = true;
-            this.TenPhong.Width = 150;
             // 
             // label5
             // 
@@ -318,6 +270,54 @@
             this.txb_search.Size = new System.Drawing.Size(147, 34);
             this.txb_search.TabIndex = 34;
             // 
+            // MaSuatChieu
+            // 
+            this.MaSuatChieu.DataPropertyName = "MaSuatChieu";
+            this.MaSuatChieu.HeaderText = "Mã suất chiếu";
+            this.MaSuatChieu.Name = "MaSuatChieu";
+            this.MaSuatChieu.ReadOnly = true;
+            this.MaSuatChieu.Width = 150;
+            // 
+            // Ngay
+            // 
+            this.Ngay.DataPropertyName = "Ngay";
+            this.Ngay.HeaderText = "Ngày";
+            this.Ngay.Name = "Ngay";
+            this.Ngay.ReadOnly = true;
+            this.Ngay.Width = 150;
+            // 
+            // Gio
+            // 
+            this.Gio.DataPropertyName = "Gio";
+            this.Gio.HeaderText = "Giờ";
+            this.Gio.Name = "Gio";
+            this.Gio.ReadOnly = true;
+            this.Gio.Width = 150;
+            // 
+            // TrangThai
+            // 
+            this.TrangThai.DataPropertyName = "TrangThai";
+            this.TrangThai.HeaderText = "Trạng thái";
+            this.TrangThai.Name = "TrangThai";
+            this.TrangThai.ReadOnly = true;
+            this.TrangThai.Width = 150;
+            // 
+            // MaPhim
+            // 
+            this.MaPhim.DataPropertyName = "MaPhim";
+            this.MaPhim.HeaderText = "Mã phim";
+            this.MaPhim.Name = "MaPhim";
+            this.MaPhim.ReadOnly = true;
+            this.MaPhim.Width = 150;
+            // 
+            // MaPhong
+            // 
+            this.MaPhong.DataPropertyName = "MaPhong";
+            this.MaPhong.HeaderText = "Mã phòng";
+            this.MaPhong.Name = "MaPhong";
+            this.MaPhong.ReadOnly = true;
+            this.MaPhong.Width = 150;
+            // 
             // ShowTimeUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -331,6 +331,7 @@
             this.Controls.Add(this.dgv_showTime);
             this.Name = "ShowTimeUC";
             this.Size = new System.Drawing.Size(948, 584);
+            this.Load += new System.EventHandler(this.ShowTimeUC_Load);
             ((System.ComponentModel.ISupportInitialize)(this.dgv_showTime)).EndInit();
             this.grp_showTime.ResumeLayout(false);
             this.grp_showTime.PerformLayout();
@@ -352,12 +353,6 @@
         private System.Windows.Forms.ComboBox cbx_movieName;
         private System.Windows.Forms.DateTimePicker dtpicker_date;
         private System.Windows.Forms.DateTimePicker dtpicker_time;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaSuatChieu;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Ngay;
-        private System.Windows.Forms.DataGridViewTextBoxColumn Gio;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenPhim;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenPhong;
         private System.Windows.Forms.GroupBox grp_showTime;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.TextBox txb_showTimeId;
@@ -366,5 +361,11 @@
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_search;
         private System.Windows.Forms.TextBox txb_search;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaSuatChieu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ngay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaPhim;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaPhong;
     }
 }

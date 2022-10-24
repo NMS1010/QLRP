@@ -45,9 +45,9 @@ namespace QuanLyRapPhim.DAO
 
         public static int Update(Room room, ref string error)
         {
-            string query = "exec proc_updateCinemaRoom @MaPhong , @TenPhong , @SoCot , @SoHang , @TongSoGhe , @TrangThai , @MaMay";
+            string query = "exec proc_updateCinemaRoom @MaPhong , @TenPhong , @SoCot , @SoHang , @TrangThai , @MaMay";
             int count = DataProvider.ExecuteNonQuery(query, ref error, new object[] {
-                room.Id, room.Name, room.Col, room.Row, room.Col * room.Row, room.Status, room.IdProjector
+                room.Id, room.Name, room.Col, room.Row, room.Status, room.IdProjector
             });
             if (count == 0) return 0;
             count = DataProvider.ExecuteNonQuery("exec proc_deleteCinemaRoomChairByRoomId @MaPhong", ref error,

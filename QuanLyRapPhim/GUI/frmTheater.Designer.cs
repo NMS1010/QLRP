@@ -28,12 +28,9 @@
         /// </summary>
         private void InitializeComponent()
         {
-            System.ComponentModel.ComponentResourceManager resources = new System.ComponentModel.ComponentResourceManager(typeof(frmTheater));
             this.panel1 = new System.Windows.Forms.Panel();
             this.lb_thoigian = new System.Windows.Forms.Label();
             this.lb_thongtin = new System.Windows.Forms.Label();
-            this.flp_viTriGhe = new System.Windows.Forms.FlowLayoutPanel();
-            this.pb_image = new System.Windows.Forms.PictureBox();
             this.panel2 = new System.Windows.Forms.Panel();
             this.label12 = new System.Windows.Forms.Label();
             this.button2 = new System.Windows.Forms.Button();
@@ -61,13 +58,11 @@
             this.label4 = new System.Windows.Forms.Label();
             this.txb_mayChieu = new System.Windows.Forms.TextBox();
             this.label3 = new System.Windows.Forms.Label();
-            this.txb_viTriGhe = new System.Windows.Forms.TextBox();
-            this.label2 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
             this.label1 = new System.Windows.Forms.Label();
             this.fileSystemWatcher1 = new System.IO.FileSystemWatcher();
+            this.pnl_seat = new System.Windows.Forms.Panel();
             this.panel1.SuspendLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_image)).BeginInit();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
             this.gb_tinhTien.SuspendLayout();
@@ -90,7 +85,7 @@
             // 
             this.lb_thoigian.AutoSize = true;
             this.lb_thoigian.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_thoigian.Location = new System.Drawing.Point(5, 25);
+            this.lb_thoigian.Location = new System.Drawing.Point(605, 9);
             this.lb_thoigian.Name = "lb_thoigian";
             this.lb_thoigian.Size = new System.Drawing.Size(242, 20);
             this.lb_thoigian.TabIndex = 1;
@@ -100,29 +95,11 @@
             // 
             this.lb_thongtin.AutoSize = true;
             this.lb_thongtin.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_thongtin.Location = new System.Drawing.Point(5, 5);
+            this.lb_thongtin.Location = new System.Drawing.Point(5, 9);
             this.lb_thongtin.Name = "lb_thongtin";
-            this.lb_thongtin.Size = new System.Drawing.Size(439, 20);
+            this.lb_thongtin.Size = new System.Drawing.Size(297, 20);
             this.lb_thongtin.TabIndex = 0;
-            this.lb_thongtin.Text = "CGV Hung Vuong | CINEMA 01 | Spider Man: No Way Home";
-            // 
-            // flp_viTriGhe
-            // 
-            this.flp_viTriGhe.Location = new System.Drawing.Point(44, 104);
-            this.flp_viTriGhe.Name = "flp_viTriGhe";
-            this.flp_viTriGhe.Size = new System.Drawing.Size(800, 350);
-            this.flp_viTriGhe.TabIndex = 2;
-            // 
-            // pb_image
-            // 
-            this.pb_image.ErrorImage = ((System.Drawing.Image)(resources.GetObject("pb_image.ErrorImage")));
-            this.pb_image.Image = ((System.Drawing.Image)(resources.GetObject("pb_image.Image")));
-            this.pb_image.Location = new System.Drawing.Point(895, 133);
-            this.pb_image.Name = "pb_image";
-            this.pb_image.Size = new System.Drawing.Size(167, 191);
-            this.pb_image.SizeMode = System.Windows.Forms.PictureBoxSizeMode.StretchImage;
-            this.pb_image.TabIndex = 3;
-            this.pb_image.TabStop = false;
+            this.lb_thongtin.Text = "CINEMA 01 | Spider Man: No Way Home";
             // 
             // panel2
             // 
@@ -130,7 +107,7 @@
             this.panel2.Controls.Add(this.button2);
             this.panel2.Controls.Add(this.label11);
             this.panel2.Controls.Add(this.button1);
-            this.panel2.Location = new System.Drawing.Point(895, 342);
+            this.panel2.Location = new System.Drawing.Point(895, 127);
             this.panel2.Name = "panel2";
             this.panel2.Size = new System.Drawing.Size(167, 87);
             this.panel2.TabIndex = 0;
@@ -178,9 +155,9 @@
             this.panel3.Controls.Add(this.gb_tinhTien);
             this.panel3.Controls.Add(this.gb_khachHang);
             this.panel3.Controls.Add(this.gb_loaiVe);
-            this.panel3.Location = new System.Drawing.Point(12, 463);
+            this.panel3.Location = new System.Drawing.Point(9, 531);
             this.panel3.Name = "panel3";
-            this.panel3.Size = new System.Drawing.Size(1050, 195);
+            this.panel3.Size = new System.Drawing.Size(1050, 198);
             this.panel3.TabIndex = 4;
             // 
             // gb_tinhTien
@@ -223,6 +200,7 @@
             // 
             // txt_tienCanTra
             // 
+            this.txt_tienCanTra.Enabled = false;
             this.txt_tienCanTra.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_tienCanTra.Location = new System.Drawing.Point(157, 106);
             this.txt_tienCanTra.Name = "txt_tienCanTra";
@@ -241,6 +219,7 @@
             // 
             // txt_KM
             // 
+            this.txt_KM.Enabled = false;
             this.txt_KM.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_KM.Location = new System.Drawing.Point(157, 64);
             this.txt_KM.Name = "txt_KM";
@@ -259,6 +238,7 @@
             // 
             // txt_tongTien
             // 
+            this.txt_tongTien.Enabled = false;
             this.txt_tongTien.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txt_tongTien.Location = new System.Drawing.Point(157, 25);
             this.txt_tongTien.Name = "txt_tongTien";
@@ -351,8 +331,6 @@
             this.gb_loaiVe.Controls.Add(this.label4);
             this.gb_loaiVe.Controls.Add(this.txb_mayChieu);
             this.gb_loaiVe.Controls.Add(this.label3);
-            this.gb_loaiVe.Controls.Add(this.txb_viTriGhe);
-            this.gb_loaiVe.Controls.Add(this.label2);
             this.gb_loaiVe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_loaiVe.Location = new System.Drawing.Point(3, 3);
             this.gb_loaiVe.Name = "gb_loaiVe";
@@ -363,8 +341,9 @@
             // 
             // txt_soLuong
             // 
+            this.txt_soLuong.Enabled = false;
             this.txt_soLuong.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_soLuong.Location = new System.Drawing.Point(126, 105);
+            this.txt_soLuong.Location = new System.Drawing.Point(126, 84);
             this.txt_soLuong.Name = "txt_soLuong";
             this.txt_soLuong.Size = new System.Drawing.Size(112, 26);
             this.txt_soLuong.TabIndex = 5;
@@ -373,7 +352,7 @@
             // 
             this.label4.AutoSize = true;
             this.label4.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label4.Location = new System.Drawing.Point(35, 107);
+            this.label4.Location = new System.Drawing.Point(35, 86);
             this.label4.Name = "label4";
             this.label4.Size = new System.Drawing.Size(76, 20);
             this.label4.TabIndex = 4;
@@ -381,8 +360,9 @@
             // 
             // txb_mayChieu
             // 
+            this.txb_mayChieu.Enabled = false;
             this.txb_mayChieu.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_mayChieu.Location = new System.Drawing.Point(126, 65);
+            this.txb_mayChieu.Location = new System.Drawing.Point(126, 44);
             this.txb_mayChieu.Name = "txb_mayChieu";
             this.txb_mayChieu.Size = new System.Drawing.Size(112, 26);
             this.txb_mayChieu.TabIndex = 3;
@@ -391,29 +371,11 @@
             // 
             this.label3.AutoSize = true;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(35, 67);
+            this.label3.Location = new System.Drawing.Point(35, 46);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(84, 20);
             this.label3.TabIndex = 2;
             this.label3.Text = "Máy chiếu:";
-            // 
-            // txb_viTriGhe
-            // 
-            this.txb_viTriGhe.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_viTriGhe.Location = new System.Drawing.Point(126, 26);
-            this.txb_viTriGhe.Name = "txb_viTriGhe";
-            this.txb_viTriGhe.Size = new System.Drawing.Size(112, 26);
-            this.txb_viTriGhe.TabIndex = 1;
-            // 
-            // label2
-            // 
-            this.label2.AutoSize = true;
-            this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(35, 28);
-            this.label2.Name = "label2";
-            this.label2.Size = new System.Drawing.Size(75, 20);
-            this.label2.TabIndex = 0;
-            this.label2.Text = "Vị trí ghế:";
             // 
             // panel4
             // 
@@ -439,23 +401,29 @@
             this.fileSystemWatcher1.EnableRaisingEvents = true;
             this.fileSystemWatcher1.SynchronizingObject = this;
             // 
+            // pnl_seat
+            // 
+            this.pnl_seat.Location = new System.Drawing.Point(14, 105);
+            this.pnl_seat.Name = "pnl_seat";
+            this.pnl_seat.Size = new System.Drawing.Size(862, 411);
+            this.pnl_seat.TabIndex = 5;
+            // 
             // frmTheater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
-            this.ClientSize = new System.Drawing.Size(1074, 662);
+            this.ClientSize = new System.Drawing.Size(1074, 741);
+            this.Controls.Add(this.pnl_seat);
             this.Controls.Add(this.panel4);
             this.Controls.Add(this.panel3);
             this.Controls.Add(this.panel2);
-            this.Controls.Add(this.pb_image);
-            this.Controls.Add(this.flp_viTriGhe);
             this.Controls.Add(this.panel1);
             this.Name = "frmTheater";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Bán vé";
+            this.Load += new System.EventHandler(this.frmTheater_Load);
             this.panel1.ResumeLayout(false);
             this.panel1.PerformLayout();
-            ((System.ComponentModel.ISupportInitialize)(this.pb_image)).EndInit();
             this.panel2.ResumeLayout(false);
             this.panel2.PerformLayout();
             this.panel3.ResumeLayout(false);
@@ -477,8 +445,6 @@
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Label lb_thoigian;
         private System.Windows.Forms.Label lb_thongtin;
-        private System.Windows.Forms.FlowLayoutPanel flp_viTriGhe;
-        private System.Windows.Forms.PictureBox pb_image;
         private System.Windows.Forms.Panel panel2;
         private System.Windows.Forms.Panel panel3;
         private System.Windows.Forms.GroupBox gb_tinhTien;
@@ -502,8 +468,6 @@
         private System.Windows.Forms.Label label4;
         private System.Windows.Forms.TextBox txb_mayChieu;
         private System.Windows.Forms.Label label3;
-        private System.Windows.Forms.TextBox txb_viTriGhe;
-        private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Panel panel4;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label11;
@@ -511,5 +475,6 @@
         private System.Windows.Forms.Label label12;
         private System.Windows.Forms.Button button2;
         private System.IO.FileSystemWatcher fileSystemWatcher1;
+        private System.Windows.Forms.Panel pnl_seat;
     }
 }

@@ -12,7 +12,7 @@ namespace QuanLyRapPhim.DAO
     {
         public static DataTable GetAllChair(ref string error)
         {
-            string query = "select * from dbo.func_getChair";
+            string query = "select * from dbo.func_getChair()";
             return DataProvider.ExecuteQuery(query, ref error);
         }
 

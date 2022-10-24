@@ -37,12 +37,6 @@
             this.label3 = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
             this.dgv_cinemaRoom = new System.Windows.Forms.DataGridView();
-            this.MaPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.SoCot = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.TongSoGhe = new System.Windows.Forms.DataGridViewTextBoxColumn();
-            this.MayChieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.grp_room = new System.Windows.Forms.GroupBox();
             this.cbx_roomStatus = new System.Windows.Forms.ComboBox();
             this.label8 = new System.Windows.Forms.Label();
@@ -53,6 +47,13 @@
             this.btn_add = new System.Windows.Forms.Button();
             this.btn_search = new System.Windows.Forms.Button();
             this.txb_search = new System.Windows.Forms.TextBox();
+            this.MaPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoHang = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.SoCot = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongSoGhe = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.MayChieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TrangThai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             ((System.ComponentModel.ISupportInitialize)(this.dgv_cinemaRoom)).BeginInit();
             this.grp_room.SuspendLayout();
             this.SuspendLayout();
@@ -71,6 +72,7 @@
             // 
             this.cbx_projector.AutoCompleteMode = System.Windows.Forms.AutoCompleteMode.SuggestAppend;
             this.cbx_projector.AutoCompleteSource = System.Windows.Forms.AutoCompleteSource.ListItems;
+            this.cbx_projector.DropDownStyle = System.Windows.Forms.ComboBoxStyle.DropDownList;
             this.cbx_projector.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.cbx_projector.FormattingEnabled = true;
             this.cbx_projector.Location = new System.Drawing.Point(113, 110);
@@ -142,61 +144,14 @@
             this.SoHang,
             this.SoCot,
             this.TongSoGhe,
-            this.MayChieu});
+            this.MayChieu,
+            this.TrangThai});
             this.dgv_cinemaRoom.Location = new System.Drawing.Point(3, 160);
             this.dgv_cinemaRoom.Name = "dgv_cinemaRoom";
             this.dgv_cinemaRoom.ReadOnly = true;
             this.dgv_cinemaRoom.Size = new System.Drawing.Size(942, 417);
             this.dgv_cinemaRoom.TabIndex = 2;
             this.dgv_cinemaRoom.CellClick += new System.Windows.Forms.DataGridViewCellEventHandler(this.dgv_cinemaRoom_CellClick);
-            // 
-            // MaPhong
-            // 
-            this.MaPhong.DataPropertyName = "MaPhong";
-            this.MaPhong.HeaderText = "Mã phòng";
-            this.MaPhong.Name = "MaPhong";
-            this.MaPhong.ReadOnly = true;
-            this.MaPhong.Width = 150;
-            // 
-            // TenPhong
-            // 
-            this.TenPhong.DataPropertyName = "TenPhong";
-            this.TenPhong.HeaderText = "Tên phòng";
-            this.TenPhong.Name = "TenPhong";
-            this.TenPhong.ReadOnly = true;
-            this.TenPhong.Width = 150;
-            // 
-            // SoHang
-            // 
-            this.SoHang.DataPropertyName = "SoHang";
-            this.SoHang.HeaderText = "Số hàng";
-            this.SoHang.Name = "SoHang";
-            this.SoHang.ReadOnly = true;
-            this.SoHang.Width = 150;
-            // 
-            // SoCot
-            // 
-            this.SoCot.DataPropertyName = "SoCot";
-            this.SoCot.HeaderText = "Số cột";
-            this.SoCot.Name = "SoCot";
-            this.SoCot.ReadOnly = true;
-            this.SoCot.Width = 150;
-            // 
-            // TongSoGhe
-            // 
-            this.TongSoGhe.DataPropertyName = "TongSoGhe";
-            this.TongSoGhe.HeaderText = "Tổng số ghế";
-            this.TongSoGhe.Name = "TongSoGhe";
-            this.TongSoGhe.ReadOnly = true;
-            this.TongSoGhe.Width = 150;
-            // 
-            // MayChieu
-            // 
-            this.MayChieu.DataPropertyName = "MayChieu";
-            this.MayChieu.HeaderText = "Máy chiếu";
-            this.MayChieu.Name = "MayChieu";
-            this.MayChieu.ReadOnly = true;
-            this.MayChieu.Width = 150;
             // 
             // grp_room
             // 
@@ -254,6 +209,7 @@
             // 
             // txb_roomId
             // 
+            this.txb_roomId.Enabled = false;
             this.txb_roomId.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_roomId.Location = new System.Drawing.Point(113, 40);
             this.txb_roomId.Name = "txb_roomId";
@@ -311,6 +267,59 @@
             this.txb_search.Size = new System.Drawing.Size(147, 34);
             this.txb_search.TabIndex = 34;
             // 
+            // MaPhong
+            // 
+            this.MaPhong.DataPropertyName = "MaPhong";
+            this.MaPhong.HeaderText = "Mã phòng";
+            this.MaPhong.Name = "MaPhong";
+            this.MaPhong.ReadOnly = true;
+            this.MaPhong.Width = 150;
+            // 
+            // TenPhong
+            // 
+            this.TenPhong.DataPropertyName = "TenPhong";
+            this.TenPhong.HeaderText = "Tên phòng";
+            this.TenPhong.Name = "TenPhong";
+            this.TenPhong.ReadOnly = true;
+            this.TenPhong.Width = 150;
+            // 
+            // SoHang
+            // 
+            this.SoHang.DataPropertyName = "SoHang";
+            this.SoHang.HeaderText = "Số hàng";
+            this.SoHang.Name = "SoHang";
+            this.SoHang.ReadOnly = true;
+            // 
+            // SoCot
+            // 
+            this.SoCot.DataPropertyName = "SoCot";
+            this.SoCot.HeaderText = "Số cột";
+            this.SoCot.Name = "SoCot";
+            this.SoCot.ReadOnly = true;
+            // 
+            // TongSoGhe
+            // 
+            this.TongSoGhe.DataPropertyName = "TongSoGhe";
+            this.TongSoGhe.HeaderText = "Tổng số ghế";
+            this.TongSoGhe.Name = "TongSoGhe";
+            this.TongSoGhe.ReadOnly = true;
+            this.TongSoGhe.Width = 150;
+            // 
+            // MayChieu
+            // 
+            this.MayChieu.DataPropertyName = "MaMay";
+            this.MayChieu.HeaderText = "Máy chiếu";
+            this.MayChieu.Name = "MayChieu";
+            this.MayChieu.ReadOnly = true;
+            this.MayChieu.Width = 150;
+            // 
+            // TrangThai
+            // 
+            this.TrangThai.DataPropertyName = "TrangThai";
+            this.TrangThai.HeaderText = "Trạng thái";
+            this.TrangThai.Name = "TrangThai";
+            this.TrangThai.ReadOnly = true;
+            // 
             // CinemaRoomUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -343,12 +352,6 @@
         private System.Windows.Forms.TextBox txb_cinemaName;
         private System.Windows.Forms.Label label6;
         private System.Windows.Forms.ComboBox cbx_projector;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MaPhong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TenPhong;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoHang;
-        private System.Windows.Forms.DataGridViewTextBoxColumn SoCot;
-        private System.Windows.Forms.DataGridViewTextBoxColumn TongSoGhe;
-        private System.Windows.Forms.DataGridViewTextBoxColumn MayChieu;
         private System.Windows.Forms.GroupBox grp_room;
         private System.Windows.Forms.Button btn_delete;
         private System.Windows.Forms.Button btn_save;
@@ -359,5 +362,12 @@
         private System.Windows.Forms.TextBox txb_roomId;
         private System.Windows.Forms.ComboBox cbx_roomStatus;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaPhong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenPhong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoHang;
+        private System.Windows.Forms.DataGridViewTextBoxColumn SoCot;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TongSoGhe;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MayChieu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TrangThai;
     }
 }
