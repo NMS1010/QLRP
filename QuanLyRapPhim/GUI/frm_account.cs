@@ -55,7 +55,7 @@ namespace QuanLyRapPhim
             {
                 FullName = txb_TenND.Text,
                 Gender = cbx_GioiTinh.Text,
-                Dob = dtpicker_dob.Value.ToShortDateString(),
+                Dob = dtpicker_dob.Value.ToString("yyyy-MM-dd"),
                 Phone = txb_SDT.Text,
                 CCCD = txb_CCCD.Text,
                 Email = txt_Email.Text,
