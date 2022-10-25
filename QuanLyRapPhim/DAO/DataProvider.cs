@@ -10,7 +10,7 @@ namespace QuanLyRapPhim.DAO
 {
     public class DataProvider
     {
-        public static string ConnectionString = @"Data Source=.\SQLEXPRESS;Initial Catalog=QLRP;Integrated Security=True;Connect Timeout=30;Encrypt=False;TrustServerCertificate=False;ApplicationIntent=ReadWrite;MultiSubnetFailover=False";
+        public static string ConnectionString = @"Data Source=.\sqlexpress;Initial Catalog=QLRP;Integrated Security=True";
 
         public static DataTable ExecuteQuery(string query, ref string error, object[] parameter = null)
         {

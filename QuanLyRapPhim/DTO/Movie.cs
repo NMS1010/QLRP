@@ -12,11 +12,11 @@ namespace QuanLyRapPhim.DTO
         public decimal Time { get; set; }
         public string MovieName { get; set; }
         public int AgeRange { get; set; }
-        public DateTime StartDate { get; set; }
-        public DateTime EndDate { get; set; }
+        public string StartDate { get; set; }
+        public string EndDate { get; set; }
         public string MainDirector { get; set; }
 
-        public List<int> CategoryIds { get; set; }
-        public List<int> ActorIds { get; set; }
+        public List<int> CategoryIds { get; set; } = new List<int>();
+        public List<int> ActorIds { get; set; } = new List<int>();
     }
 }

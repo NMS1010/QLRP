@@ -12,16 +12,16 @@ namespace QuanLyRapPhim.DAO
     {
         public static int Insert(Service service, ref string error)
         {
-            string query = "exec proc_addService @TenDichVu, @Gia";
+            string query = "exec proc_addService @TenDichVu , @Gia";
             return DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { service.Name, service.Price });
+            
         }
-
         public static int Update(Service service, ref string error)
         {
-            string query = "exec proc_updateService @MaDichVu, @TenDichVu, @Gia";
+            string query = "exec proc_updateService @TenDichVu , @MaDichVu , @Gia";
             return DataProvider.ExecuteNonQuery(query, ref error,
-                new object[] { service.ServiceId, service.Name, service.Price});
+                new object[] { service.Name, service.ServiceId, service.Price});
         }
 
         public static int Delete(int ServiceId, ref string error)

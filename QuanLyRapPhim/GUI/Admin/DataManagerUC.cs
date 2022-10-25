@@ -52,30 +52,36 @@ namespace QuanLyRapPhim.Admin
 
         private void btn_movie_Click(object sender, EventArgs e)
         {
-            MovieUC showTimeUC = new MovieUC();
+            MovieUC movieUC = new MovieUC();
             pnl_data.Controls.Clear();
-            pnl_data.Controls.Add(showTimeUC);
+            pnl_data.Controls.Add(movieUC);
+            movieUC.LoadData();
+
+
         }
 
         private void btn_seat_Click(object sender, EventArgs e)
         {
-            SeatUC showTimeUC = new SeatUC();
+            SeatUC seatUc = new SeatUC();
             pnl_data.Controls.Clear();
-            pnl_data.Controls.Add(showTimeUC);
+            pnl_data.Controls.Add(seatUc);
+            seatUc.LoadData();
         }
 
         private void btn_projector_Click(object sender, EventArgs e)
         {
-            ProjectorUC showTimeUC = new ProjectorUC();
+            ProjectorUC projectorUc = new ProjectorUC();
             pnl_data.Controls.Clear();
-            pnl_data.Controls.Add(showTimeUC);
+            pnl_data.Controls.Add(projectorUc);
+            projectorUc.LoadData();
         }
 
         private void btn_service_Click(object sender, EventArgs e)
         {
-            ServiceUC showTimeUC = new ServiceUC();
+            ServiceUC serviceUc = new ServiceUC();
             pnl_data.Controls.Clear();
-            pnl_data.Controls.Add(showTimeUC);
+            pnl_data.Controls.Add(serviceUc);
+            serviceUc.LoadData();
         }
 
         private void btn_discount_Click(object sender, EventArgs e)

@@ -55,7 +55,7 @@ namespace QuanLyRapPhim
             {
                 FullName = txb_TenND.Text,
                 Gender = cbx_GioiTinh.Text,
-                Dob = dtpicker_dob.Value.ToShortDateString(),
+                Dob = dtpicker_dob.Value.ToString("yyyy-MM-dd"),
                 Phone = txb_SDT.Text,
                 CCCD = txb_CCCD.Text,
                 Email = txt_Email.Text,
@@ -71,9 +71,9 @@ namespace QuanLyRapPhim
                     )
                 );
             }
-            if (!string.IsNullOrEmpty(user.FullName) || !string.IsNullOrEmpty(user.Gender) || !string.IsNullOrEmpty(user.Phone)
-                || !string.IsNullOrEmpty(user.Dob) || !string.IsNullOrEmpty(user.CCCD) || !string.IsNullOrEmpty(user.Email)
-                || !string.IsNullOrEmpty(user.UserName) || !string.IsNullOrEmpty(user.Password) || !string.IsNullOrEmpty(txb_Luong.Text)
+            if (string.IsNullOrEmpty(user.FullName) || string.IsNullOrEmpty(user.Gender) || string.IsNullOrEmpty(user.Phone)
+                || string.IsNullOrEmpty(user.Dob) || string.IsNullOrEmpty(user.CCCD) || string.IsNullOrEmpty(user.Email)
+                || string.IsNullOrEmpty(user.UserName) || string.IsNullOrEmpty(user.Password) || string.IsNullOrEmpty(txb_Luong.Text)
                 || user.RoleIds.Count == 0)
                 return null;
             return user;

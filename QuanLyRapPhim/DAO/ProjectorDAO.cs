@@ -37,5 +37,11 @@ namespace QuanLyRapPhim.DAO
             string query = "exec proc_deleteProjector @MaMay";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { projectorId });
         }
+
+        public static DataTable Search(string keyword, ref string error)
+        {
+            string query = "select * from dbo.func_searchAllProjector( @keyword )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { keyword });
+        }
     }
 }
