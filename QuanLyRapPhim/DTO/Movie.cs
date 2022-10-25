@@ -16,7 +16,7 @@ namespace QuanLyRapPhim.DTO
         public string EndDate { get; set; }
         public string MainDirector { get; set; }
 
-        public List<int> CategoryIds { get; set; }
-        public List<int> ActorIds { get; set; }
+        public List<int> CategoryIds { get; set; } = new List<int>();
+        public List<int> ActorIds { get; set; } = new List<int>();
     }
 }

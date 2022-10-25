@@ -12,6 +12,7 @@ namespace QuanLyRapPhim.DAO
     {
         public static int Insert(Movie movie, ref string error)
         {
+            
             string query = "exec proc_addFilm @ThoiLuong , @TenPhim , @LuaTuoi , @NgayKhoiChieu , @NgayKetThuc , @DaoDienChinh";
             int count = DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { movie.Time, movie.MovieName, movie.AgeRange, movie.StartDate, movie.EndDate, movie.MainDirector });
@@ -22,13 +23,13 @@ namespace QuanLyRapPhim.DAO
             int movieId = (int)dt.Rows[0]["MaPhim"];
             foreach (int categoryId in movie.CategoryIds)
             {
-                count = DataProvider.ExecuteNonQuery("exec proc_addFilmCategory @MaPhim @MaLoai", ref error,
+                count = DataProvider.ExecuteNonQuery("exec proc_addFilmCategory @MaPhim , @MaLoai", ref error,
                 new object[] { movieId, categoryId });
                 if (count == 0) return 0;
             }
             foreach (int actorId in movie.ActorIds)
             {
-                count = DataProvider.ExecuteNonQuery("exec proc_addFilmActor @MaPhim @MaDienVien", ref error,
+                count = DataProvider.ExecuteNonQuery("exec proc_addFilmActor @MaPhim , @MaDienVien", ref error,
                 new object[] { movieId, actorId });
                 if (count == 0) return 0;
             }
@@ -49,13 +50,13 @@ namespace QuanLyRapPhim.DAO
             if (count == 0) return 0;
             foreach (int categoryId in movie.CategoryIds)
             {
-                count = DataProvider.ExecuteNonQuery("exec proc_addFilmCategory @MaPhim @MaLoai", ref error,
+                count = DataProvider.ExecuteNonQuery("exec proc_addFilmCategory @MaPhim , @MaLoai", ref error,
                 new object[] { movie.MovieId, categoryId });
                 if (count == 0) return 0;
             }
             foreach (int actorId in movie.ActorIds)
             {
-                count = DataProvider.ExecuteNonQuery("exec proc_addFilmActor @MaPhim @MaDienVien", ref error,
+                count = DataProvider.ExecuteNonQuery("exec proc_addFilmActor @MaPhim , @MaDienVien", ref error,
                 new object[] { movie.MovieId, actorId });
                 if (count == 0) return 0;
             }
@@ -85,6 +86,17 @@ namespace QuanLyRapPhim.DAO
         {
             string query = "select * from dbo.func_getFilmByDate( @date )";
             return DataProvider.ExecuteQuery(query, ref error, new object[] { date });
+        }
+
+        public static DataTable GetCategoryByFilmId(int filmId, ref string error)
+        {
+            string query = "select * from dbo.func_getCategoryIdByFilmId( @filmId )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { filmId });
+        }
+        public static DataTable GetActorByFilmId(int filmId, ref string error)
+        {
+            string query = "select * from dbo.func_getActorIdByFilmId( @filmId )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { filmId });
         }
     }
 }
