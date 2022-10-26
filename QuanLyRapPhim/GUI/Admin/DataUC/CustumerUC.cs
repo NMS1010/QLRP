@@ -3,6 +3,7 @@ using QuanLyRapPhim.DAO;
 using QuanLyRapPhim.DTO;
 using QuanLyRapPhim.Utils.FormControls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -18,6 +19,7 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
     {
         private string error = "";
         private List<Control> controls = new List<Control>();
+        Dictionary<int, string> typeCustumers;
         public CustumerUC()
         {
             InitializeComponent();
@@ -25,6 +27,15 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
         }
         private void Init()
         {
+            typeCustumers = new Dictionary<int, string>();
+            DataTable typeCustomer = TypeCustomerDAO.GetAllTypeCustomer(ref error);
+            foreach (DataRow type in typeCustomer.Rows)
+            {
+                int typeId = (int)type["MaLoaiKH"];
+                string typeName = type["TenLoaiKH"].ToString();
+                typeCustumers.Add(typeId, typeName);
+                cbx_loaiKH.Items.Add(typeName);
+            }
             foreach (var c in grb_customer.Controls)
             {
                 controls.Add(c as Control);
@@ -32,14 +43,17 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
         }
         private void Fill(int selectedRowIndex)
         {
+            
             txb_maKH.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["MaKH"].Value?.ToString();
             txb_hoTen.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["Ten"].Value?.ToString();
-            txb_gioiTinh.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["GioiTinh"].Value?.ToString();
+            cbx_gioiTinh.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["GioiTinh"].Value?.ToString();
             dtp_ngSinh.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["NgaySinh"].Value?.ToString();
             txb_diaChi.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["DiaChi"].Value?.ToString();
             txb_sdt.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["SoDienThoai"].Value?.ToString();
-            txb_loaiKH.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["MaLoaiKH"].Value?.ToString();
             txb_email.Text = dgv_dsKH.Rows[selectedRowIndex].Cells["Email"].Value?.ToString();
+
+            int typeId = Int32.Parse(dgv_dsKH.Rows[selectedRowIndex].Cells["MaLoaiKH"].Value?.ToString());
+            cbx_loaiKH.Text = (string)typeCustumers[typeId];
         }
         private void GetRowChecked()
         {
@@ -61,17 +75,19 @@ namespace QuanLyRapPhim.GUI.Admin.DataUC
         }
         private Customer GetCustomer()
         {
-            if (string.IsNullOrEmpty(txb_hoTen.Text) || string.IsNullOrEmpty(txb_gioiTinh.Text) || string.IsNullOrEmpty(txb_diaChi.Text) || string.IsNullOrEmpty(txb_sdt.Text))
+            if (string.IsNullOrEmpty(txb_hoTen.Text)|| string.IsNullOrEmpty(txb_diaChi.Text) || string.IsNullOrEmpty(txb_sdt.Text))
                 return null;
+            int typeId = typeCustumers.Keys.FirstOrDefault(s => typeCustumers[s] == cbx_loaiKH.Text);
             Customer customer = new Customer()
             {
                 Name = txb_hoTen.Text,
-                Sex = txb_gioiTinh.Text,
+                Sex = cbx_gioiTinh.Text,
                 Dob = Convert.ToDateTime(dtp_ngSinh.Text),
                 Address = txb_diaChi.Text,
                 PhoneNumber = txb_sdt.Text,
-                TypeCustomerId = Int32.Parse(txb_loaiKH.Text),
-                Email = txb_email.Text
+                Email = txb_email.Text,
+                
+                TypeCustomerId = typeId
             };
             return customer;
         }

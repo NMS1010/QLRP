@@ -82,7 +82,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 {
                     MovieId = (int)row["MaPhim"],
                     MovieName = row["TenPhim"].ToString(),
-                    Time = Convert.ToDecimal(row["ThoiLuong"]),
+                    Time = (double)Convert.ToDecimal(row["ThoiLuong"]),
                     AgeRange = (int)row["LuaTuoi"],
                     StartDate = row["NgayKhoiChieu"].ToString(),
                     EndDate = row["NgayKetThuc"].ToString(),
@@ -208,7 +208,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             Movie movie = new Movie()
             {
                 MovieName = txb_movieName.Text,
-                Time = Decimal.TryParse(txb_time.Text, out decimal res) ? res : 0,
+                Time = (double)(Decimal.TryParse(txb_time.Text, out decimal res) ? res : 0),
                 AgeRange = int.TryParse(txb_ageRate.Text, out age) ? age : 0,
                 StartDate = dtpicker_startDate.Value.ToString("yyyy-MM-dd"),
                 EndDate = dtpicker_endDate.Value.ToString("yyyy-MM-dd"),

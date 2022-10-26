@@ -33,9 +33,7 @@
             this.txb_email = new System.Windows.Forms.TextBox();
             this.label10 = new System.Windows.Forms.Label();
             this.label7 = new System.Windows.Forms.Label();
-            this.txb_loaiKH = new System.Windows.Forms.TextBox();
             this.label8 = new System.Windows.Forms.Label();
-            this.txb_gioiTinh = new System.Windows.Forms.TextBox();
             this.label9 = new System.Windows.Forms.Label();
             this.txb_sdt = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
@@ -62,6 +60,8 @@
             this.SoDienThoai = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.MaLoaiKH = new System.Windows.Forms.DataGridViewTextBoxColumn();
             this.Email = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.cbx_gioiTinh = new System.Windows.Forms.ComboBox();
+            this.cbx_loaiKH = new System.Windows.Forms.ComboBox();
             this.grb_customer.SuspendLayout();
             this.panel1.SuspendLayout();
             this.pnl_viewKH.SuspendLayout();
@@ -70,13 +70,13 @@
             // 
             // grb_customer
             // 
+            this.grb_customer.Controls.Add(this.cbx_loaiKH);
+            this.grb_customer.Controls.Add(this.cbx_gioiTinh);
             this.grb_customer.Controls.Add(this.dtp_ngSinh);
             this.grb_customer.Controls.Add(this.txb_email);
             this.grb_customer.Controls.Add(this.label10);
             this.grb_customer.Controls.Add(this.label7);
-            this.grb_customer.Controls.Add(this.txb_loaiKH);
             this.grb_customer.Controls.Add(this.label8);
-            this.grb_customer.Controls.Add(this.txb_gioiTinh);
             this.grb_customer.Controls.Add(this.label9);
             this.grb_customer.Controls.Add(this.txb_sdt);
             this.grb_customer.Controls.Add(this.label5);
@@ -97,7 +97,7 @@
             // 
             // dtp_ngSinh
             // 
-            this.dtp_ngSinh.CustomFormat = "dd-MM-yyyy";
+            this.dtp_ngSinh.CustomFormat = "MM-dd-yyyy";
             this.dtp_ngSinh.Format = System.Windows.Forms.DateTimePickerFormat.Custom;
             this.dtp_ngSinh.Location = new System.Drawing.Point(125, 130);
             this.dtp_ngSinh.Name = "dtp_ngSinh";
@@ -130,13 +130,6 @@
             this.label7.Size = new System.Drawing.Size(0, 18);
             this.label7.TabIndex = 16;
             // 
-            // txb_loaiKH
-            // 
-            this.txb_loaiKH.Location = new System.Drawing.Point(752, 81);
-            this.txb_loaiKH.Name = "txb_loaiKH";
-            this.txb_loaiKH.Size = new System.Drawing.Size(169, 26);
-            this.txb_loaiKH.TabIndex = 15;
-            // 
             // label8
             // 
             this.label8.AutoSize = true;
@@ -146,13 +139,6 @@
             this.label8.Size = new System.Drawing.Size(73, 18);
             this.label8.TabIndex = 14;
             this.label8.Text = "Loại KH:";
-            // 
-            // txb_gioiTinh
-            // 
-            this.txb_gioiTinh.Location = new System.Drawing.Point(752, 37);
-            this.txb_gioiTinh.Name = "txb_gioiTinh";
-            this.txb_gioiTinh.Size = new System.Drawing.Size(169, 26);
-            this.txb_gioiTinh.TabIndex = 13;
             // 
             // label9
             // 
@@ -381,6 +367,25 @@
             this.Email.Name = "Email";
             this.Email.Width = 200;
             // 
+            // cbx_gioiTinh
+            // 
+            this.cbx_gioiTinh.FormattingEnabled = true;
+            this.cbx_gioiTinh.Items.AddRange(new object[] {
+            "Nam",
+            "Nữ"});
+            this.cbx_gioiTinh.Location = new System.Drawing.Point(752, 41);
+            this.cbx_gioiTinh.Name = "cbx_gioiTinh";
+            this.cbx_gioiTinh.Size = new System.Drawing.Size(169, 28);
+            this.cbx_gioiTinh.TabIndex = 20;
+            // 
+            // cbx_loaiKH
+            // 
+            this.cbx_loaiKH.FormattingEnabled = true;
+            this.cbx_loaiKH.Location = new System.Drawing.Point(752, 83);
+            this.cbx_loaiKH.Name = "cbx_loaiKH";
+            this.cbx_loaiKH.Size = new System.Drawing.Size(169, 28);
+            this.cbx_loaiKH.TabIndex = 21;
+            // 
             // CustumerUC
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -413,9 +418,7 @@
         private System.Windows.Forms.TextBox txb_maKH;
         private System.Windows.Forms.Label label1;
         private System.Windows.Forms.Label label7;
-        private System.Windows.Forms.TextBox txb_loaiKH;
         private System.Windows.Forms.Label label8;
-        private System.Windows.Forms.TextBox txb_gioiTinh;
         private System.Windows.Forms.Label label9;
         private System.Windows.Forms.Panel panel1;
         private System.Windows.Forms.Button btn_search;
@@ -436,5 +439,7 @@
         private System.Windows.Forms.TextBox txb_email;
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.DateTimePicker dtp_ngSinh;
+        private System.Windows.Forms.ComboBox cbx_loaiKH;
+        private System.Windows.Forms.ComboBox cbx_gioiTinh;
     }
 }
