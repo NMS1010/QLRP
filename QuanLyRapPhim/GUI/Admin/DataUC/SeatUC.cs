@@ -94,48 +94,9 @@ namespace QuanLyRapPhim.Admin.DataUC
             GetRowChecked();
         }
 
-        private void btn_add_Click(object sender, EventArgs e)
-        {
-            if (!string.IsNullOrEmpty(txb_SeatId.Text))
-            {
-                ClearControls.ClearContent(controls);
-                return;
-            }
-            Chair chair = GetChair();
-            if (chair == null)
-            {
-                MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
-                return;
-            }
-            string error = "";
-            int result = ChairDAO.Insert(chair, ref error);
-            if (result <= 0 || !string.IsNullOrEmpty(error))
-            {
-                MessageBox.Show(error);
-                return;
-            }
-            MessageBox.Show("Thêm ghế thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
-            LoadData();
-            GetRowChecked();
-        }
+        
 
-        private void btn_delete_Click(object sender, EventArgs e)
-        {
-            DialogResult dr;
-            string error = "";
-            dr = MessageBox.Show("Bạn có thật sự muốn xóa không ?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
-            if (dr == DialogResult.Cancel) return;
-            int chairId = Int32.Parse(txb_SeatId.Text);
-            int result = ChairDAO.Delete(chairId, ref error);
-            if (result <= 0 || !string.IsNullOrEmpty(error))
-            {
-                MessageBox.Show(error);
-                return;
-            }
-            LoadData();
-            GetRowChecked();
-        }
-
+        
         private void btn_save_Click(object sender, EventArgs e)
         {
             if (string.IsNullOrEmpty(txb_SeatId.Text))
@@ -161,10 +122,6 @@ namespace QuanLyRapPhim.Admin.DataUC
             GetRowChecked();
         }
 
-        private void btn_search_Click(object sender, EventArgs e)
-        {
-            string keyword = txb_search.Text;
-            LoadData(keyword);
-        }
+      
     }
 }
