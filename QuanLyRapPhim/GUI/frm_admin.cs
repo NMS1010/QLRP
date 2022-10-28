@@ -28,7 +28,7 @@ namespace QuanLyRapPhim
 
         private void btn_khachHang_Click(object sender, EventArgs e)
         {
-            CustumerUC custumerUC = new CustumerUC();
+            TypeCustumerUC custumerUC = new TypeCustumerUC();
             pnl_main.Controls.Clear();
             custumerUC.Dock = DockStyle.Fill;
             pnl_main.Controls.Add(custumerUC);
