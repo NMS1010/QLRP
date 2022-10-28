@@ -1,25 +1,26 @@
-﻿using QuanLyRapPhim.DAO;
+﻿using QuanLyRapPhim.Admin.DataUC;
+using QuanLyRapPhim.DAO;
 using QuanLyRapPhim.DTO;
 using QuanLyRapPhim.Utils.FormControls;
 using System;
+using System.Collections;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
 using System.Drawing;
-using System.Globalization;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Forms;
 
-namespace QuanLyRapPhim.Admin.DataUC
+namespace QuanLyRapPhim.GUI.Admin.DataUC
 {
-    public partial class DiscountUC : UserControl
+    public partial class TypeCustumerUC : UserControl
     {
         private string error = "";
         private List<Control> controls = new List<Control>();
 
-        public DiscountUC()
+        public TypeCustumerUC()
         {
             InitializeComponent();
             Init();
@@ -27,7 +28,7 @@ namespace QuanLyRapPhim.Admin.DataUC
 
         private void Init()
         {
-            foreach (var c in grb_discount.Controls)
+            foreach (var c in grb_customer.Controls)
             {
                 controls.Add(c as Control);
             }
@@ -35,9 +36,9 @@ namespace QuanLyRapPhim.Admin.DataUC
 
         private void Fill(int selectedRowIndex)
         {
-            txb_discountId.Text = dgv_discount.Rows[selectedRowIndex].Cells["MaKM"].Value?.ToString();
-            txb_codeName.Text = dgv_discount.Rows[selectedRowIndex].Cells["TenKM"].Value?.ToString();
-            txb_price.Text = dgv_discount.Rows[selectedRowIndex].Cells["GiaTriKM"].Value?.ToString();
+            txb_maLoaiKH.Text = dgv_typeCustomer.Rows[selectedRowIndex].Cells["MaLoaiKH"].Value?.ToString();
+            txb_tenLoai.Text = dgv_typeCustomer.Rows[selectedRowIndex].Cells["TenLoaiKH"].Value?.ToString();
+            txb_giaGiam.Text = dgv_typeCustomer.Rows[selectedRowIndex].Cells["GiaGiam"].Value?.ToString();
         }
 
         private void GetRowChecked()
@@ -45,13 +46,13 @@ namespace QuanLyRapPhim.Admin.DataUC
             int selectedRowIndex = -1;
             try
             {
-                selectedRowIndex = dgv_discount.SelectedCells[0].RowIndex;
+                selectedRowIndex = dgv_typeCustomer.SelectedCells[0].RowIndex;
             }
             catch
             {
                 return;
             }
-            if (selectedRowIndex > dgv_discount.Rows.Count - 2)
+            if (selectedRowIndex > dgv_typeCustomer.Rows.Count - 2)
             {
                 ClearControls.ClearContent(controls);
                 return;
@@ -59,53 +60,54 @@ namespace QuanLyRapPhim.Admin.DataUC
             Fill(selectedRowIndex);
         }
 
-        private Promotion GetDiscount()
+        private TypeCustomer GetTypeCustomer()
         {
-            if (string.IsNullOrEmpty(txb_codeName.Text) || string.IsNullOrEmpty(txb_price.Text))
+            if (string.IsNullOrEmpty(txb_tenLoai.Text) || string.IsNullOrEmpty(txb_giaGiam.Text))
                 return null;
-            Promotion promotion = new Promotion()
+            TypeCustomer typeCustomer = new TypeCustomer()
             {
-                Name = txb_codeName.Text,
-                ValueOfPromotion = (float)Math.Round(float.TryParse(txb_price.Text, out float res) ? res : 1, 2),
+                Name = txb_tenLoai.Text,
+                Price = Math.Round(double.TryParse(txb_giaGiam.Text, out double res) ? res : 1, 2),
             };
 
-            return promotion;
+            return typeCustomer;
         }
 
         public void LoadData()
         {
-            DataTable result = PromotionDAO.GetAllPromotion(ref error);
+            DataTable result = TypeCustomerDAO.GetAllTypeCustomer(ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
             }
-            dgv_discount.DataSource = result;
+            dgv_typeCustomer.DataSource = result;
             GetRowChecked();
+            lb_customerCount.Text = CustomerDAO.GetAllCustomer(ref error)?.Rows?.Count.ToString();
         }
 
         private void btn_add_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txb_discountId.Text))
+            if (!string.IsNullOrEmpty(txb_maLoaiKH.Text))
             {
-                txb_discountId.ResetText();
-                txb_codeName.ResetText();
-                txb_price.ResetText();
+                txb_maLoaiKH.ResetText();
+                txb_tenLoai.ResetText();
+                txb_giaGiam.ResetText();
                 return;
             }
-            Promotion promotion = GetDiscount();
-            if (promotion == null)
+            TypeCustomer typeCustomer = GetTypeCustomer();
+            if (typeCustomer == null)
             {
                 MessageBox.Show("Vui lòng nhập đầy đủ thông tin");
                 return;
             }
-            int result = PromotionDAO.Insert(promotion, ref error);
+            int result = TypeCustomerDAO.Insert(typeCustomer, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
             }
-            MessageBox.Show("Thêm khuyến mãi thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Thêm loại KH thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
             GetRowChecked();
         }
@@ -115,8 +117,8 @@ namespace QuanLyRapPhim.Admin.DataUC
             DialogResult dr;
             dr = MessageBox.Show("Bạn có thật sự muốn xóa không ?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);
             if (dr == DialogResult.Cancel) return;
-            int promotionId = Int32.Parse(txb_discountId.Text);
-            int result = PromotionDAO.Delete(promotionId, ref error);
+            int typeCustomerId = Int32.Parse(txb_maLoaiKH.Text);
+            int result = TypeCustomerDAO.Delete(typeCustomerId, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
@@ -128,41 +130,41 @@ namespace QuanLyRapPhim.Admin.DataUC
 
         private void btn_save_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txb_discountId.Text))
+            if (string.IsNullOrEmpty(txb_maLoaiKH.Text))
             {
                 MessageBox.Show("Lưu không thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Error);
                 return;
             }
-            Promotion promotion = new Promotion()
+            TypeCustomer typeCustomer = new TypeCustomer()
             {
-                PromotionId = Int32.Parse(txb_discountId.Text),
-                Name = txb_codeName.Text,
-                ValueOfPromotion = Convert.ToSingle(txb_price.Text)
+                TypeCustomerId = Int32.Parse(txb_maLoaiKH.Text),
+                Name = txb_tenLoai.Text,
+                Price = (double.TryParse(txb_maLoaiKH.Text, out double res) ? res : 2),
             };
-            int result = PromotionDAO.Update(promotion, ref error);
+            int result = TypeCustomerDAO.Update(typeCustomer, ref error);
             if (result <= 0 || !string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
             }
-            MessageBox.Show("Cập nhật khuyến mãi thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Cập nhậtloại khách hàng thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
             GetRowChecked();
         }
 
         private void btn_search_Click(object sender, EventArgs e)
         {
-            DataTable result = PromotionDAO.Search(txb_search.Text, ref error);
+            DataTable result = TypeCustomerDAO.Search(txb_search.Text, ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
             }
-            dgv_discount.DataSource = result;
+            dgv_typeCustomer.DataSource = result;
             GetRowChecked();
         }
 
-        private void dgv_discount_CellClick(object sender, DataGridViewCellEventArgs e)
+        private void dgv_dsKH_CellClick(object sender, DataGridViewCellEventArgs e)
         {
             GetRowChecked();
         }

@@ -93,7 +93,7 @@ namespace QuanLyRapPhim
                 Promotion promotion = new Promotion()
                 {
                     PromotionId = (int)r["MaKM"],
-                    ValueOfPromotion = (float)r["GiaTriKM"],
+                    ValueOfPromotion = (double)r["GiaTriKM"],
                     Name = r["TenKM"].ToString().Trim()
                 };
                 promotions.Add(promotion);

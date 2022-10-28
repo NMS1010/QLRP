@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace QuanLyRapPhim.DTO
 {
-	public class Promotion
-	{
-		public int PromotionId { get; set; }
-		public string Name { get; set; }
-		public float ValueOfPromotion { get; set; }
-	}
+    public class Promotion
+    {
+        public int PromotionId { get; set; }
+        public string Name { get; set; }
+        public double ValueOfPromotion { get; set; }
+    }
 }

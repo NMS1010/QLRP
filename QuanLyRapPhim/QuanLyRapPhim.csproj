@@ -101,11 +101,11 @@
     <Compile Include="GUI\Admin\DataUC\CinemaRoomUC.Designer.cs">
       <DependentUpon>CinemaRoomUC.cs</DependentUpon>
     </Compile>
-    <Compile Include="GUI\Admin\DataUC\CustumerUC.cs">
+    <Compile Include="GUI\Admin\DataUC\TypeCustumerUC.cs">
       <SubType>UserControl</SubType>
     </Compile>
-    <Compile Include="GUI\Admin\DataUC\CustumerUC.Designer.cs">
-      <DependentUpon>CustumerUC.cs</DependentUpon>
+    <Compile Include="GUI\Admin\DataUC\TypeCustumerUC.Designer.cs">
+      <DependentUpon>TypeCustumerUC.cs</DependentUpon>
     </Compile>
     <Compile Include="GUI\Admin\DataUC\DiscountUC.cs">
       <SubType>UserControl</SubType>
@@ -196,8 +196,8 @@
     <EmbeddedResource Include="GUI\Admin\DataUC\CinemaRoomUC.resx">
       <DependentUpon>CinemaRoomUC.cs</DependentUpon>
     </EmbeddedResource>
-    <EmbeddedResource Include="GUI\Admin\DataUC\CustumerUC.resx">
-      <DependentUpon>CustumerUC.cs</DependentUpon>
+    <EmbeddedResource Include="GUI\Admin\DataUC\TypeCustumerUC.resx">
+      <DependentUpon>TypeCustumerUC.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Admin\DataUC\DiscountUC.resx">
       <DependentUpon>DiscountUC.cs</DependentUpon>

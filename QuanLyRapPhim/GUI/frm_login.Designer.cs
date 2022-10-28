@@ -115,6 +115,7 @@ namespace QuanLyRapPhim
             this.txb_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.txb_password.Location = new System.Drawing.Point(22, 190);
             this.txb_password.Name = "txb_password";
+            this.txb_password.PasswordChar = '*';
             this.txb_password.Size = new System.Drawing.Size(270, 32);
             this.txb_password.TabIndex = 10;
             // 
@@ -192,9 +193,9 @@ namespace QuanLyRapPhim
             this.label6.ForeColor = System.Drawing.Color.White;
             this.label6.Location = new System.Drawing.Point(56, 149);
             this.label6.Name = "label6";
-            this.label6.Size = new System.Drawing.Size(370, 16);
+            this.label6.Size = new System.Drawing.Size(374, 16);
             this.label6.TabIndex = 3;
-            this.label6.Text = "Dịch vụ đặt biệt - Tuyệt vời như mơ - Nên thơ cảm xúc";
+            this.label6.Text = "Dịch vụ đặc biệt - Tuyệt vời như mơ - Nên thơ cảm xúc";
             // 
             // frm_login
             // 

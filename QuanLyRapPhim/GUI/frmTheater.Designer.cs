@@ -57,6 +57,8 @@
             this.txt_maKH = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.gb_loaiVe = new System.Windows.Forms.GroupBox();
+            this.txb_ticketPrice = new System.Windows.Forms.TextBox();
+            this.label3 = new System.Windows.Forms.Label();
             this.txt_soLuong = new System.Windows.Forms.TextBox();
             this.label4 = new System.Windows.Forms.Label();
             this.panel4 = new System.Windows.Forms.Panel();
@@ -65,8 +67,6 @@
             this.pnl_seat = new System.Windows.Forms.Panel();
             this.lb_ve = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
-            this.label3 = new System.Windows.Forms.Label();
-            this.txb_ticketPrice = new System.Windows.Forms.TextBox();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -358,9 +358,9 @@
             this.label5.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label5.Location = new System.Drawing.Point(32, 27);
             this.label5.Name = "label5";
-            this.label5.Size = new System.Drawing.Size(118, 20);
+            this.label5.Size = new System.Drawing.Size(123, 20);
             this.label5.TabIndex = 6;
-            this.label5.Text = "Mã khách hàng";
+            this.label5.Text = "Tên khách hàng";
             // 
             // gb_loaiVe
             // 
@@ -375,6 +375,25 @@
             this.gb_loaiVe.TabIndex = 0;
             this.gb_loaiVe.TabStop = false;
             this.gb_loaiVe.Text = "Vé";
+            // 
+            // txb_ticketPrice
+            // 
+            this.txb_ticketPrice.Enabled = false;
+            this.txb_ticketPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txb_ticketPrice.Location = new System.Drawing.Point(19, 130);
+            this.txb_ticketPrice.Name = "txb_ticketPrice";
+            this.txb_ticketPrice.Size = new System.Drawing.Size(139, 26);
+            this.txb_ticketPrice.TabIndex = 9;
+            // 
+            // label3
+            // 
+            this.label3.AutoSize = true;
+            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.label3.Location = new System.Drawing.Point(15, 96);
+            this.label3.Name = "label3";
+            this.label3.Size = new System.Drawing.Size(54, 20);
+            this.label3.TabIndex = 8;
+            this.label3.Text = "Giá vé";
             // 
             // txt_soLuong
             // 
@@ -445,25 +464,6 @@
             this.label2.Size = new System.Drawing.Size(82, 20);
             this.label2.TabIndex = 7;
             this.label2.Text = "Vé còn lại:";
-            // 
-            // label3
-            // 
-            this.label3.AutoSize = true;
-            this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
-            this.label3.Location = new System.Drawing.Point(15, 96);
-            this.label3.Name = "label3";
-            this.label3.Size = new System.Drawing.Size(54, 20);
-            this.label3.TabIndex = 8;
-            this.label3.Text = "Giá vé";
-            // 
-            // txb_ticketPrice
-            // 
-            this.txb_ticketPrice.Enabled = false;
-            this.txb_ticketPrice.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_ticketPrice.Location = new System.Drawing.Point(19, 130);
-            this.txb_ticketPrice.Name = "txb_ticketPrice";
-            this.txb_ticketPrice.Size = new System.Drawing.Size(139, 26);
-            this.txb_ticketPrice.TabIndex = 9;
             // 
             // frmTheater
             // 
