@@ -47,9 +47,7 @@ namespace QuanLyRapPhim
         private void btn_sellTicket_Click(object sender, EventArgs e)
         {
             frmSeller frmSeller = new frmSeller();
-            this.Hide();
-            frmSeller.ShowDialog();
-            this.Show();
+            frmSeller.Show();
         }
     }
 }
