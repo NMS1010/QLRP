@@ -22,14 +22,15 @@ namespace QuanLyRapPhim.Admin.DataUC
             InitializeComponent();
             Init();
         }
+
         private void Init()
         {
             foreach (var c in grb_projector.Controls)
             {
                 controls.Add(c as Control);
             }
-
         }
+
         public void LoadData(string keyword = null)
         {
             string error = "";
@@ -47,20 +48,20 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show(error);
                 return;
             }
-            
+
             dgv_projector.DataSource = projectorDT;
             GetRowChecked();
         }
+
         private void Fill(int selectedRowIndex)
         {
-
-            txb_prjectorId.Text = dgv_projector.Rows[selectedRowIndex].Cells["MaMay"].Value?.ToString();
-            txb_projectorName.Text = dgv_projector.Rows[selectedRowIndex].Cells["LoaiMay"].Value?.ToString();
-            txb_price.Text = dgv_projector.Rows[selectedRowIndex].Cells["Gia"].Value?.ToString();
+            txb_prjectorId.Text = dgv_projector.Rows[selectedRowIndex].Cells["MaMay"].Value?.ToString().Trim();
+            txb_projectorName.Text = dgv_projector.Rows[selectedRowIndex].Cells["LoaiMay"].Value?.ToString().Trim();
+            txb_price.Text = dgv_projector.Rows[selectedRowIndex].Cells["Gia"].Value?.ToString().Trim();
         }
+
         private void GetRowChecked()
         {
-
             int selectedRowIndex = -1;
             try
             {
@@ -94,6 +95,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 return null;
             return projector;
         }
+
         private void btn_add_Click(object sender, EventArgs e)
         {
             if (!string.IsNullOrEmpty(txb_prjectorId.Text))
@@ -121,7 +123,6 @@ namespace QuanLyRapPhim.Admin.DataUC
 
         private void btn_delete_Click(object sender, EventArgs e)
         {
-
             DialogResult dr;
             string error = "";
             dr = MessageBox.Show("Bạn có thật sự muốn xóa không ?", "Cảnh báo", MessageBoxButtons.OKCancel, MessageBoxIcon.Warning);

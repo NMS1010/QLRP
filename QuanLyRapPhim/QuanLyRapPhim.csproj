@@ -52,7 +52,7 @@
     <Compile Include="DAO\MovieDAO.cs" />
     <Compile Include="DAO\PermissionDAO.cs" />
     <Compile Include="DAO\ProjectorDAO.cs" />
-    <Compile Include="DAO\PromotoinDAO.cs" />
+    <Compile Include="DAO\PromotionDAO.cs" />
     <Compile Include="DAO\RoleDAO.cs" />
     <Compile Include="DAO\RoomDAO.cs" />
     <Compile Include="DAO\ChairDAO.cs" />

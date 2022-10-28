@@ -11,10 +11,10 @@ namespace QuanLyRapPhim.DAO
 {
     public class TicketDAO
     {
-        public static DataTable GetAllTicketBoughted(ref string error)
+        public static DataTable GetAllTicketByShowTimeId(int showtimeId, ref string error)
         {
-            string query = "select * from dbo.func_getBoughtTicket()";
-            return DataProvider.ExecuteQuery(query, ref error);
+            string query = "select * from dbo.func_getTicketByShowTimeId( @MaSC )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { showtimeId });
         }
 
         public static int Insert(Ticket ticket, ref string error)

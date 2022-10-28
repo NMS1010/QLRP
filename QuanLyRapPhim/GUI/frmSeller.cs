@@ -52,11 +52,11 @@ namespace QuanLyRapPhim
                 Movie movie = new Movie()
                 {
                     MovieId = (int)dr["MaPhim"],
-                    MovieName = dr["TenPhim"].ToString(),
-                    MainDirector = dr["DaoDienChinh"].ToString(),
+                    MovieName = dr["TenPhim"].ToString().Trim(),
+                    MainDirector = dr["DaoDienChinh"].ToString().Trim(),
                     AgeRange = (int)dr["LuaTuoi"],
-                    StartDate = ((DateTime)dr["NgayKhoiChieu"]).ToShortDateString(),
-                    EndDate = ((DateTime)dr["NgayKetThuc"]).ToShortDateString(),
+                    StartDate = ((DateTime)dr["NgayKhoiChieu"]).ToShortDateString().Trim(),
+                    EndDate = ((DateTime)dr["NgayKetThuc"]).ToShortDateString().Trim(),
                     Time = (double)dr["ThoiLuong"]
                 };
 
@@ -76,12 +76,12 @@ namespace QuanLyRapPhim
                         Id = (int)r["MaSuatChieu"],
                         IdFilm = (int)r["MaPhim"],
                         IdRoom = (int)r["MaPhong"],
-                        Time = r["Gio"].ToString(),
-                        Day = r["Ngay"].ToString(),
-                        FilmName = r["TenPhim"].ToString(),
-                        RoomName = r["TenPhong"].ToString(),
+                        Time = r["Gio"].ToString().Trim(),
+                        Day = r["Ngay"].ToString().Trim(),
+                        FilmName = r["TenPhim"].ToString().Trim(),
+                        RoomName = r["TenPhong"].ToString().Trim(),
                         Status = (int)r["TrangThai"],
-                        ProjectorName = r["LoaiMay"].ToString(),
+                        ProjectorName = r["LoaiMay"].ToString().Trim(),
                         Row = (int)r["SoHang"],
                         Col = (int)r["SoCot"],
                     };
@@ -109,14 +109,10 @@ namespace QuanLyRapPhim
             foreach (ShowTime st in showtimes[selectedRow])
             {
                 stt++;
-                string[] row = new string[] { stt.ToString(), st.FilmName, st.RoomName, st.Time, Convert.ToDateTime(st.Day).ToShortDateString(), st.Status.ToString(), st.ProjectorName };
+                string[] row = new string[] { stt.ToString().Trim(), st.FilmName, st.RoomName, st.Time, Convert.ToDateTime(st.Day).ToShortDateString().Trim(), st.Status.ToString().Trim(), st.ProjectorName };
                 ListViewItem lvi = new ListViewItem(row);
                 lv_lichChieu.Items.Add(lvi);
             }
-        }
-
-        private void lv_lichChieu_SelectedIndexChanged(object sender, EventArgs e)
-        {
         }
 
         private void dtpicker_lichChieu_ValueChanged(object sender, EventArgs e)

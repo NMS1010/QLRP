@@ -158,11 +158,11 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show("Có lỗi xảy ra");
                 return;
             }
-            txb_roomId.Text = room.Id.ToString();
+            txb_roomId.Text = room.Id.ToString().Trim();
             txb_cinemaName.Text = room.Name;
-            txb_col.Text = room.Col.ToString();
-            txb_row.Text = room.Row.ToString();
-            cbx_roomStatus.Text = STATUS.Status[room.Status].ToString();
+            txb_col.Text = room.Col.ToString().Trim();
+            txb_row.Text = room.Row.ToString().Trim();
+            cbx_roomStatus.Text = STATUS.Status[room.Status].ToString().Trim();
             cbx_projector.Text = projectors.FirstOrDefault(x => x.Id == room.IdProjector).Type;
         }
 

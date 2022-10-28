@@ -23,6 +23,7 @@ namespace QuanLyRapPhim.Admin.DataUC
         private string error = "";
         private List<Movie> movies = new List<Movie>();
         private List<Control> controls = new List<Control>();
+
         private void Init()
         {
             actor = new Hashtable();
@@ -52,11 +53,13 @@ namespace QuanLyRapPhim.Admin.DataUC
                 checkLstBox_category.Items.Add(categoryName);
             }
         }
+
         public MovieUC()
         {
             InitializeComponent();
             Init();
         }
+
         public void LoadData(string keyword = null)
         {
             string error = "";
@@ -108,6 +111,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
             GetRowChecked();
         }
+
         private void GetRowChecked()
         {
             int selectedRowIndex = -1;
@@ -127,6 +131,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
             Fill(selectedRowIndex);
         }
+
         private void Fill(int selectedRowIndex)
         {
             int movieId = (int)dgv_movie.Rows[selectedRowIndex].Cells["MaPhim"].Value;
@@ -247,7 +252,6 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
             Fill(selectedRowIndex);
             idFilmCurrent = (int)dgv_movie.Rows[selectedRowIndex].Cells["MaPhim"].Value;
-            
         }
 
         private void btn_delete_Click(object sender, EventArgs e)
@@ -256,7 +260,7 @@ namespace QuanLyRapPhim.Admin.DataUC
             {
                 return;
             }
-            
+
             string error = "";
             int count = MovieDAO.Delete(idFilmCurrent, ref error);
             if (!string.IsNullOrEmpty(error))
