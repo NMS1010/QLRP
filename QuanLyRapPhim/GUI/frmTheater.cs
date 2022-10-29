@@ -67,7 +67,9 @@ namespace QuanLyRapPhim
             }
             foreach (DataRow r in boughtTicketDT.Rows)
             {
-                boughtTickets.Add(r["ViTriGhe"].ToString().Trim());
+                string seat = r["ViTriGhe"].ToString().Trim();
+                if (boughtTickets.Contains(seat)) continue;
+                boughtTickets.Add(seat);
             }
             totalSeat = showTime.Row * showTime.Col;
 
@@ -206,6 +208,7 @@ namespace QuanLyRapPhim
             b.ShowDialog();
             MessageBox.Show("Thanh toán thành công");
             LoadSeat();
+            btn_thanhToan.Enabled = false;
         }
 
         private void btn_cal_Click(object sender, EventArgs e)
@@ -227,6 +230,12 @@ namespace QuanLyRapPhim
             txt_KM.Text = "-" + (promotionPrice.Value * 100).ToString() + "%";
             finalPrice = Math.Round((totalPrice - totalPrice * (decimal)(promotionPrice.Value)), 0);
             txt_tienCanTra.Text = finalPrice.ToString() + " VNĐ";
+            btn_thanhToan.Enabled = true;
+        }
+
+        private void btn_huy_Click(object sender, EventArgs e)
+        {
+            Close();
         }
     }
 }

@@ -195,6 +195,7 @@
             // btn_thanhToan
             // 
             this.btn_thanhToan.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(0)))), ((int)(((byte)(192)))), ((int)(((byte)(0)))));
+            this.btn_thanhToan.Enabled = false;
             this.btn_thanhToan.Location = new System.Drawing.Point(262, 151);
             this.btn_thanhToan.Name = "btn_thanhToan";
             this.btn_thanhToan.Size = new System.Drawing.Size(125, 32);
@@ -212,6 +213,7 @@
             this.btn_huy.TabIndex = 18;
             this.btn_huy.Text = "Hủy";
             this.btn_huy.UseVisualStyleBackColor = false;
+            this.btn_huy.Click += new System.EventHandler(this.btn_huy_Click);
             // 
             // txt_tienCanTra
             // 
