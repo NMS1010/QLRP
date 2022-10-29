@@ -17,9 +17,16 @@ namespace QuanLyRapPhim.DAO
                 new object[] { customer.Name, customer.Sex, customer.Dob, customer.Address, customer.PhoneNumber, customer.TypeCustomerId, customer.Email });
         }
 
+        public static int InsertCustomerService(int customerId, int serviceId, ref string error)
+        {
+            string query = "exec proc_addServiceForCustomer @MaDichVu , @MaKhachHang";
+            return DataProvider.ExecuteNonQuery(query, ref error,
+                new object[] { serviceId, customerId });
+        }
+
         public static int Update(Customer customer, ref string error)
         {
-            string query = "exec proc_updateCustomer @MaKH , @Ten , @GioiTinh , @NgaySinh , @DiaChi , @SoDienThoai , @MaLoaiKH , @Email"; 
+            string query = "exec proc_updateCustomer @MaKH , @Ten , @GioiTinh , @NgaySinh , @DiaChi , @SoDienThoai , @MaLoaiKH , @Email";
             return DataProvider.ExecuteNonQuery(query, ref error,
                 new object[] { customer.CustomerId, customer.Name, customer.Sex, customer.Dob, customer.Address, customer.PhoneNumber, customer.TypeCustomerId, customer.Email });
         }

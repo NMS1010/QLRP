@@ -54,7 +54,7 @@
             this.label7 = new System.Windows.Forms.Label();
             this.cbx_loaiKH = new System.Windows.Forms.ComboBox();
             this.label6 = new System.Windows.Forms.Label();
-            this.txt_maKH = new System.Windows.Forms.TextBox();
+            this.txt_tenKH = new System.Windows.Forms.TextBox();
             this.label5 = new System.Windows.Forms.Label();
             this.gb_loaiVe = new System.Windows.Forms.GroupBox();
             this.txb_ticketPrice = new System.Windows.Forms.TextBox();
@@ -278,7 +278,7 @@
             this.gb_khachHang.Controls.Add(this.label7);
             this.gb_khachHang.Controls.Add(this.cbx_loaiKH);
             this.gb_khachHang.Controls.Add(this.label6);
-            this.gb_khachHang.Controls.Add(this.txt_maKH);
+            this.gb_khachHang.Controls.Add(this.txt_tenKH);
             this.gb_khachHang.Controls.Add(this.label5);
             this.gb_khachHang.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.gb_khachHang.Location = new System.Drawing.Point(16, 3);
@@ -344,13 +344,13 @@
             this.label6.TabIndex = 8;
             this.label6.Text = "Loại khách hàng";
             // 
-            // txt_maKH
+            // txt_tenKH
             // 
-            this.txt_maKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txt_maKH.Location = new System.Drawing.Point(164, 25);
-            this.txt_maKH.Name = "txt_maKH";
-            this.txt_maKH.Size = new System.Drawing.Size(175, 26);
-            this.txt_maKH.TabIndex = 7;
+            this.txt_tenKH.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.txt_tenKH.Location = new System.Drawing.Point(164, 25);
+            this.txt_tenKH.Name = "txt_tenKH";
+            this.txt_tenKH.Size = new System.Drawing.Size(175, 26);
+            this.txt_tenKH.TabIndex = 7;
             // 
             // label5
             // 
@@ -521,7 +521,7 @@
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.ComboBox cbx_loaiKH;
         private System.Windows.Forms.Label label6;
-        private System.Windows.Forms.TextBox txt_maKH;
+        private System.Windows.Forms.TextBox txt_tenKH;
         private System.Windows.Forms.Label label5;
         private System.Windows.Forms.GroupBox gb_loaiVe;
         private System.Windows.Forms.TextBox txt_soLuong;

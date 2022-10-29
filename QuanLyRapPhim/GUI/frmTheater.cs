@@ -31,6 +31,7 @@ namespace QuanLyRapPhim
         private List<string> selectedTickets;
         private int totalSeat;
         private string error = "";
+        private decimal finalPrice = 0;
 
         public frmTheater(ShowTime st, Movie m)
         {
@@ -71,12 +72,14 @@ namespace QuanLyRapPhim
                 TypeCustomer typeCustomer = new TypeCustomer()
                 {
                     TypeCustomerId = (int)r["MaLoaiKH"],
-                    Name = r["TenLoaiKH"].ToString().Trim()
+                    Name = r["TenLoaiKH"].ToString().Trim(),
+                    Price = (double)r["GiamGia"]
                 };
                 typeCustomers.Add(typeCustomer);
                 cbx_loaiKH.Items.Add(typeCustomer.Name);
             }
-
+            if (cbx_loaiKH.Items.Count > 0)
+                cbx_loaiKH.SelectedIndex = 0;
             foreach (DataRow r in serviceDT.Rows)
             {
                 Service service = new Service()
@@ -88,6 +91,8 @@ namespace QuanLyRapPhim
                 services.Add(service);
                 cklb_dichVu.Items.Add(service.Name);
             }
+            if (cklb_dichVu.Items.Count > 0)
+                cklb_dichVu.SelectedIndex = 0;
             foreach (DataRow r in promotionDT.Rows)
             {
                 Promotion promotion = new Promotion()
@@ -99,6 +104,8 @@ namespace QuanLyRapPhim
                 promotions.Add(promotion);
                 cbx_khuyenMai.Items.Add(promotion.Name);
             }
+            if (cbx_khuyenMai.Items.Count > 0)
+                cbx_khuyenMai.SelectedIndex = 0;
             foreach (DataRow r in ticketDT.Rows)
             {
                 Ticket ticket = new Ticket()
@@ -179,15 +186,92 @@ namespace QuanLyRapPhim
 
         private void btn_thanhToan_Click(object sender, EventArgs e)
         {
-            if (!string.IsNullOrEmpty(txt_maKH.Text))
+            if (string.IsNullOrEmpty(txt_tenKH.Text))
             {
                 MessageBox.Show("Vui lòng nhập mã khách hàng");
                 return;
             }
+            int? typeCustomerId = typeCustomers.Where(x => x.Name == cbx_loaiKH.Text)?.FirstOrDefault()?.TypeCustomerId;
+
+            if (!typeCustomerId.HasValue)
+            {
+                MessageBox.Show("Có lỗi");
+                return;
+            }
+            Customer user = new Customer()
+            {
+                Name = txt_tenKH.Text,
+                TypeCustomerId = typeCustomerId.Value,
+                Address = "null",
+                Dob = "2000-01-01",
+                Email = "null",
+                PhoneNumber = "null",
+                Sex = "null"
+            };
+
+            int count = CustomerDAO.Insert(user, ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+            int? promotionId = promotions.Where(x => x.Name == cbx_khuyenMai.Text)?.FirstOrDefault()?.PromotionId;
+            if (!promotionId.HasValue)
+            {
+                MessageBox.Show("Có lỗi");
+                return;
+            }
+            DataTable customerDT = CustomerDAO.GetAllCustomer(ref error);
+            int customerId = (int)customerDT.Rows[customerDT.Rows.Count - 1]["MaKH"];
+            foreach (var item in cklb_dichVu.CheckedItems)
+            {
+                services.Where(x => x.Name == item.ToString()).ToList().ForEach(x =>
+                {
+                    count = CustomerDAO.InsertCustomerService(customerId, x.ServiceId, ref error);
+                    if (!string.IsNullOrEmpty(error))
+                    {
+                        MessageBox.Show(error);
+                        return;
+                    }
+                });
+            }
+            Bill bill = new Bill()
+            {
+                CustomerId = customerId,
+                PromotionId = promotionId.Value,
+                SumCost = finalPrice,
+                InvoiceDate = DateTime.Now.ToShortDateString(),
+                InvoiceTime = DateTime.Now.ToShortTimeString(),
+            };
+
+            count = BillDAO.Insert(bill, ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+            MessageBox.Show("Thanh toán thành công");
         }
 
         private void btn_cal_Click(object sender, EventArgs e)
         {
+            double? typeCustomerPrice = typeCustomers.Where(x => x.Name == cbx_loaiKH.Text)?.FirstOrDefault()?.Price;
+            double? promotionPrice = promotions.Where(x => x.Name == cbx_khuyenMai.Text)?.FirstOrDefault()?.ValueOfPromotion;
+            decimal totalPriceService = 0;
+            foreach (var item in cklb_dichVu.CheckedItems)
+            {
+                services.Where(x => x.Name == item.ToString()).ToList().ForEach(x =>
+                {
+                    totalPriceService += x.Price;
+                });
+            }
+
+            decimal totalTicketPrice = decimal.Parse(txb_ticketPrice.Text) * int.Parse(txt_soLuong.Text);
+            decimal totalPrice = totalPriceService + (totalTicketPrice - totalTicketPrice * (decimal)typeCustomerPrice);
+            txt_tongTien.Text = Math.Round(totalPrice, 0).ToString() + " VNĐ";
+            txt_KM.Text = "-" + (promotionPrice.Value * 100).ToString() + "%";
+            finalPrice = Math.Round((totalPrice - totalPrice * (decimal)(promotionPrice.Value)), 0);
+            txt_tienCanTra.Text = finalPrice.ToString() + " VNĐ";
         }
     }
 }
