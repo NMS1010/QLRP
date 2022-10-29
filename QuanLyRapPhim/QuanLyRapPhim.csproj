@@ -264,6 +264,20 @@
   <ItemGroup>
     <None Include="Resources\pexels-johannes-plenio-1103970.jpg" />
   </ItemGroup>
-  <ItemGroup />
+  <ItemGroup>
+    <None Include="Resources\people-2-512.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\New-Database-icon.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\employee-office-staff-3d735bc691173bb5-256x256.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Resources\ticket-removebg-preview.png" />
+  </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
 </Project>

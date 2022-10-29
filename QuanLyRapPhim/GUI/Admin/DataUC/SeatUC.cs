@@ -31,18 +31,12 @@ namespace QuanLyRapPhim.Admin.DataUC
             }
            
         }
-        public void LoadData(string keyword = null)
+        public void LoadData()
         {
             string error = "";
             DataTable chairDT;
-            if (keyword == null || keyword == "")
-            {
+          
                 chairDT = ChairDAO.GetAllChair(ref error);
-            }
-            else
-            {
-                chairDT = ChairDAO.Search(keyword, ref error);
-            }
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);

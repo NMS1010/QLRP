@@ -17,6 +17,10 @@ namespace QuanLyRapPhim
         public frm_admin()
         {
             InitializeComponent();
+            DataManagerUC dataManagerUC = new DataManagerUC();
+            pnl_main.Controls.Clear();
+            pnl_main.Controls.Add(dataManagerUC);
+
         }
 
         private void btn_dataManager_Click(object sender, EventArgs e)
@@ -24,6 +28,7 @@ namespace QuanLyRapPhim
             DataManagerUC dataManagerUC = new DataManagerUC();
             pnl_main.Controls.Clear();
             pnl_main.Controls.Add(dataManagerUC);
+
         }
 
         private void btn_khachHang_Click(object sender, EventArgs e)
@@ -47,7 +52,11 @@ namespace QuanLyRapPhim
         private void btn_sellTicket_Click(object sender, EventArgs e)
         {
             frmSeller frmSeller = new frmSeller();
-            frmSeller.Show();
+            this.Hide();
+            frmSeller.ShowDialog();
+            this.Show();
         }
+
+      
     }
 }
