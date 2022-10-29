@@ -144,6 +144,12 @@
       <DependentUpon>ShowTimeUC.cs</DependentUpon>
     </Compile>
     <Compile Include="DAO\DataProvider.cs" />
+    <Compile Include="GUI\frm_bill.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frm_bill.Designer.cs">
+      <DependentUpon>frm_bill.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frm_admin.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -216,6 +222,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\Admin\DataUC\ShowTimeUC.resx">
       <DependentUpon>ShowTimeUC.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frm_bill.resx">
+      <DependentUpon>frm_bill.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frmSeller.resx">
       <DependentUpon>frmSeller.cs</DependentUpon>
