@@ -1,5 +1,6 @@
 ﻿using QuanLyRapPhim.DAO;
 using QuanLyRapPhim.DTO;
+using QuanLyRapPhim.GUI;
 using System;
 using System.Collections.Generic;
 using System.ComponentModel;
@@ -45,6 +46,36 @@ namespace QuanLyRapPhim
             Init();
         }
 
+        private void LoadSeat()
+        {
+            DataTable boughtTicketDT = TicketDAO.GetBoughtTicket(showTime.Id, ref error);
+            DataTable ticketDT = TicketDAO.GetAllTicketByShowTimeId(showTime.Id, ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
+            foreach (DataRow r in ticketDT.Rows)
+            {
+                Ticket ticket = new Ticket()
+                {
+                    Id = (int)r["MaVe"],
+                    Seat = r["ViTriGhe"].ToString().Trim(),
+                    TotalPrice = (decimal)r["TongGia"]
+                };
+                tickets.Add(ticket);
+            }
+            foreach (DataRow r in boughtTicketDT.Rows)
+            {
+                boughtTickets.Add(r["ViTriGhe"].ToString().Trim());
+            }
+            totalSeat = showTime.Row * showTime.Col;
+
+            GenerateSeats(showTime.Row, showTime.Col);
+            lb_ve.Text = $"{totalSeat - boughtTickets.Count}/{totalSeat}";
+            txb_ticketPrice.Text = tickets[0].TotalPrice.ToString();
+        }
+
         private void Init()
         {
             typeCustomers = new List<TypeCustomer>();
@@ -57,11 +88,9 @@ namespace QuanLyRapPhim
             DateTime t1 = Convert.ToDateTime(showTime.Time);
             lb_thongtin.Text = $"Tên phim: {movie.MovieName} | Phòng chiếu: {showTime.RoomName} | Định dạng: {showTime.ProjectorName}";
             lb_thoigian.Text = $"{Convert.ToDateTime(showTime.Day).ToShortDateString()}|{t1.ToShortTimeString()} - {t1.AddSeconds((double)movie.Time * 60).ToShortTimeString()}";
-            DataTable boughtTicketDT = TicketDAO.GetBoughtTicket(showTime.Id, ref error);
             DataTable customerTypeDT = TypeCustomerDAO.GetAllTypeCustomer(ref error);
             DataTable serviceDT = ServiceDAO.GetAllService(ref error);
             DataTable promotionDT = PromotionDAO.GetAllPromotion(ref error);
-            DataTable ticketDT = TicketDAO.GetAllTicketByShowTimeId(showTime.Id, ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
@@ -106,25 +135,7 @@ namespace QuanLyRapPhim
             }
             if (cbx_khuyenMai.Items.Count > 0)
                 cbx_khuyenMai.SelectedIndex = 0;
-            foreach (DataRow r in ticketDT.Rows)
-            {
-                Ticket ticket = new Ticket()
-                {
-                    Id = (int)r["MaVe"],
-                    Seat = r["ViTriGhe"].ToString().Trim(),
-                    TotalPrice = (decimal)r["TongGia"]
-                };
-                tickets.Add(ticket);
-            }
-            foreach (DataRow r in boughtTicketDT.Rows)
-            {
-                boughtTickets.Add(r["ViTriGhe"].ToString());
-            }
-            totalSeat = showTime.Row * showTime.Col;
-
-            GenerateSeats(showTime.Row, showTime.Col);
-            lb_ve.Text = $"{totalSeat - boughtTickets.Count}/{totalSeat}";
-            txb_ticketPrice.Text = tickets[0].TotalPrice.ToString();
+            LoadSeat();
         }
 
         private void GenerateSeats(int row, int col)
@@ -179,7 +190,6 @@ namespace QuanLyRapPhim
                 totalSelectedSeat -= 1;
                 selectedTickets.Remove(seat.Text);
             }
-            //UpdateTicketPrice();
             txt_soLuong.Text = selectedTickets.Count.ToString();
             lb_ve.Text = $"{totalSeat - totalSelectedSeat - boughtTickets.Count}/{totalSeat}";
         }
@@ -191,66 +201,11 @@ namespace QuanLyRapPhim
                 MessageBox.Show("Vui lòng nhập mã khách hàng");
                 return;
             }
-            int? typeCustomerId = typeCustomers.Where(x => x.Name == cbx_loaiKH.Text)?.FirstOrDefault()?.TypeCustomerId;
-
-            if (!typeCustomerId.HasValue)
-            {
-                MessageBox.Show("Có lỗi");
-                return;
-            }
-            Customer user = new Customer()
-            {
-                Name = txt_tenKH.Text,
-                TypeCustomerId = typeCustomerId.Value,
-                Address = "null",
-                Dob = "2000-01-01",
-                Email = "null",
-                PhoneNumber = "null",
-                Sex = "null"
-            };
-
-            int count = CustomerDAO.Insert(user, ref error);
-            if (!string.IsNullOrEmpty(error))
-            {
-                MessageBox.Show(error);
-                return;
-            }
-            int? promotionId = promotions.Where(x => x.Name == cbx_khuyenMai.Text)?.FirstOrDefault()?.PromotionId;
-            if (!promotionId.HasValue)
-            {
-                MessageBox.Show("Có lỗi");
-                return;
-            }
-            DataTable customerDT = CustomerDAO.GetAllCustomer(ref error);
-            int customerId = (int)customerDT.Rows[customerDT.Rows.Count - 1]["MaKH"];
-            foreach (var item in cklb_dichVu.CheckedItems)
-            {
-                services.Where(x => x.Name == item.ToString()).ToList().ForEach(x =>
-                {
-                    count = CustomerDAO.InsertCustomerService(customerId, x.ServiceId, ref error);
-                    if (!string.IsNullOrEmpty(error))
-                    {
-                        MessageBox.Show(error);
-                        return;
-                    }
-                });
-            }
-            Bill bill = new Bill()
-            {
-                CustomerId = customerId,
-                PromotionId = promotionId.Value,
-                SumCost = finalPrice,
-                InvoiceDate = DateTime.Now.ToShortDateString(),
-                InvoiceTime = DateTime.Now.ToShortTimeString(),
-            };
-
-            count = BillDAO.Insert(bill, ref error);
-            if (!string.IsNullOrEmpty(error))
-            {
-                MessageBox.Show(error);
-                return;
-            }
+            frm_bill b = new frm_bill(cbx_loaiKH, cbx_khuyenMai, cklb_dichVu, finalPrice, txt_tenKH.Text,
+                selectedTickets, typeCustomers, promotions, services, showTime, movie);
+            b.ShowDialog();
             MessageBox.Show("Thanh toán thành công");
+            LoadSeat();
         }
 
         private void btn_cal_Click(object sender, EventArgs e)

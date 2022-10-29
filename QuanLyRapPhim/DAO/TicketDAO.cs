@@ -1,4 +1,5 @@
-﻿using QuanLyRapPhim.DTO;
+﻿using QuanLyRapPhim.Admin.DataUC;
+using QuanLyRapPhim.DTO;
 using System;
 using System.Collections.Generic;
 using System.Data;
@@ -54,6 +55,12 @@ namespace QuanLyRapPhim.DAO
             decimal projectorPrice = (decimal)projectorPriceDT.Rows[0]["Gia"];
             string query = "exec proc_updateTicketPrice @MaSuatChieu , @TongGiaVe";
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { showTimeId, seatPrice + projectorPrice });
+        }
+
+        public static DataTable GetTicketIdBySeatName(string seatName, ref string error)
+        {
+            string query = "select * from dbo.func_getTicketIdBySeatName( @seatName )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { seatName });
         }
 
         public static bool GenerateTicket(int showTimeID, int roomId, ref string error)

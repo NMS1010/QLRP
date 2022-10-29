@@ -45,12 +45,14 @@ from SuatChieu
 go
 
 create view view_chiTietHoaDon as
-select Ten, GioiTinh, SoDienThoai, TenKM, KhuyenMai.MaKM, NgayXuat, GioXuat, TongChiPhi, TenDichVu
-from HoaDon inner join KhachHang on HoaDon.MaKH = KhachHang.MaKH 
-		left join KhuyenMai on KhuyenMai.MaKM = HoaDon.MaKM
-		left join KH_DV on KhachHang.maKH = KH_DV.MaKH
-		left join DichVu on KH_DV.MaDV = DichVu.MaDichVu
-
+select Ten, TenPhim, TenPhong, GioXuat, NgayXuat, TenKM, TongChiPhi
+from HoaDon
+		inner join KhuyenMai on HoaDon.MaKM = KhuyenMai.MaKM
+		inner join KhachHang on HoaDon.MaKH = KhachHang.MaKH 
+		inner join Ve on MaVe = Ve.MaVe
+		inner join SuatChieu on Ve.MaSuatChieu = SuatChieu.MaSuatChieu
+		inner join PhongChieu on SuatChieu.MaPhong = PhongChieu.MaPhong
+		inner join Phim on SuatChieu.MaPhim = Phim.MaPhim
 -- View chi tiết doanh thu theo phim
 go
 create view view_chiTietDoanhThuPhim as
@@ -62,4 +64,5 @@ from Ve inner join SuatChieu on Ve.MaSuatChieu = SuatChieu.MaSuatChieu
 		inner join Ghe on PhongChieu_Ghe.MaGhe = Ghe.MaGhe
 where Ve.TrangThai = 1
 group by Phim.TenPhim
+
 

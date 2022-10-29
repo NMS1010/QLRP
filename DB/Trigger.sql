@@ -69,23 +69,23 @@ begin
 		end
 end
 go
-create trigger trigger_check_TuoiMuaVe
-on Ve after update
-as
-begin
-	declare @MaKH int, @LuaTuoi int, @count int
-	select @MaKH = MaKH, @LuaTuoi = LuaTuoi from inserted inner join SuatChieu on inserted.MaSuatChieu = SuatChieu.MaSuatChieu
-			inner join Phim on SuatChieu.MaPhim = Phim.MaPhim
+--create trigger trigger_check_TuoiMuaVe
+--on Ve after update
+--as
+--begin
+--	declare @MaKH int, @LuaTuoi int, @count int
+--	select @MaKH = MaKH, @LuaTuoi = LuaTuoi from inserted inner join SuatChieu on inserted.MaSuatChieu = SuatChieu.MaSuatChieu
+--			inner join Phim on SuatChieu.MaPhim = Phim.MaPhim
 
-	select @count = count(*)
-	from KhachHang
-	where maKH = @MaKH  and year(getdate()) - year(NgaySinh) >= @LuaTuoi 
+--	select @count = count(*)
+--	from KhachHang
+--	where maKH = @MaKH  and year(getdate()) - year(NgaySinh) >= @LuaTuoi 
 
-	if(@count = 0 and @MaKH is not null)
-	begin
-		rollback tran
-		raiserror(N'Không đủ tuổi để xem bộ phim này',16,1)
-		return
-	end
-end
+--	if(@count = 0 and @MaKH is not null)
+--	begin
+--		rollback tran
+--		raiserror(N'Không đủ tuổi để xem bộ phim này',16,1)
+--		return
+--	end
+--end
 

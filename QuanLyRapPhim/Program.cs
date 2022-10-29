@@ -17,7 +17,7 @@ namespace QuanLyRapPhim
         {
             Application.EnableVisualStyles();
             Application.SetCompatibleTextRenderingDefault(false);
-            Application.Run(new frm_bill());
+            Application.Run(new frm_admin());
         }
     }
 }

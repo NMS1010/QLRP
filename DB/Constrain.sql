@@ -42,16 +42,6 @@ alter table PhongChieu_Ghe drop constraint IF EXISTS check_SoLuong_PhongChieu_Gh
 alter table PhongChieu_Ghe add constraint check_SoLuong_PhongChieu_Ghe CHECK (SoLuong > 0)
 
 
---Constraint KhachHang
-alter table KhachHang drop constraint IF EXISTS check_NgaySinh_KhachHang
-alter table KhachHang drop constraint IF EXISTS check_SoDienThoai_KhachHang
-alter table KhachHang drop constraint IF EXISTS check_Email_KhachHang
-
-
-alter table KhachHang add constraint check_NgaySinh_KhachHang CHECK ((year(getdate()) - year(NgaySinh)) > 1)
-alter table KhachHang add constraint check_SoDienThoai_KhachHang CHECK (SoDienThoai not like '%[^0-9]%' and (LEN(SoDienThoai) = 10))
-alter table KhachHang add constraint check_Email_KhachHang CHECK (Email LIKE '_%@__%.__%')
-
 
 --Constraint DichVu
 alter table DichVu drop constraint IF EXISTS check_Gia_DichVu

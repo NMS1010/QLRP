@@ -123,7 +123,7 @@ go
 
 create table KhachHang(
 	MaKH int identity(1,1) constraint pk_khach_hang primary key,
-	Ten nvarchar(255) null,
+	Ten nvarchar(255) not null,
 	GioiTinh nvarchar(4) null,
 	NgaySinh date null, 
 	DiaChi nvarchar(255) null,

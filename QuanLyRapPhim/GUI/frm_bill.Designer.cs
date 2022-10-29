@@ -87,7 +87,7 @@
             // 
             this.lb_time.AutoSize = true;
             this.lb_time.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_time.Location = new System.Drawing.Point(21, 148);
+            this.lb_time.Location = new System.Drawing.Point(12, 148);
             this.lb_time.Name = "lb_time";
             this.lb_time.Size = new System.Drawing.Size(65, 31);
             this.lb_time.TabIndex = 4;
@@ -97,7 +97,7 @@
             // 
             this.lb_date.AutoSize = true;
             this.lb_date.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_date.Location = new System.Drawing.Point(228, 148);
+            this.lb_date.Location = new System.Drawing.Point(213, 148);
             this.lb_date.Name = "lb_date";
             this.lb_date.Size = new System.Drawing.Size(67, 31);
             this.lb_date.TabIndex = 5;
@@ -137,7 +137,7 @@
             // 
             this.lb_price.AutoSize = true;
             this.lb_price.Font = new System.Drawing.Font("Microsoft Sans Serif", 20.25F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.lb_price.Location = new System.Drawing.Point(143, 262);
+            this.lb_price.Location = new System.Drawing.Point(142, 262);
             this.lb_price.Name = "lb_price";
             this.lb_price.Size = new System.Drawing.Size(162, 31);
             this.lb_price.TabIndex = 9;
@@ -173,6 +173,7 @@
             this.btn_confirm.TabIndex = 12;
             this.btn_confirm.Text = "Xác nhận / Confirm";
             this.btn_confirm.UseVisualStyleBackColor = false;
+            this.btn_confirm.Click += new System.EventHandler(this.btn_confirm_Click);
             // 
             // frm_bill
             // 
@@ -197,6 +198,7 @@
             this.Name = "frm_bill";
             this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Hóa Đơn";
+            this.Load += new System.EventHandler(this.frm_bill_Load);
             this.ResumeLayout(false);
             this.PerformLayout();
 

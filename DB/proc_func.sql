@@ -86,12 +86,19 @@ begin
 	update Ve set TongGia = @TongGiaVe
 	where MaSuatChieu = @MaSuatChieu
 end
-
+go
+create function func_getTicketIdBySeatName(@seatName char(3))
+returns table as 
+return(
+	select MaVe
+	from Ve
+	where ViTriGhe = @seatName
+)
 --Khach hang
 go
 create proc proc_addCustomer 
 @Ten nvarchar(255),
-@GioiTinh varchar(4),
+@GioiTinh nvarchar(4),
 @NgaySinh date,
 @DiaChi nvarchar(255),
 @SoDienThoai varchar(10),
@@ -102,7 +109,7 @@ begin
 	insert into KhachHang(Ten, GioiTinh, NgaySinh, DiaChi, SoDienThoai, MaLoaiKH, Email) 
 	values(@Ten, @GioiTinh, @NgaySinh, @DiaChi, @SoDienThoai, @MaLoaiKH, @Email) 
 end
-
+exec proc_addCustomer 'Sơn' , null , null, null ,null , 1 , null
 go
 create proc proc_updateCustomer 
 @MaKH int,
@@ -1030,3 +1037,35 @@ begin
 	delete from Phim_DienVien where MaPhim = @MaPhim
 end
 go
+
+------Hoá đơn
+create proc proc_addBill
+@MaKH int, 
+@MaKM int,
+@GioXuat time,
+@NgayXuat date,
+@TongChiPhi decimal
+as
+begin
+	insert into HoaDon(MaKH, MaKM, GioXuat, NgayXuat, TongChiPhi) 
+	values (@MaKH, @MaKM, @GioXuat, @NgayXuat, @TongChiPhi)
+end
+go
+create function func_searchBill(@key nvarchar(255)) 
+returns table as
+return (
+    select *
+    from view_chiTietHoaDon
+	where Ten LIKE '%'+@key+'%' or TenPhim LIKE '%'+@key+'%' or TenPhong LIKE '%'+@key+'%'
+);
+go
+
+create function func_getAllBill ()
+returns table as
+return (
+	select * 
+	from HoaDon
+)
+go
+
+
