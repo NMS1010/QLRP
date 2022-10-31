@@ -1059,13 +1059,20 @@ return (
 	where Ten LIKE '%'+@key+'%' or TenPhim LIKE '%'+@key+'%' or TenPhong LIKE '%'+@key+'%'
 );
 go
-
 create function func_getAllBill ()
 returns table as
 return (
 	select * 
-	from HoaDon
+	from view_chiTietHoaDon
 )
 go
 
+--- Doanh thu
+create function func_getRevenueByFilm(@filmName nvarchar(255), @startDate date, @endDate date)
+returns table as
+return (
+	select *
+	from view_chiTietDoanhThuPhim
+	where TenPhim = @filmName and NgayMua >= @startDate and NgayMua <= @endDate
+)
 
