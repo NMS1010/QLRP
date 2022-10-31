@@ -45,7 +45,7 @@ from SuatChieu
 go
 
 create view view_chiTietHoaDon as
-select Ten, TenPhim, TenPhong, GioXuat, NgayXuat, TenKM, TongChiPhi
+select MaHoaDon, min(Ten) as Ten, min(TenPhim) as TenPhim, min(TenPhong) as TenPhong, min(GioXuat) as GioXuat, min(NgayXuat) as NgayXuat, min(TenKM) as TenKM, min(TongChiPhi) as TongChiPhi
 from HoaDon
 		inner join KhuyenMai on HoaDon.MaKM = KhuyenMai.MaKM
 		inner join KhachHang on HoaDon.MaKH = KhachHang.MaKH 
@@ -53,16 +53,18 @@ from HoaDon
 		inner join SuatChieu on Ve.MaSuatChieu = SuatChieu.MaSuatChieu
 		inner join PhongChieu on SuatChieu.MaPhong = PhongChieu.MaPhong
 		inner join Phim on SuatChieu.MaPhim = Phim.MaPhim
+group by MaHoaDon
+
 -- View chi tiết doanh thu theo phim
 go
 create view view_chiTietDoanhThuPhim as
-select Phim.TenPhim, sum(GiaGhe) as TongDoanhThu
+select MaHoaDon, min(TenPhim) as TenPhim, min(TenPhong) as TenPhong, min(NgayMua) as NgayMua, min(NgayKhoiChieu) as NgayKhoiChieu, min(NgayKetThuc) as NgayKetThuc, min(Ngay) as Ngay, min(Gio) as Gio, min(TongChiPhi) as TongChiPhi
 from Ve inner join SuatChieu on Ve.MaSuatChieu = SuatChieu.MaSuatChieu
 		inner join PhongChieu on SuatChieu.MaPhong = PhongChieu.MaPhong
 		inner join Phim on SuatChieu.MaPhim = Phim.MaPhim
-		inner join PhongChieu_Ghe on PhongChieu.MaPhong = PhongChieu_Ghe.MaPhong
-		inner join Ghe on PhongChieu_Ghe.MaGhe = Ghe.MaGhe
+		inner join HoaDon on HoaDon.MaKH = Ve.MaKH
 where Ve.TrangThai = 1
-group by Phim.TenPhim
+group by MaHoaDon
+
 
 

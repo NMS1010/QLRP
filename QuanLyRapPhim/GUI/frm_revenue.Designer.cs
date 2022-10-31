@@ -34,12 +34,22 @@ namespace QuanLyRapPhim
             this.txb_SumRevenue = new System.Windows.Forms.TextBox();
             this.lblDenNgay = new System.Windows.Forms.Label();
             this.label1 = new System.Windows.Forms.Label();
-            this.dtgvRevenue = new System.Windows.Forms.DataGridView();
+            this.dgv_Revenue = new System.Windows.Forms.DataGridView();
             this.cbx_SelectMovie = new System.Windows.Forms.ComboBox();
             this.dtpicker_ToDate = new System.Windows.Forms.DateTimePicker();
             this.dtpicker_FromDate = new System.Windows.Forms.DateTimePicker();
             this.label2 = new System.Windows.Forms.Label();
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvRevenue)).BeginInit();
+            this.btn_showRevenue = new System.Windows.Forms.Button();
+            this.MaHoaDon = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenPhim = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TenPhong = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayKhoiChieu = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayKetThuc = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.NgayMua = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Ngay = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.Gio = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            this.TongChiPhi = new System.Windows.Forms.DataGridViewTextBoxColumn();
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Revenue)).BeginInit();
             this.SuspendLayout();
             // 
             // lblSelectMovie
@@ -64,15 +74,15 @@ namespace QuanLyRapPhim
             this.lblTongDoanhThu.Location = new System.Drawing.Point(454, 437);
             this.lblTongDoanhThu.Margin = new System.Windows.Forms.Padding(2, 0, 2, 0);
             this.lblTongDoanhThu.Name = "lblTongDoanhThu";
-            this.lblTongDoanhThu.Size = new System.Drawing.Size(140, 20);
+            this.lblTongDoanhThu.Size = new System.Drawing.Size(136, 20);
             this.lblTongDoanhThu.TabIndex = 49;
-            this.lblTongDoanhThu.Text = "Tổng doanh thu:";
+            this.lblTongDoanhThu.Text = "Doanh thu phim";
             // 
             // txb_SumRevenue
             // 
             this.txb_SumRevenue.Enabled = false;
             this.txb_SumRevenue.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_SumRevenue.Location = new System.Drawing.Point(598, 431);
+            this.txb_SumRevenue.Location = new System.Drawing.Point(603, 435);
             this.txb_SumRevenue.Margin = new System.Windows.Forms.Padding(2);
             this.txb_SumRevenue.Name = "txb_SumRevenue";
             this.txb_SumRevenue.Size = new System.Drawing.Size(177, 26);
@@ -105,18 +115,27 @@ namespace QuanLyRapPhim
             this.label1.TabIndex = 46;
             this.label1.Text = "Từ ngày:";
             // 
-            // dtgvRevenue
+            // dgv_Revenue
             // 
-            this.dtgvRevenue.AllowUserToAddRows = false;
-            this.dtgvRevenue.AllowUserToDeleteRows = false;
-            this.dtgvRevenue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
-            this.dtgvRevenue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
-            this.dtgvRevenue.Location = new System.Drawing.Point(32, 69);
-            this.dtgvRevenue.Margin = new System.Windows.Forms.Padding(2);
-            this.dtgvRevenue.Name = "dtgvRevenue";
-            this.dtgvRevenue.ReadOnly = true;
-            this.dtgvRevenue.Size = new System.Drawing.Size(798, 342);
-            this.dtgvRevenue.TabIndex = 45;
+            this.dgv_Revenue.AllowUserToDeleteRows = false;
+            this.dgv_Revenue.AutoSizeColumnsMode = System.Windows.Forms.DataGridViewAutoSizeColumnsMode.Fill;
+            this.dgv_Revenue.ColumnHeadersHeightSizeMode = System.Windows.Forms.DataGridViewColumnHeadersHeightSizeMode.AutoSize;
+            this.dgv_Revenue.Columns.AddRange(new System.Windows.Forms.DataGridViewColumn[] {
+            this.MaHoaDon,
+            this.TenPhim,
+            this.TenPhong,
+            this.NgayKhoiChieu,
+            this.NgayKetThuc,
+            this.NgayMua,
+            this.Ngay,
+            this.Gio,
+            this.TongChiPhi});
+            this.dgv_Revenue.Location = new System.Drawing.Point(32, 69);
+            this.dgv_Revenue.Margin = new System.Windows.Forms.Padding(2);
+            this.dgv_Revenue.Name = "dgv_Revenue";
+            this.dgv_Revenue.ReadOnly = true;
+            this.dgv_Revenue.Size = new System.Drawing.Size(798, 342);
+            this.dgv_Revenue.TabIndex = 45;
             // 
             // cbx_SelectMovie
             // 
@@ -164,6 +183,79 @@ namespace QuanLyRapPhim
             this.label2.TabIndex = 51;
             this.label2.Text = "VND";
             // 
+            // btn_showRevenue
+            // 
+            this.btn_showRevenue.Location = new System.Drawing.Point(32, 431);
+            this.btn_showRevenue.Name = "btn_showRevenue";
+            this.btn_showRevenue.Size = new System.Drawing.Size(79, 36);
+            this.btn_showRevenue.TabIndex = 52;
+            this.btn_showRevenue.Text = "Xem";
+            this.btn_showRevenue.UseVisualStyleBackColor = true;
+            this.btn_showRevenue.Click += new System.EventHandler(this.btn_showRevenue_Click);
+            // 
+            // MaHoaDon
+            // 
+            this.MaHoaDon.DataPropertyName = "MaHoaDon";
+            this.MaHoaDon.HeaderText = "Mã hoá đơn";
+            this.MaHoaDon.Name = "MaHoaDon";
+            this.MaHoaDon.ReadOnly = true;
+            // 
+            // TenPhim
+            // 
+            this.TenPhim.DataPropertyName = "TenPhim";
+            this.TenPhim.HeaderText = "Tên phim";
+            this.TenPhim.Name = "TenPhim";
+            this.TenPhim.ReadOnly = true;
+            // 
+            // TenPhong
+            // 
+            this.TenPhong.DataPropertyName = "TenPhong";
+            this.TenPhong.HeaderText = "Tên phòng";
+            this.TenPhong.Name = "TenPhong";
+            this.TenPhong.ReadOnly = true;
+            // 
+            // NgayKhoiChieu
+            // 
+            this.NgayKhoiChieu.DataPropertyName = "NgayKhoiChieu";
+            this.NgayKhoiChieu.HeaderText = "Ngày khởi chiếu";
+            this.NgayKhoiChieu.Name = "NgayKhoiChieu";
+            this.NgayKhoiChieu.ReadOnly = true;
+            // 
+            // NgayKetThuc
+            // 
+            this.NgayKetThuc.DataPropertyName = "NgayKetThuc";
+            this.NgayKetThuc.HeaderText = "Ngày kết thúc";
+            this.NgayKetThuc.Name = "NgayKetThuc";
+            this.NgayKetThuc.ReadOnly = true;
+            // 
+            // NgayMua
+            // 
+            this.NgayMua.DataPropertyName = "NgayMua";
+            this.NgayMua.HeaderText = "Ngày mua";
+            this.NgayMua.Name = "NgayMua";
+            this.NgayMua.ReadOnly = true;
+            // 
+            // Ngay
+            // 
+            this.Ngay.DataPropertyName = "Ngay";
+            this.Ngay.HeaderText = "Ngày chiếu";
+            this.Ngay.Name = "Ngay";
+            this.Ngay.ReadOnly = true;
+            // 
+            // Gio
+            // 
+            this.Gio.DataPropertyName = "Gio";
+            this.Gio.HeaderText = "Giờ chiếu";
+            this.Gio.Name = "Gio";
+            this.Gio.ReadOnly = true;
+            // 
+            // TongChiPhi
+            // 
+            this.TongChiPhi.DataPropertyName = "TongChiPhi";
+            this.TongChiPhi.HeaderText = "Tổng tiền";
+            this.TongChiPhi.Name = "TongChiPhi";
+            this.TongChiPhi.ReadOnly = true;
+            // 
             // frm_revenue
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -172,20 +264,22 @@ namespace QuanLyRapPhim
             this.BackgroundImage = global::QuanLyRapPhim.Properties.Resources.pexels_johannes_plenio_1103970;
             this.BackgroundImageLayout = System.Windows.Forms.ImageLayout.Stretch;
             this.ClientSize = new System.Drawing.Size(872, 479);
+            this.Controls.Add(this.btn_showRevenue);
             this.Controls.Add(this.label2);
             this.Controls.Add(this.lblSelectMovie);
             this.Controls.Add(this.lblTongDoanhThu);
             this.Controls.Add(this.txb_SumRevenue);
             this.Controls.Add(this.lblDenNgay);
             this.Controls.Add(this.label1);
-            this.Controls.Add(this.dtgvRevenue);
+            this.Controls.Add(this.dgv_Revenue);
             this.Controls.Add(this.cbx_SelectMovie);
             this.Controls.Add(this.dtpicker_ToDate);
             this.Controls.Add(this.dtpicker_FromDate);
             this.ForeColor = System.Drawing.Color.Black;
             this.Name = "frm_revenue";
             this.Text = "frm_revenue";
-            ((System.ComponentModel.ISupportInitialize)(this.dtgvRevenue)).EndInit();
+            this.Load += new System.EventHandler(this.frm_revenue_Load);
+            ((System.ComponentModel.ISupportInitialize)(this.dgv_Revenue)).EndInit();
             this.ResumeLayout(false);
             this.PerformLayout();
 
@@ -198,10 +292,20 @@ namespace QuanLyRapPhim
         private System.Windows.Forms.TextBox txb_SumRevenue;
         private System.Windows.Forms.Label lblDenNgay;
         private System.Windows.Forms.Label label1;
-        private System.Windows.Forms.DataGridView dtgvRevenue;
+        private System.Windows.Forms.DataGridView dgv_Revenue;
         private System.Windows.Forms.ComboBox cbx_SelectMovie;
         private System.Windows.Forms.DateTimePicker dtpicker_ToDate;
         private System.Windows.Forms.DateTimePicker dtpicker_FromDate;
         private System.Windows.Forms.Label label2;
+        private System.Windows.Forms.Button btn_showRevenue;
+        private System.Windows.Forms.DataGridViewTextBoxColumn MaHoaDon;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenPhim;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TenPhong;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayKhoiChieu;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayKetThuc;
+        private System.Windows.Forms.DataGridViewTextBoxColumn NgayMua;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Ngay;
+        private System.Windows.Forms.DataGridViewTextBoxColumn Gio;
+        private System.Windows.Forms.DataGridViewTextBoxColumn TongChiPhi;
     }
 }
