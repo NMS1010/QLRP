@@ -41,34 +41,36 @@ begin
 end
 go
 
-create trigger trigger_check_Luong 
-on NguoiDung_VaiTro after insert, update
-as
-begin
-	declare @Luong money, @count int, @isAdmin int, @MaND int
-	select @isAdmin = count(*) 
-	from inserted inner join VaiTro on inserted.MaVaiTro = VaiTro.MaVaiTro
-	where TenVaiTro = 'Admin'
+--create trigger trigger_check_Luong 
+--on NguoiDung_VaiTro after insert, update
+--as
+--begin
+--	declare @Luong money, @count int, @isAdmin int, @MaND int
+--	select @isAdmin = count(*) 
+--	from inserted inner join VaiTro on inserted.MaVaiTro = VaiTro.MaVaiTro
+--	where TenVaiTro = 'Admin'
 
-	select @Luong = Luong, @MaND = inserted.MaND 
-	from NguoiDung, inserted 
-	where NguoiDung.MaND = inserted.MaND
+--	select @Luong = Luong, @MaND = inserted.MaND 
+--	from NguoiDung, inserted 
+--	where NguoiDung.MaND = inserted.MaND
 
 
-	select @count = count(*)
-	from NguoiDung inner join NguoiDung_VaiTro on NguoiDung.MaND = NguoiDung_VaiTro.MaND
-		inner join VaiTro on NguoiDung_VaiTro.MaVaiTro = VaiTro.MaVaiTro
-	where (@isAdmin > 0 and TenVaiTro = 'Employee' and Luong >= @Luong) or (@isAdmin = 0 and TenVaiTro = 'Admin' and Luong <= @Luong) 
+--	select @count = count(*)
+--	from NguoiDung inner join NguoiDung_VaiTro on NguoiDung.MaND = NguoiDung_VaiTro.MaND
+--		inner join VaiTro on NguoiDung_VaiTro.MaVaiTro = VaiTro.MaVaiTro
+--	where (@isAdmin > 0 and TenVaiTro = 'Employee' and Luong >= @Luong) or (@isAdmin = 0 and TenVaiTro = 'Admin' and Luong <= @Luong) 
 
-	if(@count > 0)
-		begin
-			rollback tran
-			delete from NguoiDung where MaND = @MaND
-			raiserror(N'Lương người quản trị phải lớn hơn nhân viên',16,1)
-			return
-		end
-end
-go
+--	if(@count > 0)
+--		begin
+--			rollback tran
+--			delete from NguoiDung where MaND = @MaND
+--			raiserror(N'Lương người quản trị phải lớn hơn nhân viên',16,1)
+--			return
+--		end
+--end
+--go
+
+--drop trigger trigger_check_Luong 
 --create trigger trigger_check_TuoiMuaVe
 --on Ve after update
 --as

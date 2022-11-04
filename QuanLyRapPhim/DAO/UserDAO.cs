@@ -55,10 +55,10 @@ namespace QuanLyRapPhim.DAO
                 new object[] { userId });
         }
 
-        public static bool Login(string username, string password, ref string error)
+        public static DataTable Login(string username, string password, ref string error)
         {
-            string query = "select dbo.func_Login( @username , @password )";
-            return (int)DataProvider.ExecuteScalar(query, ref error, new object[] { username, password }) > 1 ? true : false;
+            string query = "select * from dbo.func_Login( @username , @password )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { username, password });
         }
 
         public static DataTable GetAllUser(ref string error)

@@ -42,6 +42,10 @@ namespace QuanLyRapPhim
             this.label4 = new System.Windows.Forms.Label();
             this.label5 = new System.Windows.Forms.Label();
             this.label6 = new System.Windows.Forms.Label();
+            this.txb_DbName = new System.Windows.Forms.TextBox();
+            this.label9 = new System.Windows.Forms.Label();
+            this.txb_ServerName = new System.Windows.Forms.TextBox();
+            this.label10 = new System.Windows.Forms.Label();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.SuspendLayout();
@@ -49,6 +53,10 @@ namespace QuanLyRapPhim
             // panel1
             // 
             this.panel1.BackColor = System.Drawing.Color.FromArgb(((int)(((byte)(75)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))), ((int)(((byte)(255)))));
+            this.panel1.Controls.Add(this.txb_DbName);
+            this.panel1.Controls.Add(this.label9);
+            this.panel1.Controls.Add(this.txb_ServerName);
+            this.panel1.Controls.Add(this.label10);
             this.panel1.Controls.Add(this.label8);
             this.panel1.Controls.Add(this.btn_login);
             this.panel1.Controls.Add(this.panel2);
@@ -57,9 +65,9 @@ namespace QuanLyRapPhim
             this.panel1.Controls.Add(this.txb_username);
             this.panel1.Controls.Add(this.label2);
             this.panel1.Controls.Add(this.label1);
-            this.panel1.Location = new System.Drawing.Point(455, 34);
+            this.panel1.Location = new System.Drawing.Point(455, 12);
             this.panel1.Name = "panel1";
-            this.panel1.Size = new System.Drawing.Size(325, 411);
+            this.panel1.Size = new System.Drawing.Size(325, 433);
             this.panel1.TabIndex = 0;
             // 
             // label8
@@ -78,7 +86,7 @@ namespace QuanLyRapPhim
             this.btn_login.BackColor = System.Drawing.Color.DodgerBlue;
             this.btn_login.Font = new System.Drawing.Font("Microsoft Sans Serif", 11.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_login.ForeColor = System.Drawing.SystemColors.ControlText;
-            this.btn_login.Location = new System.Drawing.Point(65, 237);
+            this.btn_login.Location = new System.Drawing.Point(63, 303);
             this.btn_login.Name = "btn_login";
             this.btn_login.Size = new System.Drawing.Size(198, 41);
             this.btn_login.TabIndex = 11;
@@ -113,7 +121,7 @@ namespace QuanLyRapPhim
             // txb_password
             // 
             this.txb_password.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_password.Location = new System.Drawing.Point(22, 190);
+            this.txb_password.Location = new System.Drawing.Point(20, 256);
             this.txb_password.Name = "txb_password";
             this.txb_password.PasswordChar = '*';
             this.txb_password.Size = new System.Drawing.Size(270, 32);
@@ -124,7 +132,7 @@ namespace QuanLyRapPhim
             this.label3.AutoSize = true;
             this.label3.BackColor = System.Drawing.Color.Transparent;
             this.label3.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label3.Location = new System.Drawing.Point(18, 157);
+            this.label3.Location = new System.Drawing.Point(16, 223);
             this.label3.Name = "label3";
             this.label3.Size = new System.Drawing.Size(91, 20);
             this.label3.TabIndex = 11;
@@ -133,7 +141,7 @@ namespace QuanLyRapPhim
             // txb_username
             // 
             this.txb_username.Font = new System.Drawing.Font("Microsoft Sans Serif", 16.2F, System.Drawing.FontStyle.Regular, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.txb_username.Location = new System.Drawing.Point(22, 107);
+            this.txb_username.Location = new System.Drawing.Point(20, 173);
             this.txb_username.Name = "txb_username";
             this.txb_username.Size = new System.Drawing.Size(270, 32);
             this.txb_username.TabIndex = 7;
@@ -143,7 +151,7 @@ namespace QuanLyRapPhim
             this.label2.AutoSize = true;
             this.label2.BackColor = System.Drawing.Color.Transparent;
             this.label2.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.label2.Location = new System.Drawing.Point(17, 79);
+            this.label2.Location = new System.Drawing.Point(15, 145);
             this.label2.Name = "label2";
             this.label2.Size = new System.Drawing.Size(96, 20);
             this.label2.TabIndex = 9;
@@ -155,7 +163,7 @@ namespace QuanLyRapPhim
             this.label1.BackColor = System.Drawing.Color.Transparent;
             this.label1.Font = new System.Drawing.Font("Microsoft Sans Serif", 14.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.label1.ForeColor = System.Drawing.Color.DarkRed;
-            this.label1.Location = new System.Drawing.Point(96, 31);
+            this.label1.Location = new System.Drawing.Point(96, 12);
             this.label1.Name = "label1";
             this.label1.Size = new System.Drawing.Size(131, 24);
             this.label1.TabIndex = 0;
@@ -196,6 +204,47 @@ namespace QuanLyRapPhim
             this.label6.Size = new System.Drawing.Size(374, 16);
             this.label6.TabIndex = 3;
             this.label6.Text = "Dịch vụ đặc biệt - Tuyệt vời như mơ - Nên thơ cảm xúc";
+            // 
+            // txb_DbName
+            // 
+            this.txb_DbName.Enabled = false;
+            this.txb_DbName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txb_DbName.Location = new System.Drawing.Point(127, 91);
+            this.txb_DbName.Name = "txb_DbName";
+            this.txb_DbName.ReadOnly = true;
+            this.txb_DbName.Size = new System.Drawing.Size(163, 26);
+            this.txb_DbName.TabIndex = 16;
+            this.txb_DbName.Text = "QLRP";
+            // 
+            // label9
+            // 
+            this.label9.AutoSize = true;
+            this.label9.BackColor = System.Drawing.Color.Transparent;
+            this.label9.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label9.Location = new System.Drawing.Point(16, 99);
+            this.label9.Name = "label9";
+            this.label9.Size = new System.Drawing.Size(69, 20);
+            this.label9.TabIndex = 17;
+            this.label9.Text = "Tên DB";
+            // 
+            // txb_ServerName
+            // 
+            this.txb_ServerName.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F);
+            this.txb_ServerName.Location = new System.Drawing.Point(127, 39);
+            this.txb_ServerName.Name = "txb_ServerName";
+            this.txb_ServerName.Size = new System.Drawing.Size(164, 26);
+            this.txb_ServerName.TabIndex = 14;
+            // 
+            // label10
+            // 
+            this.label10.AutoSize = true;
+            this.label10.BackColor = System.Drawing.Color.Transparent;
+            this.label10.Font = new System.Drawing.Font("Microsoft Sans Serif", 12F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.label10.Location = new System.Drawing.Point(15, 47);
+            this.label10.Name = "label10";
+            this.label10.Size = new System.Drawing.Size(93, 20);
+            this.label10.TabIndex = 15;
+            this.label10.Text = "Tên server";
             // 
             // frm_login
             // 
@@ -238,6 +287,10 @@ namespace QuanLyRapPhim
         private System.Windows.Forms.Label label7;
         private System.Windows.Forms.Button btn_login;
         private System.Windows.Forms.Label label8;
+        private System.Windows.Forms.TextBox txb_DbName;
+        private System.Windows.Forms.Label label9;
+        private System.Windows.Forms.TextBox txb_ServerName;
+        private System.Windows.Forms.Label label10;
     }
 }
 
