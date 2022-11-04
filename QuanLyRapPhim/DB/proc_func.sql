@@ -4,33 +4,30 @@ go
 --------------------Xác thực--------------
 go 
 create function func_Login(@username nvarchar(255), @password nvarchar(255))
-returns int
+returns table
 as
-begin
-	declare @isSuccess int
-	select @isSuccess = count(*)
+return(
+	select *
 	from NguoiDung
 	where TenTaiKhoan = @username and MatKhau = @password
-	return @isSuccess
-end
+)
 
-go 
-create proc proc_ChangePassword
-@username nvarchar(255),
-@password nvarchar(255),
-@newpassword nvarchar(255)
-as
-begin
-	declare @isSuccess int, @changeSuccess int
+--go 
+--create proc proc_ChangePassword
+--@username nvarchar(255),
+--@password nvarchar(255),
+--@newpassword nvarchar(255)
+--as
+--begin
 	
-	set @isSuccess = dbo.func_Login(@username, @password)
-	if(@isSuccess = 1)
-	begin
-		update NguoiDung set MatKhau = @newpassword where TenTaiKhoan = @username
-		return 1
-	end
-	return -1
-end
+--	select * from dbo.func_Login(@username, @password)
+--	if(@isSuccess = 1)
+--	begin
+--		update NguoiDung set MatKhau = @newpassword where TenTaiKhoan = @username
+--		return 1
+--	end
+--	return -1
+--end
 ---------------------Ve-------------------
 go
 create proc proc_addTicket 
@@ -634,6 +631,7 @@ return (
 
 -- NGUOIDUNG
 go
+
 create proc proc_addUser
 @TenND nvarchar(255),
 @GioiTinh nvarchar(4),
@@ -646,14 +644,36 @@ create proc proc_addUser
 @Luong decimal
 as 
 begin
-	insert into NguoiDung(TenND, GioiTinh, NgaySinh, SDT, CCCD, Email, TenTaiKhoan, MatKhau, Luong)
-		values (@TenND, @GioiTinh, @NgaySinh, @SDT, @CCCD, @Email, @TenTaiKhoan, @MatKhau, @Luong)
+	begin transaction
+		begin try
+			insert into NguoiDung(TenND, GioiTinh, NgaySinh, SDT, CCCD, Email, TenTaiKhoan, MatKhau, Luong)
+			values (@TenND, @GioiTinh, @NgaySinh, @SDT, @CCCD, @Email, @TenTaiKhoan, @MatKhau, @Luong)
+	
+			declare @createLogin varchar(200)
+			declare @createUser varchar(200)
+
+			set @createLogin='CREATE LOGIN '+ @TenTaiKhoan +' WITH PASSWORD = ''' + @MatKhau + ''''
+			set @createUser='CREATE USER '+ @TenTaiKhoan +' FOR LOGIN '+@TenTaiKhoan
+			print @createLogin
+			print @createUser
+			exec (@createLogin)
+			exec (@createUser)
+			commit transaction
+
+		end try
+		begin catch
+			declare @ErrorMessage NVARCHAR(4000);
+			SELECT @ErrorMessage = ERROR_MESSAGE()
+			raiserror(@ErrorMessage, 16, 1)
+			rollback transaction 
+		end catch  
+
 end
 go
 
 create proc proc_updateUser 
-	@MaND int,
-	@TenND nvarchar(255),
+@MaND int,
+@TenND nvarchar(255),
 @GioiTinh nvarchar(4),
 @NgaySinh date,
 @SDT varchar(20),
@@ -664,10 +684,43 @@ create proc proc_updateUser
 @Luong decimal
 as 
 begin
-	update NguoiDung Set TenND = @TenND, GioiTinh = @GioiTinh, 
-		NgaySinh = @NgaySinh, SDT = @SDT, CCCD = @CCCD, Email = @Email, 
-		TenTaiKhoan = @TenTaiKhoan, MatKhau = @MatKhau, Luong = @Luong 
-	where MaND = @MaND
+	begin transaction
+		begin try
+			declare @name nvarchar(255)
+			select @name = TenTaiKhoan
+			from NguoiDung
+			where MaND = @MaND
+
+			update NguoiDung Set TenND = @TenND, GioiTinh = @GioiTinh, 
+				NgaySinh = @NgaySinh, SDT = @SDT, CCCD = @CCCD, Email = @Email, 
+				TenTaiKhoan = @TenTaiKhoan, MatKhau = @MatKhau, Luong = @Luong 
+			where MaND = @MaND
+
+			declare @updateLoginUserName varchar(200)
+			declare @updateLoginPass varchar(200)
+
+			declare @updateUserUserName varchar(200)
+			declare @updateUserPass varchar(200)
+
+			set @updateLoginUserName='ALTER LOGIN '+ @TenTaiKhoan +' WITH PASSWORD = ''' + @MatKhau + ''''
+			set @updateLoginPass='ALTER LOGIN '+ @TenTaiKhoan +' WITH NAME = ' + @TenTaiKhoan
+
+			set @updateUserUserName='ALTER USER '+ @name +' WITH NAME = ' + @TenTaiKhoan
+			set @updateUserPass='ALTER USER '+ @name +' WITH LOGIN = ' + @TenTaiKhoan
+
+			exec (@updateLoginUserName)
+			exec (@updateLoginPass)
+			exec (@updateUserUserName)
+			exec (@updateUserPass)
+
+			commit transaction
+		end try
+		begin catch
+			declare @ErrorMessage NVARCHAR(4000);
+			SELECT @ErrorMessage = ERROR_MESSAGE()
+			raiserror(@ErrorMessage, 16, 1)
+			rollback transaction 
+		end catch  
 end
 go
 
@@ -711,8 +764,93 @@ create proc proc_addUserRole
 @MaVaiTro int
 as 
 begin
+	declare @name nvarchar(255)
+	select @name = TenTaiKhoan
+	from NguoiDung
+	where MaND = @MaND
+
+	declare @roleName nvarchar(255)
+	select @roleName = TenVaiTro
+	from VaiTro
+	where MaVaiTro = @MaVaiTro
+
+	declare @statement varchar(200)
+
 	insert into NguoiDung_VaiTro(MaND, MaVaiTro)
 		values (@MaND, @MaVaiTro)
+	if (@roleName like 'Admin' or @roleName like 'admin')
+	begin
+		set @statement ='grant exec, select, insert, update, delete to ' + @name
+		exec (@statement)
+	end
+	else
+	begin
+		
+		set @statement ='grant select on dbo.func_Login to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getRoleNameByUsername to ' + @name
+		exec (@statement)
+		
+
+		set @statement ='grant select on dbo.func_getShowtimes to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getShowtimesByFilm to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_searchShowtimes to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getTicketIdBySeatName to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getBoughtTicket to ' + @name
+		exec (@statement)
+
+		set @statement ='grant exec on dbo.proc_buyTicket to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getTicketByShowTimeId to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getAllTypeCustomer to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_searchAllTypeCustomer to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getAllDiscount to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_searchAllDiscount to ' + @name
+		exec (@statement)
+		
+		set @statement ='grant select on dbo.func_getAllFilm to ' + @name
+		exec (@statement)
+		
+		set @statement ='grant select on dbo.func_searchFilm to ' + @name
+		exec (@statement)
+		
+		set @statement ='grant select on dbo.func_getFilmByDate to ' + @name
+		exec (@statement)
+		
+		set @statement ='grant exec on proc_addCustomer to ' + @name
+		exec (@statement)
+
+		set @statement ='grant exec on proc_addServiceForCustomer to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getAllService to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_searchAllService to ' + @name
+		exec (@statement)
+
+		set @statement ='grant exec on proc_addBill to ' + @name
+		exec (@statement)
+		
+	end
 end
 go
 
@@ -720,7 +858,17 @@ create proc proc_deleteUserRolebyUserId
 @MaND int
 as 
 begin
+	declare @name nvarchar(255)
+	select @name = TenTaiKhoan
+	from NguoiDung
+	where MaND = @MaND
+
 	delete from NguoiDung_VaiTro where MaND = @MaND
+	
+	declare @statement varchar(200)
+
+	set @statement ='revoke exec, select, insert, update, delete to ' + @name
+	exec (@statement)
 end
 go
 
@@ -789,61 +937,6 @@ return (
 	from VaiTro
 	where TenVaiTro = @name
 )
-go
--- QUYEN
-create proc proc_addPermission
-@TenQuyen nvarchar(255)
-as 
-begin
-	insert into Quyen(TenQuyen)
-		values (@TenQuyen)
-end
-go
-
-create proc proc_updatePermission
-@MaQuyen int,
-@TenQuyen nvarchar(255)
-as 
-begin
-		update Quyen Set TenQuyen = @TenQuyen 
-		where MaQuyen = @MaQuyen
-end
-go
-
-create function func_getAllPermission()
-returns table as
-return (
-    select *
-    from Quyen
-);
-go
-
-create function func_searchPermission(@TenQuyen nvarchar(255)) 
-returns table as
-return (
-    select *
-    from Quyen
-	where TenQuyen LIKE '%'+@TenQuyen+'%'
-);
-go
-
--- VaiTro - Quyen
-create proc proc_addRolePermission
-@MaVaiTro int,
-@MaQuyen int
-as 
-begin
-	insert into VaiTro_Quyen(MaVaiTro, MaQuyen)
-		values (@MaVaiTro, @MaQuyen)
-end
-go
-
-create proc proc_deleteRolePermissionbyRoleId
-@MaVaiTro int
-as 
-begin
-	delete from VaiTro_Quyen where MaVaiTro = @MaVaiTro
-end
 go
 
 

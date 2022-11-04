@@ -30,19 +30,7 @@ CREATE TABLE NguoiDung_VaiTro (
 	CONSTRAINT PK_NguoiDung_VaiTro PRIMARY KEY (MaND, MaVaiTro)
 )
 go
-CREATE TABLE Quyen (
-	MaQuyen int identity(1,1) PRIMARY KEY,
-	TenQuyen nvarchar(255) unique not null
-)
-go
-CREATE TABLE VaiTro_Quyen (
-	MaVaiTro int,
-	MaQuyen int,
-	CONSTRAINT FK_Quyen FOREIGN KEY (MaQuyen) REFERENCES Quyen(MaQuyen),
-	CONSTRAINT FK_VaiTro_Quyen FOREIGN KEY (MaVaiTro) REFERENCES VaiTro(MaVaiTro),
-	CONSTRAINT PK_VaiTro_Quyen PRIMARY KEY (MaVaiTro, MaQuyen)
-)
-go
+
 CREATE TABLE Phim(
 	MaPhim int identity(1,1) PRIMARY KEY,
 	ThoiLuong float not null,

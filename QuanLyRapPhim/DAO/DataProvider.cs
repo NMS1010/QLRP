@@ -10,10 +10,15 @@ namespace QuanLyRapPhim.DAO
 {
     public class DataProvider
     {
+        public static string ServerName;
+        public static string DataBaseName;
+        public static string UserName;
+        public static string Password;
         public static string ConnectionString = @"Data Source=MINHSON\MINHSON;Initial Catalog=QLRP;Integrated Security=True";
 
         public static DataTable ExecuteQuery(string query, ref string error, object[] parameter = null)
         {
+            ConnectionString = $@"Data Source={ServerName};Initial Catalog={DataBaseName};User Id={UserName};Password={Password};";
             DataTable data = new DataTable();
             try
             {
@@ -55,6 +60,7 @@ namespace QuanLyRapPhim.DAO
 
         public static int ExecuteNonQuery(string query, ref string error, object[] parameter = null)
         {
+            ConnectionString = $@"Data Source={ServerName};Initial Catalog={DataBaseName};User Id={UserName};Password={Password};";
             int data = 0;
             try
             {
@@ -95,6 +101,7 @@ namespace QuanLyRapPhim.DAO
 
         public static object ExecuteScalar(string query, ref string error, object[] parameter = null)
         {
+            ConnectionString = $@"Data Source={ServerName};Initial Catalog={DataBaseName};User Id={UserName};Password={Password};";
             object data = 0;
             try
             {
