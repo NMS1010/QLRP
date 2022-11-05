@@ -72,10 +72,25 @@ namespace QuanLyRapPhim
                 boughtTickets.Add(seat);
             }
             totalSeat = showTime.Row * showTime.Col;
-            totalSelectedSeat = 0;
+
             GenerateSeats(showTime.Row, showTime.Col);
             lb_ve.Text = $"{totalSeat - boughtTickets.Count}/{totalSeat}";
             txb_ticketPrice.Text = tickets[0].TotalPrice.ToString();
+        }
+
+        private void ClearContent()
+        {
+            totalSelectedSeat = 0;
+            txt_tenKH.ResetText();
+            selectedTickets.Clear();
+            txt_soLuong.Text = totalSelectedSeat.ToString();
+            txt_tienCanTra.ResetText();
+            txt_KM.ResetText();
+            txt_tongTien.ResetText();
+            for (int i = 0; i < cklb_dichVu.Items.Count; i++)
+            {
+                cklb_dichVu.SetItemChecked(i, false);
+            }
         }
 
         private void Init()
@@ -158,7 +173,7 @@ namespace QuanLyRapPhim
                         c = orderedColor;
                         enable = false;
                     }
-                    if (selectedTickets.Contains(seat))
+                    else if (selectedTickets.Contains(seat))
                     {
                         c = enableColor;
                     }
@@ -211,7 +226,10 @@ namespace QuanLyRapPhim
                 selectedTickets, typeCustomers, promotions, services, showTime, movie);
             DialogResult res = b.ShowDialog();
             if (res == DialogResult.OK)
+            {
                 MessageBox.Show("Thanh toán thành công");
+                ClearContent();
+            }
             LoadSeat();
             btn_thanhToan.Enabled = false;
         }

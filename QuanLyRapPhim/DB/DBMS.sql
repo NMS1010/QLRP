@@ -105,7 +105,7 @@ go
 create table LoaiKH(
 	MaLoaiKH int identity(1,1) constraint pk_loaikh primary key,
 	TenLoaiKH nvarchar(255) unique not null,
-	GiamGia float not null check (GiamGia > 0)
+	GiamGia float not null 
 )
 go
 
@@ -134,13 +134,13 @@ create table Ve(
 create table DichVu(
 	MaDichVu int identity(1,1) constraint pk_dichvu primary key,
 	TenDichVu nvarchar(255) unique not null,
-	Gia decimal not null check (Gia > 0)
+	Gia decimal not null
 )
 go 
 create table KhuyenMai(
 	MaKM int identity(1,1) constraint pk_khuyenmai primary key,
 	TenKM nvarchar(255) unique not null,
-	GiaTriKM float check(GiaTriKM > 0 and GiaTriKM < 1)
+	GiaTriKM float
 )
 go
 create table KH_DV(
@@ -153,7 +153,7 @@ create table KH_DV(
 go
 create table HoaDon(
 	MaHoaDon int identity(1,1) constraint pk_hoadon primary key,
-	TongChiPhi decimal not null check(TongChiPhi > 0),
+	TongChiPhi decimal not null,
 	NgayXuat date not null,
 	GioXuat time not null,
 	MaKH int not null,
