@@ -72,7 +72,7 @@ namespace QuanLyRapPhim
                 boughtTickets.Add(seat);
             }
             totalSeat = showTime.Row * showTime.Col;
-
+            totalSelectedSeat = 0;
             GenerateSeats(showTime.Row, showTime.Col);
             lb_ve.Text = $"{totalSeat - boughtTickets.Count}/{totalSeat}";
             txb_ticketPrice.Text = tickets[0].TotalPrice.ToString();
@@ -158,6 +158,10 @@ namespace QuanLyRapPhim
                         c = orderedColor;
                         enable = false;
                     }
+                    if (selectedTickets.Contains(seat))
+                    {
+                        c = enableColor;
+                    }
                     Button b = new Button()
                     {
                         Enabled = enable,
@@ -198,15 +202,16 @@ namespace QuanLyRapPhim
 
         private void btn_thanhToan_Click(object sender, EventArgs e)
         {
-            if (string.IsNullOrEmpty(txt_tenKH.Text))
+            if (string.IsNullOrEmpty(txt_tenKH.Text) || string.IsNullOrEmpty(txt_tenKH.Text))
             {
-                MessageBox.Show("Vui lòng nhập mã khách hàng");
+                MessageBox.Show("Vui lòng nhập tên khách hàng hoặc chọn vé");
                 return;
             }
             frm_bill b = new frm_bill(cbx_loaiKH, cbx_khuyenMai, cklb_dichVu, finalPrice, txt_tenKH.Text,
                 selectedTickets, typeCustomers, promotions, services, showTime, movie);
-            b.ShowDialog();
-            MessageBox.Show("Thanh toán thành công");
+            DialogResult res = b.ShowDialog();
+            if (res == DialogResult.OK)
+                MessageBox.Show("Thanh toán thành công");
             LoadSeat();
             btn_thanhToan.Enabled = false;
         }

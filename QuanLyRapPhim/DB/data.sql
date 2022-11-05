@@ -1,8 +1,6 @@
 ﻿use QLRP
 go
 
-declare @id int
-
 exec proc_addRole 'Admin'
 exec proc_addRole 'Nhân viên'
 
@@ -14,3 +12,4 @@ exec proc_addUser N'Nguyễn Minh', 'Nam', '2002-10-10', '0354964840' , '0123456
 
 exec proc_addUserRole 2 , 2
 
+exec proc_addChair '50000', '1'

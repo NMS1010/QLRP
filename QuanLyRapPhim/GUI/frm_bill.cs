@@ -51,6 +51,7 @@ namespace QuanLyRapPhim.GUI
             lb_date.Text = Convert.ToDateTime(showTime.Day).ToShortDateString();
             string t = showTime.RoomName + "/";
             selectedTickets.ForEach(x => t += (x + ", "));
+            t = t.Remove(t.LastIndexOf(", "));
             lb_roomSeat.Text = t;
             lb_price.Text = finalPrice + " VNĐ";
         }
@@ -88,6 +89,11 @@ namespace QuanLyRapPhim.GUI
                 return;
             }
             DataTable customerDT = CustomerDAO.GetAllCustomer(ref error);
+            if (!string.IsNullOrEmpty(error))
+            {
+                MessageBox.Show(error);
+                return;
+            }
             int customerId = (int)customerDT.Rows[customerDT.Rows.Count - 1]["MaKH"];
             foreach (var item in cklb_dichVu.CheckedItems)
             {
@@ -136,6 +142,11 @@ namespace QuanLyRapPhim.GUI
                     return;
                 }
             }
+            Close();
+        }
+
+        private void btn_cancel_Click(object sender, EventArgs e)
+        {
             Close();
         }
     }

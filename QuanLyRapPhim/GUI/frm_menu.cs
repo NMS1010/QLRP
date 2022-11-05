@@ -1,4 +1,5 @@
-﻿using System;
+﻿using QuanLyRapPhim.DAO;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -19,6 +20,13 @@ namespace QuanLyRapPhim.GUI
 
         private void btn_manager_Click(object sender, EventArgs e)
         {
+            string error = "";
+            DataTable cinemaRoom = RoomDAO.GetAllRoom(ref error);
+            if (!string.IsNullOrEmpty(error) && error.Contains("permission"))
+            {
+                MessageBox.Show("Tài khoản không có quyền truy cập");
+                return;
+            }
             frm_admin frm_Admin = new frm_admin();
             Hide();
             frm_Admin.ShowDialog();

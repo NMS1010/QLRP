@@ -106,7 +106,7 @@ begin
 	insert into KhachHang(Ten, GioiTinh, NgaySinh, DiaChi, SoDienThoai, MaLoaiKH, Email) 
 	values(@Ten, @GioiTinh, @NgaySinh, @DiaChi, @SoDienThoai, @MaLoaiKH, @Email) 
 end
-exec proc_addCustomer 'Sơn' , null , null, null ,null , 1 , null
+
 go
 create proc proc_updateCustomer 
 @MaKH int,
@@ -851,6 +851,9 @@ begin
 		exec (@statement)
 
 		set @statement ='grant select on dbo.func_searchAllService to ' + @name
+		exec (@statement)
+
+		set @statement ='grant select on dbo.func_getAllCustomer to ' + @name
 		exec (@statement)
 
 		set @statement ='grant exec on proc_addBill to ' + @name
