@@ -113,7 +113,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show(error);
                 return;
             }
-            MessageBox.Show("Thêm máy chiếu thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Thêm dịch vụ thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
             GetRowChecked();
         }
@@ -155,7 +155,7 @@ namespace QuanLyRapPhim.Admin.DataUC
                 MessageBox.Show(error);
                 return;
             }
-            MessageBox.Show("Cập nhật ghế thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
+            MessageBox.Show("Cập nhật dịch vụ thành công !", "Thông báo", MessageBoxButtons.OK, MessageBoxIcon.Information);
             LoadData();
             GetRowChecked();
         }

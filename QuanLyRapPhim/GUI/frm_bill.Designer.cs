@@ -41,6 +41,7 @@
             this.label10 = new System.Windows.Forms.Label();
             this.label11 = new System.Windows.Forms.Label();
             this.btn_confirm = new System.Windows.Forms.Button();
+            this.btn_cancel = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // label1
@@ -167,7 +168,7 @@
             // 
             this.btn_confirm.BackColor = System.Drawing.Color.Lime;
             this.btn_confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
-            this.btn_confirm.Location = new System.Drawing.Point(90, 362);
+            this.btn_confirm.Location = new System.Drawing.Point(18, 362);
             this.btn_confirm.Name = "btn_confirm";
             this.btn_confirm.Size = new System.Drawing.Size(136, 30);
             this.btn_confirm.TabIndex = 12;
@@ -175,13 +176,27 @@
             this.btn_confirm.UseVisualStyleBackColor = false;
             this.btn_confirm.Click += new System.EventHandler(this.btn_confirm_Click);
             // 
+            // btn_cancel
+            // 
+            this.btn_cancel.BackColor = System.Drawing.Color.Brown;
+            this.btn_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
+            this.btn_cancel.Location = new System.Drawing.Point(168, 362);
+            this.btn_cancel.Name = "btn_cancel";
+            this.btn_cancel.Size = new System.Drawing.Size(136, 30);
+            this.btn_cancel.TabIndex = 13;
+            this.btn_cancel.Text = "Huỷ / Cancel";
+            this.btn_cancel.UseVisualStyleBackColor = false;
+            this.btn_cancel.Click += new System.EventHandler(this.btn_cancel_Click);
+            // 
             // frm_bill
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
+            this.AutoSize = true;
             this.AutoValidate = System.Windows.Forms.AutoValidate.EnablePreventFocusChange;
             this.ClientSize = new System.Drawing.Size(316, 404);
             this.ControlBox = false;
+            this.Controls.Add(this.btn_cancel);
             this.Controls.Add(this.btn_confirm);
             this.Controls.Add(this.label11);
             this.Controls.Add(this.label10);
@@ -219,5 +234,6 @@
         private System.Windows.Forms.Label label10;
         private System.Windows.Forms.Label label11;
         private System.Windows.Forms.Button btn_confirm;
+        private System.Windows.Forms.Button btn_cancel;
     }
 }
