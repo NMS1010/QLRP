@@ -167,6 +167,7 @@
             // btn_confirm
             // 
             this.btn_confirm.BackColor = System.Drawing.Color.Lime;
+            this.btn_confirm.DialogResult = System.Windows.Forms.DialogResult.OK;
             this.btn_confirm.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_confirm.Location = new System.Drawing.Point(18, 362);
             this.btn_confirm.Name = "btn_confirm";
@@ -179,6 +180,7 @@
             // btn_cancel
             // 
             this.btn_cancel.BackColor = System.Drawing.Color.Brown;
+            this.btn_cancel.DialogResult = System.Windows.Forms.DialogResult.Cancel;
             this.btn_cancel.Font = new System.Drawing.Font("Microsoft Sans Serif", 8.25F, System.Drawing.FontStyle.Bold, System.Drawing.GraphicsUnit.Point, ((byte)(0)));
             this.btn_cancel.Location = new System.Drawing.Point(168, 362);
             this.btn_cancel.Name = "btn_cancel";

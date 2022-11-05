@@ -62,6 +62,7 @@
             this.Controls.Add(this.btn_manager);
             this.Controls.Add(this.btn_seller);
             this.Name = "frm_menu";
+            this.StartPosition = System.Windows.Forms.FormStartPosition.CenterScreen;
             this.Text = "Menu";
             this.ResumeLayout(false);
 
