@@ -691,6 +691,12 @@ begin
 			from NguoiDung
 			where MaND = @MaND
 
+			
+			declare @oldPass nvarchar(255)
+			select @oldPass = MatKhau
+			from NguoiDung
+			where MaND = @MaND
+
 			update NguoiDung Set TenND = @TenND, GioiTinh = @GioiTinh, 
 				NgaySinh = @NgaySinh, SDT = @SDT, CCCD = @CCCD, Email = @Email, 
 				TenTaiKhoan = @TenTaiKhoan, MatKhau = @MatKhau, Luong = @Luong 
@@ -701,9 +707,9 @@ begin
 
 			declare @updateUserUserName varchar(200)
 			declare @updateUserPass varchar(200)
-
-			set @updateLoginUserName='ALTER LOGIN '+ @TenTaiKhoan +' WITH PASSWORD = ''' + @MatKhau + ''''
-			set @updateLoginPass='ALTER LOGIN '+ @TenTaiKhoan +' WITH NAME = ' + @TenTaiKhoan
+			
+			set @updateLoginUserName='ALTER LOGIN '+ @name +' WITH NAME = ' + @TenTaiKhoan
+			set @updateLoginPass='ALTER LOGIN '+ @TenTaiKhoan +' WITH PASSWORD = ''' + @MatKhau + '''' + ' OLD_PASSWORD = ''' + @oldPass + ''''
 
 			set @updateUserUserName='ALTER USER '+ @name +' WITH NAME = ' + @TenTaiKhoan
 			set @updateUserPass='ALTER USER '+ @name +' WITH LOGIN = ' + @TenTaiKhoan
@@ -782,6 +788,7 @@ begin
 	begin
 		set @statement ='grant exec, select, insert, update, delete to ' + @name
 		exec (@statement)
+		EXEC master..sp_addsrvrolemember @loginame = @name, @rolename = N'sysadmin'
 	end
 	else
 	begin
@@ -791,7 +798,6 @@ begin
 
 		set @statement ='grant select on dbo.func_getRoleNameByUsername to ' + @name
 		exec (@statement)
-		
 
 		set @statement ='grant select on dbo.func_getShowtimes to ' + @name
 		exec (@statement)
