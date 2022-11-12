@@ -57,10 +57,10 @@ namespace QuanLyRapPhim.DAO
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { showTimeId, seatPrice + projectorPrice });
         }
 
-        public static DataTable GetTicketIdBySeatName(string seatName, ref string error)
+        public static DataTable GetTicketIdBySeatName(string seatName, int showTimeId, ref string error)
         {
-            string query = "select * from dbo.func_getTicketIdBySeatName( @seatName )";
-            return DataProvider.ExecuteQuery(query, ref error, new object[] { seatName });
+            string query = "select * from dbo.func_getTicketIdBySeatName( @seatName , @showTimeId )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { seatName, showTimeId });
         }
 
         public static bool GenerateTicket(int showTimeID, int roomId, ref string error)

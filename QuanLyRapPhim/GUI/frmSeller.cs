@@ -47,6 +47,7 @@ namespace QuanLyRapPhim
                 cbx_lichChieu_phim.Items.Clear();
                 return;
             }
+            cbx_lichChieu_phim.Items.Clear();
             foreach (DataRow dr in movieDT.Rows)
             {
                 Movie movie = new Movie()
@@ -102,6 +103,7 @@ namespace QuanLyRapPhim
 
         private void cbx_lichChieu_phim_SelectedIndexChanged(object sender, EventArgs e)
         {
+            lv_lichChieu.Items.Clear();
             int selectedRow = cbx_lichChieu_phim.SelectedIndex;
             if (selectedRow < 0 || selectedRow > cbx_lichChieu_phim.Items.Count - 1)
                 return;
@@ -109,6 +111,8 @@ namespace QuanLyRapPhim
             foreach (ShowTime st in showtimes[selectedRow])
             {
                 stt++;
+                if (Convert.ToDateTime(st.Day).ToShortDateString() != dtpicker_lichChieu.Value.ToShortDateString())
+                    continue;
                 string[] row = new string[] { stt.ToString().Trim(), st.FilmName, st.RoomName, st.Time, Convert.ToDateTime(st.Day).ToShortDateString().Trim(), st.Status.ToString().Trim(), st.ProjectorName };
                 ListViewItem lvi = new ListViewItem(row);
                 lv_lichChieu.Items.Add(lvi);
@@ -120,9 +124,11 @@ namespace QuanLyRapPhim
             LoadData();
         }
 
-        private void lv_lichChieu_ItemSelectionChanged(object sender, ListViewItemSelectionChangedEventArgs e)
+        private void lv_lichChieu_SelectedIndexChanged(object sender, EventArgs e)
         {
-            int selectedRow = cbx_lichChieu_phim.SelectedIndex;
+            if (lv_lichChieu.SelectedIndices.Count == 0)
+                return;
+            int selectedRow = lv_lichChieu.SelectedIndices[0];
             if (selectedRow < 0 || selectedRow > lv_lichChieu.Items.Count - 1)
                 return;
             int movieSelectedIndex = cbx_lichChieu_phim.SelectedIndex;

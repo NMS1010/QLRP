@@ -14,7 +14,7 @@ namespace QuanLyRapPhim.DAO
         public static string DataBaseName;
         public static string UserName;
         public static string Password;
-        public static string ConnectionString = @"Data Source=MINHSON\MINHSON;Initial Catalog=QLRP;Integrated Security=True";
+        public static string ConnectionString;
 
         public static DataTable ExecuteQuery(string query, ref string error, object[] parameter = null)
         {

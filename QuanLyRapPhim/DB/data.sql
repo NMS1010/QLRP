@@ -45,9 +45,9 @@ exec proc_addFilmCategory 2, 1
 exec proc_addFilmCategory 2, 5
 
 ---TAO MAY CHIEU
-exec proc_addProjector 'MC1', 5000
-exec proc_addProjector 'MC2', 6000
-exec proc_addProjector 'MC3', 7000
+exec proc_addProjector '2D', 5000
+exec proc_addProjector '3D', 6000
+exec proc_addProjector 'IMAX', 7000
 
 ---TAO PHONG CHIEU
 exec proc_addCinemaRoom 'P1', 6, 10, 60, 1, 1

@@ -180,6 +180,12 @@
     <Compile Include="GUI\frm_billmanager.Designer.cs">
       <DependentUpon>frm_billmanager.cs</DependentUpon>
     </Compile>
+    <Compile Include="GUI\frm_chooseServiceQuantity.cs">
+      <SubType>Form</SubType>
+    </Compile>
+    <Compile Include="GUI\frm_chooseServiceQuantity.Designer.cs">
+      <DependentUpon>frm_chooseServiceQuantity.cs</DependentUpon>
+    </Compile>
     <Compile Include="GUI\frm_login.cs">
       <SubType>Form</SubType>
     </Compile>
@@ -252,6 +258,9 @@
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frm_billmanager.resx">
       <DependentUpon>frm_billmanager.cs</DependentUpon>
+    </EmbeddedResource>
+    <EmbeddedResource Include="GUI\frm_chooseServiceQuantity.resx">
+      <DependentUpon>frm_chooseServiceQuantity.cs</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="GUI\frm_login.resx">
       <DependentUpon>frm_login.cs</DependentUpon>

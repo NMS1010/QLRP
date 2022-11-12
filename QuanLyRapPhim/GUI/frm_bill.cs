@@ -124,7 +124,7 @@ namespace QuanLyRapPhim.GUI
             }
             foreach (string s in selectedTickets)
             {
-                DataTable ticketIdDT = TicketDAO.GetTicketIdBySeatName(s, ref error);
+                DataTable ticketIdDT = TicketDAO.GetTicketIdBySeatName(s, showTime.Id, ref error);
                 if (!string.IsNullOrEmpty(error))
                 {
                     MessageBox.Show(error);

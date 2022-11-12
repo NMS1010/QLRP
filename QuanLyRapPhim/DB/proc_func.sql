@@ -12,22 +12,6 @@ return(
 	where TenTaiKhoan = @username and MatKhau = @password
 )
 
---go 
---create proc proc_ChangePassword
---@username nvarchar(255),
---@password nvarchar(255),
---@newpassword nvarchar(255)
---as
---begin
-	
---	select * from dbo.func_Login(@username, @password)
---	if(@isSuccess = 1)
---	begin
---		update NguoiDung set MatKhau = @newpassword where TenTaiKhoan = @username
---		return 1
---	end
---	return -1
---end
 ---------------------Ve-------------------
 go
 create proc proc_addTicket 
@@ -84,12 +68,13 @@ begin
 	where MaSuatChieu = @MaSuatChieu
 end
 go
-create function func_getTicketIdBySeatName(@seatName char(3))
+
+create function func_getTicketIdBySeatName(@seatName char(3), @showTimeId int)
 returns table as 
 return(
 	select MaVe
 	from Ve
-	where ViTriGhe = @seatName
+	where ViTriGhe = @seatName and MaSuatChieu = @showTimeId
 )
 --Khach hang
 go
@@ -1019,10 +1004,9 @@ returns table as
 return (
 	select *
 	from Phim
-	where NgayKhoiChieu < @date and @date < NgayKetThuc
+	where NgayKhoiChieu <= @date and @date <= NgayKetThuc
 )
-go
-use QLRP
+
 go
 create function func_getCategoryIdByFilmId(@FilmId int)
 returns table

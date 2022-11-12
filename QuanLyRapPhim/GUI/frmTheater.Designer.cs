@@ -67,6 +67,7 @@
             this.pnl_seat = new System.Windows.Forms.Panel();
             this.lb_ve = new System.Windows.Forms.Label();
             this.label2 = new System.Windows.Forms.Label();
+            this.btn_chooseQuantity = new System.Windows.Forms.Button();
             this.panel1.SuspendLayout();
             this.panel2.SuspendLayout();
             this.panel3.SuspendLayout();
@@ -274,6 +275,7 @@
             // 
             // gb_khachHang
             // 
+            this.gb_khachHang.Controls.Add(this.btn_chooseQuantity);
             this.gb_khachHang.Controls.Add(this.cbx_khuyenMai);
             this.gb_khachHang.Controls.Add(this.labl);
             this.gb_khachHang.Controls.Add(this.cklb_dichVu);
@@ -298,6 +300,7 @@
             this.cbx_khuyenMai.Name = "cbx_khuyenMai";
             this.cbx_khuyenMai.Size = new System.Drawing.Size(175, 28);
             this.cbx_khuyenMai.TabIndex = 13;
+            this.cbx_khuyenMai.SelectedIndexChanged += new System.EventHandler(this.cbx_khuyenMai_SelectedIndexChanged);
             // 
             // labl
             // 
@@ -311,11 +314,13 @@
             // 
             // cklb_dichVu
             // 
+            this.cklb_dichVu.CheckOnClick = true;
             this.cklb_dichVu.FormattingEnabled = true;
             this.cklb_dichVu.Location = new System.Drawing.Point(377, 57);
             this.cklb_dichVu.Name = "cklb_dichVu";
             this.cklb_dichVu.Size = new System.Drawing.Size(229, 109);
             this.cklb_dichVu.TabIndex = 11;
+            this.cklb_dichVu.ItemCheck += new System.Windows.Forms.ItemCheckEventHandler(this.cklb_dichVu_ItemCheck);
             // 
             // label7
             // 
@@ -335,6 +340,7 @@
             this.cbx_loaiKH.Name = "cbx_loaiKH";
             this.cbx_loaiKH.Size = new System.Drawing.Size(175, 28);
             this.cbx_loaiKH.TabIndex = 9;
+            this.cbx_loaiKH.SelectedIndexChanged += new System.EventHandler(this.cbx_loaiKH_SelectedIndexChanged);
             // 
             // label6
             // 
@@ -467,6 +473,16 @@
             this.label2.TabIndex = 7;
             this.label2.Text = "Vé còn lại:";
             // 
+            // btn_chooseQuantity
+            // 
+            this.btn_chooseQuantity.Location = new System.Drawing.Point(531, 21);
+            this.btn_chooseQuantity.Name = "btn_chooseQuantity";
+            this.btn_chooseQuantity.Size = new System.Drawing.Size(85, 30);
+            this.btn_chooseQuantity.TabIndex = 14;
+            this.btn_chooseQuantity.Text = "Số lượng";
+            this.btn_chooseQuantity.UseVisualStyleBackColor = true;
+            this.btn_chooseQuantity.Click += new System.EventHandler(this.btn_chooseQuantity_Click);
+            // 
             // frmTheater
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(6F, 13F);
@@ -544,5 +560,6 @@
         private System.Windows.Forms.Label label2;
         private System.Windows.Forms.Label label3;
         private System.Windows.Forms.TextBox txb_ticketPrice;
+        private System.Windows.Forms.Button btn_chooseQuantity;
     }
 }
