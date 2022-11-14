@@ -40,13 +40,15 @@ namespace QuanLyRapPhim
                 MessageBox.Show(error);
                 return;
             }
-            if (movieDT.Rows.Count == 0)
-            {
-                movies.Clear();
-                showtimes.Clear();
-                cbx_lichChieu_phim.Items.Clear();
-                return;
-            }
+            //if (movieDT.Rows.Count == 0)
+            //{
+            //    movies.Clear();
+            //    showtimes.Clear();
+            //    cbx_lichChieu_phim.Items.Clear();
+            //    return;
+            //}
+            movies.Clear();
+            showtimes.Clear();
             cbx_lichChieu_phim.Items.Clear();
             foreach (DataRow dr in movieDT.Rows)
             {
@@ -63,7 +65,7 @@ namespace QuanLyRapPhim
 
                 cbx_lichChieu_phim.Items.Add(movie.MovieName);
                 movies.Add(movie);
-                DataTable showTimeDT = ShowTimeDAO.GetShowTimeByMovie(movie.MovieId, ref error);
+                DataTable showTimeDT = ShowTimeDAO.GetShowTimeByMovie(movie.MovieId, dtpicker_lichChieu.Value.ToString("yyyy-MM-dd"), ref error);
                 if (!string.IsNullOrEmpty(error))
                 {
                     MessageBox.Show(error);

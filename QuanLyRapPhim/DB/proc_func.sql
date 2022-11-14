@@ -591,14 +591,14 @@ return (
 )
 go
 
-create function func_getShowtimesByFilm(@filmId int)
+create function func_getShowtimesByFilm(@filmId int, @date date)
 returns table as
 return (
 	select MaSuatChieu, SuatChieu.MaPhim, SuatChieu.MaPhong, Gio, Ngay, PhongChieu.TenPhong, Phim.TenPhim, SuatChieu.TrangThai, LoaiMay, SoCot, SoHang
 	from SuatChieu inner join Phim on SuatChieu.MaPhim = Phim.MaPhim
 		inner join PhongChieu on SuatChieu.MaPhong = PhongChieu.MaPhong
 		inner join MayChieu on PhongChieu.MaMay = MayChieu.MaMay
-	where Phim.MaPhim = @filmId
+	where Phim.MaPhim = @filmId and Ngay = @date
 )
 
 go

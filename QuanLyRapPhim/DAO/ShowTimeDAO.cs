@@ -52,10 +52,10 @@ namespace QuanLyRapPhim.DAO
             return DataProvider.ExecuteNonQuery(query, ref error, new object[] { showTimeId });
         }
 
-        public static DataTable GetShowTimeByMovie(int movieId, ref string error)
+        public static DataTable GetShowTimeByMovie(int movieId, string date, ref string error)
         {
-            string query = "select * from dbo.func_getShowtimesByFilm( @movieId )";
-            return DataProvider.ExecuteQuery(query, ref error, new object[] { movieId });
+            string query = "select * from dbo.func_getShowtimesByFilm( @movieId , @date )";
+            return DataProvider.ExecuteQuery(query, ref error, new object[] { movieId, date });
         }
 
         public static DataTable GetShowTimeById(int showTimeId, ref string error)
