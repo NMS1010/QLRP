@@ -140,7 +140,7 @@ go
 create table KhuyenMai(
 	MaKM int identity(1,1) constraint pk_khuyenmai primary key,
 	TenKM nvarchar(255) unique not null,
-	GiaTriKM float
+	GiaTriKM float not null
 )
 go
 create table KH_DV(

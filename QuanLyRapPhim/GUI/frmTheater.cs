@@ -21,6 +21,7 @@ namespace QuanLyRapPhim
         private List<Service> services;
         private List<Promotion> promotions;
         private List<Ticket> tickets;
+        private Dictionary<int, int> serviceQuantity;
 
         private Color disableColor = Color.White;
         private Color enableColor = Color.Yellow;
@@ -95,6 +96,7 @@ namespace QuanLyRapPhim
 
         private void Init()
         {
+            serviceQuantity = new Dictionary<int, int>();
             typeCustomers = new List<TypeCustomer>();
             services = new List<Service>();
             promotions = new List<Promotion>();
@@ -213,6 +215,7 @@ namespace QuanLyRapPhim
             }
             txt_soLuong.Text = selectedTickets.Count.ToString();
             lb_ve.Text = $"{totalSeat - totalSelectedSeat - boughtTickets.Count}/{totalSeat}";
+            btn_thanhToan.Enabled = false;
         }
 
         private void btn_thanhToan_Click(object sender, EventArgs e)
@@ -234,8 +237,13 @@ namespace QuanLyRapPhim
             btn_thanhToan.Enabled = false;
         }
 
-        private void btn_cal_Click(object sender, EventArgs e)
+        private void Calculate()
         {
+            if (cklb_dichVu.CheckedItems.Count != serviceQuantity.Count)
+            {
+                MessageBox.Show("Vui lòng chọn số lượng sản phẩm");
+                return;
+            }
             double? typeCustomerPrice = typeCustomers.Where(x => x.Name == cbx_loaiKH.Text)?.FirstOrDefault()?.Price;
             double? promotionPrice = promotions.Where(x => x.Name == cbx_khuyenMai.Text)?.FirstOrDefault()?.ValueOfPromotion;
             decimal totalPriceService = 0;
@@ -243,7 +251,7 @@ namespace QuanLyRapPhim
             {
                 services.Where(x => x.Name == item.ToString()).ToList().ForEach(x =>
                 {
-                    totalPriceService += x.Price;
+                    totalPriceService += (x.Price * serviceQuantity[x.ServiceId]);
                 });
             }
 
@@ -256,9 +264,76 @@ namespace QuanLyRapPhim
             btn_thanhToan.Enabled = true;
         }
 
+        private void btn_cal_Click(object sender, EventArgs e)
+        {
+            Calculate();
+        }
+
         private void btn_huy_Click(object sender, EventArgs e)
         {
             Close();
+        }
+
+        private void btn_chooseQuantity_Click(object sender, EventArgs e)
+        {
+            frm_chooseServiceQuantity chooseServiceQuantity = new frm_chooseServiceQuantity();
+            int o = 0;
+            foreach (KeyValuePair<int, int> k in serviceQuantity)
+            {
+                Label lbl = new Label() { Text = services.Find(f => f.ServiceId == k.Key)?.Name, Location = new Point(25, 25 + o) };
+                NumericUpDown numericUpDown = new NumericUpDown() { Value = k.Value, Location = new Point(138, 23 + o), Tag = k.Key, Minimum = 1 };
+                chooseServiceQuantity.Controls.Add(lbl);
+                chooseServiceQuantity.Controls.Add(numericUpDown);
+                o += 25;
+            }
+            Button confirm = new Button() { Text = "Xác nhận", Location = new Point(25, 25 + o) };
+            confirm.Click += Confirm_Click;
+            chooseServiceQuantity.Controls.Add(confirm);
+            chooseServiceQuantity.ShowDialog();
+        }
+
+        private void Confirm_Click(object sender, EventArgs e)
+        {
+            Button b = sender as Button;
+            frm_chooseServiceQuantity f = (frm_chooseServiceQuantity)b.FindForm();
+            foreach (Control c in f.Controls)
+            {
+                if (c is NumericUpDown)
+                {
+                    serviceQuantity[int.Parse(c.Tag.ToString())] = int.Parse((c as NumericUpDown).Value.ToString());
+                }
+            }
+            f.Close();
+        }
+
+        private void cklb_dichVu_ItemCheck(object sender, ItemCheckEventArgs e)
+        {
+            if (e.NewValue == CheckState.Checked)
+            {
+                services.Where(x => x.Name == cklb_dichVu.Items[e.Index].ToString()).ToList().ForEach(x =>
+                {
+                    if (!serviceQuantity.ContainsKey(x.ServiceId))
+                        serviceQuantity.Add(x.ServiceId, 1);
+                });
+            }
+            else
+            {
+                services.Where(x => x.Name == cklb_dichVu.Items[e.Index].ToString()).ToList().ForEach(x =>
+                {
+                    serviceQuantity.Remove(x.ServiceId);
+                });
+            }
+            btn_thanhToan.Enabled = false;
+        }
+
+        private void cbx_loaiKH_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_thanhToan.Enabled = false;
+        }
+
+        private void cbx_khuyenMai_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            btn_thanhToan.Enabled = false;
         }
     }
 }
