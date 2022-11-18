@@ -4,13 +4,17 @@ go
 --------------------Xác thực--------------
 go 
 create function func_Login(@username nvarchar(255), @password nvarchar(255))
-returns table
+returns int
 as
-return(
-	select *
+begin
+	declare @success int
+	select @success = count(*)
 	from NguoiDung
 	where TenTaiKhoan = @username and MatKhau = @password
-)
+
+	return @success
+end
+
 
 ---------------------Ve-------------------
 go
@@ -778,7 +782,7 @@ begin
 	else
 	begin
 		
-		set @statement ='grant select on dbo.func_Login to ' + @name
+		set @statement ='grant exec on dbo.func_Login to ' + @name
 		exec (@statement)
 
 		set @statement ='grant select on dbo.func_getRoleNameByUsername to ' + @name

@@ -36,44 +36,21 @@ namespace QuanLyRapPhim
             DataProvider.Password = password;
 
             string error = "";
-            DataTable res = UserDAO.Login(username, password, ref error);
+            int res = UserDAO.Login(username, password, ref error);
             if (!string.IsNullOrEmpty(error))
             {
                 MessageBox.Show(error);
                 return;
             }
-            DataTable dt = UserDAO.GetRoleNameByUsername(username, ref error);
-            if (!string.IsNullOrEmpty(error))
+            if (res == 0)
             {
-                MessageBox.Show(error);
+                MessageBox.Show("Tài khoản hoặc mật khẩu không chính xác");
                 return;
-            }
-            bool isAdmin = false;
-            foreach (DataRow dr in dt.Rows)
-            {
-                if (dr["TenVaiTro"].ToString().ToLower() == "admin")
-                {
-                    isAdmin = true; break;
-                }
             }
             frm_menu frm_Menu = new frm_menu();
             Hide();
             frm_Menu.ShowDialog();
             Show();
-            //if (isAdmin)
-            //{
-            //    frm_admin frm_Admin = new frm_admin();
-            //    this.Hide();
-            //    frm_Admin.ShowDialog();
-            //    this.Show();
-            //}
-            //else
-            //{
-            //    frmSeller frmSeller = new frmSeller();
-            //    this.Hide();
-            //    frmSeller.ShowDialog();
-            //    this.Show();
-            //}
         }
 
         private void panel2_Click(object sender, EventArgs e)
