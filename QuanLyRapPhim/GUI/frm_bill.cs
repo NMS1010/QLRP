@@ -112,8 +112,8 @@ namespace QuanLyRapPhim.GUI
                 CustomerId = customerId,
                 PromotionId = promotionId.Value,
                 SumCost = finalPrice,
-                InvoiceDate = DateTime.Now.ToShortDateString(),
-                InvoiceTime = DateTime.Now.ToShortTimeString(),
+                InvoiceDate = DateTime.Now.ToString("yyyy-MM-dd"),
+                InvoiceTime = DateTime.Now.ToString("HH-mm-ss"),
             };
 
             count = BillDAO.Insert(bill, ref error);
